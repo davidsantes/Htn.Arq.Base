@@ -47,23 +47,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2 - Infrastructure", "1.2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Infrastructure.Core", "Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj", "{6E957EA0-7A57-48BC-9A62-CB2CBAD13994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.Bll.Services.Test", "Htn.Arq.Base.Bll.Services.Test\Htn.Arq.Base.Bll.Services.Test.csproj", "{6238AD4F-4674-47B5-82B7-8608A6D8BEC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.Bll.Services.Test", "Htn.Arq.Base.Bll.Services.Test\Htn.Arq.Base.Bll.Services.Test.csproj", "{6238AD4F-4674-47B5-82B7-8608A6D8BEC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.3 - External Adapters", "2.3 - External Adapters", "{9E75F140-5FDD-4BAF-9BD2-DCC696DC95B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.Dal.Adapters", "Htn.Arq.Base.Dal.Adapters\Htn.Arq.Base.Dal.Adapters.csproj", "{4B40CC1C-A1E6-4384-94B7-C5852F029E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.Dal.Adapters", "Htn.Arq.Base.Dal.Adapters\Htn.Arq.Base.Dal.Adapters.csproj", "{4B40CC1C-A1E6-4384-94B7-C5852F029E37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.Dal.Adapters.Interfaces", "Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj", "{9F350FB9-31C4-491B-953F-B6E841E8F5A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.Dal.Adapters.Interfaces", "Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj", "{9F350FB9-31C4-491B-953F-B6E841E8F5A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.Dal.Repositories.Test", "Htn.Arq.Base.Dal.Repositories.Test\Htn.Arq.Base.Dal.Repositories.Test.csproj", "{A6DFBF3D-0AD6-47F9-AB2E-0757E039CF09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.Dal.Repositories.Test", "Htn.Arq.Base.Dal.Repositories.Test\Htn.Arq.Base.Dal.Repositories.Test.csproj", "{A6DFBF3D-0AD6-47F9-AB2E-0757E039CF09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.Dal.Adapters.Test", "Htn.Arq.Base.Dal.Adapters.Test\Htn.Arq.Base.Dal.Adapters.Test.csproj", "{C170F5A0-0425-48DF-8A49-1787A0FA1F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.Dal.Adapters.Test", "Htn.Arq.Base.Dal.Adapters.Test\Htn.Arq.Base.Dal.Adapters.Test.csproj", "{C170F5A0-0425-48DF-8A49-1787A0FA1F69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Infrastructure.Core.Test", "Htn.Infrastructure.Core.Test\Htn.Infrastructure.Core.Test.csproj", "{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Arq.Base.WebApi.Dto.Test", "Htn.Arq.Base.WebApi.Dto.Test\Htn.Arq.Base.WebApi.Dto.Test.csproj", "{FF78106D-916C-4620-9D2E-E37C8907C13B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Arq.Base.WebApi.Dto.Test", "Htn.Arq.Base.WebApi.Dto.Test\Htn.Arq.Base.WebApi.Dto.Test.csproj", "{FF78106D-916C-4620-9D2E-E37C8907C13B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Infrastructure.Di", "Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj", "{F87511E4-9275-4D0D-B605-2FCD968A5B0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htn.Infrastructure.Di", "Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj", "{F87511E4-9275-4D0D-B605-2FCD968A5B0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htn.Infrastructure.Core.Test", "Htn.Infrastructure.Core.Test\Htn.Infrastructure.Core.Test.csproj", "{E68C3075-7683-49E2-A0D0-72FC283DDA11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,10 +123,6 @@ Global
 		{C170F5A0-0425-48DF-8A49-1787A0FA1F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C170F5A0-0425-48DF-8A49-1787A0FA1F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C170F5A0-0425-48DF-8A49-1787A0FA1F69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF78106D-916C-4620-9D2E-E37C8907C13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF78106D-916C-4620-9D2E-E37C8907C13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF78106D-916C-4620-9D2E-E37C8907C13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -135,6 +131,10 @@ Global
 		{F87511E4-9275-4D0D-B605-2FCD968A5B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87511E4-9275-4D0D-B605-2FCD968A5B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F87511E4-9275-4D0D-B605-2FCD968A5B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68C3075-7683-49E2-A0D0-72FC283DDA11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68C3075-7683-49E2-A0D0-72FC283DDA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68C3075-7683-49E2-A0D0-72FC283DDA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68C3075-7683-49E2-A0D0-72FC283DDA11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,9 +163,9 @@ Global
 		{9F350FB9-31C4-491B-953F-B6E841E8F5A3} = {9E75F140-5FDD-4BAF-9BD2-DCC696DC95B0}
 		{A6DFBF3D-0AD6-47F9-AB2E-0757E039CF09} = {CDF725EA-26C5-4ED3-9640-9F28897DBF36}
 		{C170F5A0-0425-48DF-8A49-1787A0FA1F69} = {CDF725EA-26C5-4ED3-9640-9F28897DBF36}
-		{5ACD3545-FEDB-41BD-9D8C-9F3A73C8A2E9} = {C6C63C08-03D7-48DC-846C-0FF1CE1AD56A}
 		{FF78106D-916C-4620-9D2E-E37C8907C13B} = {71CC5E22-FE23-4CF6-8CDD-6F62D84D83B1}
 		{F87511E4-9275-4D0D-B605-2FCD968A5B0B} = {6B301EAF-6C96-4518-BAC5-ECD9FBD257C1}
+		{E68C3075-7683-49E2-A0D0-72FC283DDA11} = {C6C63C08-03D7-48DC-846C-0FF1CE1AD56A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57E59C06-82B0-4946-A824-18BA119F263D}

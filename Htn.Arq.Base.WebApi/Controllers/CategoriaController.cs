@@ -1,0 +1,63 @@
+﻿using AutoMapper;
+using FluentValidation;
+using Htn.Arq.Base.Bll.Entities;
+using Htn.Arq.Base.Bll.Services.Interfaces;
+using Htn.Arq.Base.WebApi.Dto;
+using Htn.Infrastructure.Core.Error;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Htn.Arq.Base.WebApi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CategoriaController : ControllerBase
+    {
+        private readonly ICategoriaProductoService _categoriaService;
+        private readonly IValidator<CategoriaProductoDto> _validator;
+        public readonly IMapper _mapper;
+
+        public CategoriaController(ICategoriaProductoService categoriaService,
+            IValidator<CategoriaProductoDto> validator,
+            IMapper mapper)
+        {
+            _categoriaService = categoriaService;
+            _validator = validator;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
+        {
+            var categorias = await _categoriaService.GetCategoriasProductoAsync();
+            if (!categorias.Any())
+            {
+                return NotFound(new Error() { Codigo = "404", Descripcion = "No encontrado" });
+            }
+
+            var listaCategoriasDto = _mapper.Map<List<CategoriaProductoDto>>(categorias);
+
+            return Ok(listaCategoriasDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)
+        {
+            var result = await _validator.ValidateAsync(nuevaCategoriaDto);
+            if (nuevaCategoriaDto == null)
+            {
+                return BadRequest("Objeto no válido: " + string.Join(",", result.Errors));
+            }
+
+            var _mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaDto);
+
+            var nuevaCategoriaId = await _categoriaService.CrearCategoriaProductoAsync(_mappedCategoria);
+            return CreatedAtAction(nameof(GetCategoriasProducto)
+                , new { id = nuevaCategoriaId }
+                , nuevaCategoriaDto);
+        }
+    }
+}

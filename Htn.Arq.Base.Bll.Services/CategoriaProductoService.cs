@@ -1,0 +1,28 @@
+﻿using Htn.Arq.Base.Bll.Entities;
+using Htn.Arq.Base.Bll.Services.Interfaces;
+using Htn.Arq.Base.Dal.Repositories.Interfaces;
+
+namespace Htn.Arq.Base.Bll.Services
+{
+    public class CategoriaProductoService : ICategoriaProductoService
+    {
+        private readonly ICategoriaRepository _categoriaRepository;
+
+        public CategoriaProductoService(ICategoriaRepository categoriaRepository)
+        {
+            _categoriaRepository = categoriaRepository;
+        }
+
+        public async Task<List<CategoriaProducto>> GetCategoriasProductoAsync()
+        {
+            var categorias = await _categoriaRepository.GetAllAsync();
+            return categorias;
+        }
+
+        public async Task<int> CrearCategoriaProductoAsync(CategoriaProducto categoria)
+        {
+            var idCategoria = await _categoriaRepository.CreateAsync(categoria);
+            return idCategoria;
+        }
+    }
+}
