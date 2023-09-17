@@ -5,7 +5,7 @@ namespace Htn.Arq.Base.Dal.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private List<CategoriaProducto> _categorias;
+        private readonly List<CategoriaProducto> _categorias;
 
         public CategoriaRepository() {
             _categorias = new List<CategoriaProducto>();
