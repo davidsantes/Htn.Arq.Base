@@ -6,6 +6,6 @@ namespace Htn.Arq.Base.Bll.Services.Interfaces
     {
         Task<List<CategoriaProducto>> GetCategoriasProductoAsync();
 
-        Task<int> CrearCategoriaProductoAsync(CategoriaProducto categoria);
+        Task<int> InsCategoriaProductoAsync(CategoriaProducto categoria);
     }
 }

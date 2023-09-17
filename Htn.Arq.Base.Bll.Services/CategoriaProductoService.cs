@@ -19,9 +19,9 @@ namespace Htn.Arq.Base.Bll.Services
             return categorias;
         }
 
-        public async Task<int> CrearCategoriaProductoAsync(CategoriaProducto categoria)
+        public async Task<int> InsCategoriaProductoAsync(CategoriaProducto categoria)
         {
-            var idCategoria = await _categoriaRepository.CreateAsync(categoria);
+            var idCategoria = await _categoriaRepository.InsAsync(categoria);
             return idCategoria;
         }
     }

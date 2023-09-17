@@ -32,7 +32,7 @@ namespace Htn.Arq.Base.Dal.Repositories
             return _categorias;
         }
 
-        public async Task<int> CreateAsync(CategoriaProducto categoria)
+        public async Task<int> InsAsync(CategoriaProducto categoria)
         {
             // Simulamos una operación asíncrona de creación, como una inserción en la base de datos
             await Task.Delay(100);

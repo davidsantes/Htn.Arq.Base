@@ -6,6 +6,6 @@ namespace Htn.Arq.Base.Dal.Repositories.Interfaces
     {
         Task<List<CategoriaProducto>> GetAllAsync();
 
-        Task<int> CreateAsync(CategoriaProducto categoria);
+        Task<int> InsAsync(CategoriaProducto categoria);
     }
 }

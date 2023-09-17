@@ -55,7 +55,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
             var _mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaDto);
 
-            var nuevaCategoriaId = await _categoriaService.CrearCategoriaProductoAsync(_mappedCategoria);
+            var nuevaCategoriaId = await _categoriaService.InsCategoriaProductoAsync(_mappedCategoria);
             return CreatedAtAction(nameof(GetCategoriasProducto)
                 , new { id = nuevaCategoriaId }
                 , nuevaCategoriaDto);
