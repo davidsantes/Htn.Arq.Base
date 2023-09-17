@@ -9,9 +9,10 @@ namespace Htn.Arq.Base.WebApi.Start
         /// <summary>
         /// Registra en el contenedor de DI los validadores de datos de DTOs 
         /// </summary>
-        public static void RegisterDtoValidators(this IServiceCollection builder)
+        public static IServiceCollection RegisterDtoValidators(this IServiceCollection services)
         {
-            builder.AddTransient<IValidator<CategoriaProductoDto>, CategoriaProductoDtoValidator>();
+            services.AddTransient<IValidator<CategoriaProductoDto>, CategoriaProductoDtoValidator>();
+            return services;
         }
     }
 }

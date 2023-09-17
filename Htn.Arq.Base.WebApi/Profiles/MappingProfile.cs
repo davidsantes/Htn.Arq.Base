@@ -10,9 +10,6 @@ namespace Htn.Arq.Base.WebApi.Profiles
         {
             CreateMap<CategoriaProducto, CategoriaProductoDto>();
             CreateMap<CategoriaProductoDto, CategoriaProducto>();
-
-            CreateMap<List<CategoriaProducto>, List<CategoriaProductoDto>>();
-            CreateMap<List<CategoriaProductoDto>, List<CategoriaProducto>>();
         }
     }
 }

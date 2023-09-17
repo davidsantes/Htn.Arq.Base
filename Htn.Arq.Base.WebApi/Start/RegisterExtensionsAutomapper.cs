@@ -5,9 +5,10 @@
         /// <summary>
         /// Registra en el contenedor de DI los profiles de automapper
         /// </summary>
-        public static void RegisterAutomapperProfiles(this IServiceCollection builder)
+        public static IServiceCollection RegisterAutomapperProfiles(this IServiceCollection services)
         {
-            builder.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            return services;
         }
     }
 }

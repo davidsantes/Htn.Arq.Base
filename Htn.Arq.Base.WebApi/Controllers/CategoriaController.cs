@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Htn.Arq.Base.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaProductoService _categoriaService;
@@ -33,6 +33,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
+                //TODO: ponerlo con recursos
                 return NotFound(new Error() { Codigo = "404", Descripcion = "No encontrado" });
             }
 
@@ -47,7 +48,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)
         {
             var result = await _validator.ValidateAsync(nuevaCategoriaDto);
-            if (nuevaCategoriaDto == null)
+            if (!result.IsValid)
             {
                 return BadRequest("Objeto no válido: " + string.Join(",", result.Errors));
             }

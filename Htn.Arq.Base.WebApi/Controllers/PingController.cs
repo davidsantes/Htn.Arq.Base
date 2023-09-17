@@ -3,7 +3,7 @@
 namespace Htn.Arq.Base.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class PingController : ControllerBase
     {
         [HttpGet]
