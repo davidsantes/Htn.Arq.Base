@@ -5,7 +5,8 @@ namespace Htn.Arq.Base.WebApi.HealthChecks
     public class MyCustomHealthCheck : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(
-            HealthCheckContext context, CancellationToken cancellationToken = default)
+            HealthCheckContext context
+            , CancellationToken cancellationToken = default)
         {
             var isHealthy = true;
 
