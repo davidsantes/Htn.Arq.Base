@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
@@ -20,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="HealthChecks\" />
-    <Folder Include="MiddleWares\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>
