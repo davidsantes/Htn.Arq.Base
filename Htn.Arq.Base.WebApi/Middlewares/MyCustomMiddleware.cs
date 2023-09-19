@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.WebApi.MiddleWares
+﻿namespace Htn.Arq.Base.WebApi.Middlewares
 {
     public class MyCustomMiddleware : IMiddleware
     {

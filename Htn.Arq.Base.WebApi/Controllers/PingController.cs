@@ -9,6 +9,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [HttpGet]
         public IActionResult GetVersion()
         {
+            //TODO: poner que acceda a un recurso de global.resources
             string version = "1.0";
             return Ok(version);
         }

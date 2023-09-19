@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
-
 </Project>

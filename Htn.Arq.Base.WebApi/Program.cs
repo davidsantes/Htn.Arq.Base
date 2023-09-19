@@ -1,10 +1,15 @@
 using HealthChecks.UI.Client;
+using Htn.Arq.Base.WebApi.Application;
+using Htn.Arq.Base.WebApi.Builder;
 using Htn.Arq.Base.WebApi.HealthChecks;
-using Htn.Arq.Base.WebApi.Start;
+using Htn.Arq.Base.WebApi.Middlewares;
 using Htn.Infrastructure.Di;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.RegisterException()
+    .RegisterMiddlewares();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -12,15 +17,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.RegisterDalRepositories()
-    .RegisterBllServices()
-    .RegisterAutomapperProfiles()
+    .RegisterBllServices()    
     .RegisterDtoValidators()
-    .RegisterMiddlewares();
+    .RegisterAutomapperProfiles();
 
 builder.Services.AddHealthChecks()
     .AddCheck<MyCustomHealthCheck>("MyCustomHealthCheck");
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment()
     || app.Environment.IsStaging()
@@ -29,6 +34,8 @@ if (app.Environment.IsDevelopment()
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandling();
 
 app.UseHttpsRedirection();
 

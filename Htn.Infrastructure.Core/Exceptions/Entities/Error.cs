@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Htn.Infrastructure.Core.Error
+namespace Htn.Infrastructure.Core.Exceptions.Entities
 {
     [DataContract]
     public class Error

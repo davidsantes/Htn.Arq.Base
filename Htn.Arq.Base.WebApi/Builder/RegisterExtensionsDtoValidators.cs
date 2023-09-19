@@ -2,7 +2,7 @@
 using Htn.Arq.Base.WebApi.Dto;
 using Htn.Arq.Base.WebApi.Dto.Validators;
 
-namespace Htn.Arq.Base.WebApi.Start
+namespace Htn.Arq.Base.WebApi.Builder
 {
     public static class RegisterExtensionsDtoValidators
     {

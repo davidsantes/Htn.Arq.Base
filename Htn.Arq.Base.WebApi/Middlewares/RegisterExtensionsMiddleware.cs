@@ -1,6 +1,4 @@
-﻿using Htn.Arq.Base.WebApi.MiddleWares;
-
-namespace Htn.Arq.Base.WebApi.Start
+﻿namespace Htn.Arq.Base.WebApi.Middlewares
 {
     public static class RegisterExtensionsMiddleware
     {

@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.WebApi.Start
+﻿namespace Htn.Arq.Base.WebApi.Builder
 {
     public static class EnvironmentExtensions
     {
