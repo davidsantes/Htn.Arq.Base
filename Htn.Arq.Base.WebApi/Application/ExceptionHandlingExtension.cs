@@ -9,7 +9,8 @@ namespace Htn.Arq.Base.WebApi.Application
         /// </summary>
         public static IApplicationBuilder UseExceptionHandling(this IApplicationBuilder app)
         {
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            //app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             return app;
         }
     }

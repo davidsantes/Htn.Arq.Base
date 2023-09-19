@@ -30,6 +30,12 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
         {
+            //TODO: omitir estas líneas que provocan error
+            // a custom app exception that will return a 400 response
+            throw new AppException("Email or password is incorrect");
+            // a key not found exception that will return a 404 response
+            throw new KeyNotFoundException("Account not found");
+
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {

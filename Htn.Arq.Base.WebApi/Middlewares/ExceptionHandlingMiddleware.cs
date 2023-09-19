@@ -51,21 +51,25 @@ namespace Htn.Arq.Base.WebApi.Middlewares
                     if (ex.Message.Contains(ExceptionConstants.InvalidToken))
                     {
                         response.StatusCode = (int)HttpStatusCode.Forbidden;
-                        errorResponse.Codigo = HttpStatusCode.Forbidden.ToString(); errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
+                        errorResponse.Codigo = HttpStatusCode.Forbidden.ToString(); 
+                        errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
                         break;
                     }
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    errorResponse.Codigo = HttpStatusCode.BadRequest.ToString(); errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
+                    errorResponse.Codigo = HttpStatusCode.BadRequest.ToString(); 
+                    errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
                     break;
 
                 case KeyNotFoundException ex:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
-                    errorResponse.Codigo = HttpStatusCode.NotFound.ToString(); errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
+                    errorResponse.Codigo = HttpStatusCode.NotFound.ToString(); 
+                    errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + ex.Message;
                     break;
 
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString(); errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + handledException.Message;
+                    errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString(); 
+                    errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + handledException.Message;
                     break;
             }
             var result = JsonSerializer.Serialize(errorResponse);
