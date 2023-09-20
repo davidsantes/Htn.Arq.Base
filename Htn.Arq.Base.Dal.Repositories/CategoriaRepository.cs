@@ -7,7 +7,8 @@ namespace Htn.Arq.Base.Dal.Repositories
     {
         private readonly List<CategoriaProducto> _categorias;
 
-        public CategoriaRepository() {
+        public CategoriaRepository()
+        {
             _categorias = new List<CategoriaProducto>();
         }
 
@@ -32,7 +33,7 @@ namespace Htn.Arq.Base.Dal.Repositories
             return _categorias;
         }
 
-        public async Task<int> InsAsync(CategoriaProducto categoria)
+        public async Task<Result<int>> InsAsync(CategoriaProducto categoria)
         {
             // Simulamos una operación asíncrona de creación, como una inserción en la base de datos
             await Task.Delay(100);
@@ -44,8 +45,10 @@ namespace Htn.Arq.Base.Dal.Repositories
             // Agregamos la nueva categoría al repositorio
             _categorias.Add(categoria);
 
-            // Retornamos el ID de la nueva categoría creada
-            return newId;
+            //Simulamos que ha ido correctamente
+            var result = new Result<int>(newId);
+
+            return result;
         }
     }
 }

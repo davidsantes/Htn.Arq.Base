@@ -61,10 +61,18 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
             var _mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaDto);
 
-            var nuevaCategoriaId = await _categoriaService.InsCategoriaProductoAsync(_mappedCategoria);
-            return CreatedAtAction(nameof(GetCategoriasProducto)
-                , new { id = nuevaCategoriaId }
-                , nuevaCategoriaDto);
+            var insCategoriaResult = await _categoriaService.InsCategoriaProductoAsync(_mappedCategoria);
+
+            if (insCategoriaResult.IsSuccess)
+            {
+                return CreatedAtAction(nameof(GetCategoriasProducto)
+                        , new { id = insCategoriaResult.Value }
+                        , nuevaCategoriaDto);
+            }
+            else
+            {
+                return BadRequest("Objeto no válido: " + string.Join(",", insCategoriaResult.Errors));
+            }
         }
     }
 }

@@ -40,16 +40,18 @@ namespace Htn.Arq.Base.Bll.Services.Test
             var mockRepository = new Mock<ICategoriaRepository>();
             var newCategoria = new CategoriaProducto { Id = 0, Nombre = "Nueva Categoría" };
             var expectedNewId = 4; // El siguiente ID esperado
+            var expectedResult = new Result<int>(expectedNewId);
+
 
             mockRepository.Setup(repo => repo.InsAsync(newCategoria))
-                .ReturnsAsync(expectedNewId);
+                .ReturnsAsync(expectedResult);
             var service = new CategoriaProductoService(mockRepository.Object);
 
             // Act
-            var result = await service.InsCategoriaProductoAsync(newCategoria);
+            var insResult = await service.InsCategoriaProductoAsync(newCategoria);
 
             // Assert
-            result.Should().Be(expectedNewId); // Verifica que el ID retornado sea el esperado
+            insResult.Value.Should().Be(expectedNewId); // Verifica que el ID retornado sea el esperado
         }
     }
 }

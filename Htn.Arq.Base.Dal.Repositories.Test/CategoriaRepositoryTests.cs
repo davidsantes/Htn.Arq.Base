@@ -33,10 +33,10 @@ namespace Htn.Arq.Base.Dal.Repositories.Test
 
             // Act
             var allCategories = await repository.GetAllAsync();
-            var newId = await repository.InsAsync(newCategoria);
+            var insResult = await repository.InsAsync(newCategoria);
 
             // Assert
-            newId.Should().BeGreaterThan(0);
+            insResult.Value.Should().BeGreaterThan(0);
             allCategories.Should().Contain(c => c.Nombre == "Juguetes"); // La nueva categoría debe estar presente
         }
     }
