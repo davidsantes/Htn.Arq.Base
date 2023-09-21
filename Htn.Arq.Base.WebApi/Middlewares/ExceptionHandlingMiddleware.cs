@@ -35,11 +35,14 @@ namespace Htn.Arq.Base.WebApi.Middlewares
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            //TODO: resolver aquí: logger y exceptionPolicy
+
             var handledException = _exceptionPolicy.ApplyPolicy(exception);
+
+            //TODO: poner excepción original: XXXXX excepción saneada: YYYYY
             var message = $"{ExceptionConstants.ExceptionTitle} - WEB API: ArquitecturaWebAPI \r\n {exception.Message} \r\n {handledException.Message}";
 
-            _logger.LogError(handledException, message);
-            HandleExceptionData(exception, handledException);
+            _logger.LogError(handledException, message);       
 
             context.Response.ContentType = ExceptionConstants.ContentTypeJson;
             var response = context.Response;
