@@ -41,6 +41,7 @@ namespace Htn.Arq.Base.WebApi.Middlewares
                           $" Excepción original: {originalException.Message} \r\n" +
                           $" Excepción saneada: {exceptionSaneada.Message}";
 
+            //TODO: mejorar el sistema de logs: https://www.milanjovanovic.tech/blog/structured-logging-in-asp-net-core-with-serilog
             logger.LogError(exceptionSaneada, message);
 
             context.Response.ContentType = ExceptionConstants.ContentTypeJson;
