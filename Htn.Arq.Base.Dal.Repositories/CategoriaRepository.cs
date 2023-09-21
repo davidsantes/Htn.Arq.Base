@@ -12,7 +12,7 @@ namespace Htn.Arq.Base.Dal.Repositories
             _categorias = new List<CategoriaProducto>();
         }
 
-        public async Task<List<CategoriaProducto>> GetAllAsync()
+        public async Task<IList<CategoriaProducto>> GetAllAsync()
         {
             // Simulamos una operación asíncrona de creación, como una inserción en la base de datos
             await Task.Delay(100);

@@ -13,7 +13,7 @@ namespace Htn.Arq.Base.Bll.Services
             _categoriaRepository = categoriaRepository;
         }
 
-        public async Task<List<CategoriaProducto>> GetCategoriasProductoAsync()
+        public async Task<IList<CategoriaProducto>> GetCategoriasProductoAsync()
         {
             var categorias = await _categoriaRepository.GetAllAsync();
             return categorias;

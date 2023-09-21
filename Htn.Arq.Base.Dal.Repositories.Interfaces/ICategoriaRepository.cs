@@ -4,7 +4,7 @@ namespace Htn.Arq.Base.Dal.Repositories.Interfaces
 {
     public interface ICategoriaRepository
     {
-        Task<List<CategoriaProducto>> GetAllAsync();
+        Task<IList<CategoriaProducto>> GetAllAsync();
 
         Task<Result<int>> InsAsync(CategoriaProducto categoria);
     }

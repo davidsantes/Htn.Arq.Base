@@ -4,7 +4,7 @@ namespace Htn.Arq.Base.Bll.Services.Interfaces
 {
     public interface ICategoriaProductoService
     {
-        Task<List<CategoriaProducto>> GetCategoriasProductoAsync();
+        Task<IList<CategoriaProducto>> GetCategoriasProductoAsync();
 
         Task<Result<int>> InsCategoriaProductoAsync(CategoriaProducto categoria);
     }

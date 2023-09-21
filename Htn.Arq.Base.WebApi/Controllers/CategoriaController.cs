@@ -32,7 +32,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         {
             //TODO: omitir estas líneas que provocan error
             // a custom app exception that will return a 500 response
-            throw new CustomException("Email or password is incorrect");
+            //throw new CustomException("Email or password is incorrect");
 
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
