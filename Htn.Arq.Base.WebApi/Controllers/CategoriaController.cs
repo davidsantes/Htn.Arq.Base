@@ -18,14 +18,15 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
         public CategoriaController(ICategoriaProductoService categoriaService,
             IValidator<CategoriaProductoDto> validator,
-            IMapper mapper)
+            IMapper mapper, 
+            ILogger<CategoriaController> logger)
         {
             _categoriaService = categoriaService;
             _validator = validator;
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetCategoriasProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
@@ -33,7 +34,6 @@ namespace Htn.Arq.Base.WebApi.Controllers
             //TODO: omitir estas líneas que provocan error
             // a custom app exception that will return a 500 response
             //throw new CustomException("Email or password is incorrect");
-
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
@@ -46,7 +46,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
             return Ok(listaCategoriasDto);
         }
 
-        [HttpPost]
+        [HttpPost("InsCategoriaProducto")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)
