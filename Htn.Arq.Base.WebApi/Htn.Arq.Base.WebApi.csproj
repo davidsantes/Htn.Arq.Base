@@ -17,9 +17,23 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
-    <ProjectReference Include="..\Htn.Arq.Base.WebApi.Dto\Htn.Arq.Base.WebApi.Dto.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ValidationResources.Designer.cs">
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ValidationResources.resx">
+      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

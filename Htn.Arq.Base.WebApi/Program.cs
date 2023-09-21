@@ -12,7 +12,10 @@ builder.Services.RegisterException()
     .RegisterMiddlewares();
 
 builder.Services.AddControllers();
+
+//TODO: configurar API Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

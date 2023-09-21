@@ -2,7 +2,7 @@
 using FluentValidation;
 using Htn.Arq.Base.Bll.Entities;
 using Htn.Arq.Base.Bll.Services.Interfaces;
-using Htn.Arq.Base.WebApi.Dto;
+using Htn.Arq.Base.WebApi.Dtos;
 using Htn.Infrastructure.Core.Exceptions.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,10 +31,8 @@ namespace Htn.Arq.Base.WebApi.Controllers
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
         {
             //TODO: omitir estas líneas que provocan error
-            // a custom app exception that will return a 400 response
-            throw new AppException("Email or password is incorrect");
-            // a key not found exception that will return a 404 response
-            throw new KeyNotFoundException("Account not found");
+            // a custom app exception that will return a 500 response
+            throw new CustomException("Email or password is incorrect");
 
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())

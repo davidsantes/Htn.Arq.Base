@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.WebApi.Dto
+﻿namespace Htn.Arq.Base.WebApi.Dtos
 {
     public class CategoriaProductoDto
     {

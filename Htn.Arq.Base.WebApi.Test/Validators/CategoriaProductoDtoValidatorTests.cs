@@ -1,10 +1,11 @@
 ﻿using FluentValidation.TestHelper;
-using Htn.Arq.Base.WebApi.Dto.Validators;
+using Htn.Arq.Base.WebApi.Dtos;
+using Htn.Arq.Base.WebApi.Resources;
+using Htn.Arq.Base.WebApi.Validators;
 using System.Resources;
 using Xunit;
-using Htn.Arq.Base.WebApi.Dto.Resources;
 
-namespace Htn.Arq.Base.WebApi.Dto.Test
+namespace Htn.Arq.Base.WebApi.Test.Validators
 {
     [Trait("Categoria", "ValidacionCategoriaProductoDto")]
     public class CategoriaProductoDtoValidatorTests
@@ -65,7 +66,7 @@ namespace Htn.Arq.Base.WebApi.Dto.Test
                 Id = 1,
                 Nombre = "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados"
             };
-         
+
             int maxLength = 50;
             var categoriaNombreRequerido = string.Format(_resourceManager.GetString("CategoriaNombreMaxLength"), maxLength);
 

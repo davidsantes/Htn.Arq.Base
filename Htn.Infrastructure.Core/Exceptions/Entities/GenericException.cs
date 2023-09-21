@@ -2,6 +2,9 @@
 
 namespace Htn.Infrastructure.Core.Exceptions.Entities
 {
+    /// <summary>
+    /// Excepción genérica con un guid de seguimiento
+    /// </summary>
     [Serializable]
     public class GenericException : AbstractCustomException
     {

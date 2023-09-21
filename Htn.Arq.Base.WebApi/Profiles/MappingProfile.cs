@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Htn.Arq.Base.Bll.Entities;
-using Htn.Arq.Base.WebApi.Dto;
+using Htn.Arq.Base.WebApi.Dtos;
 
 namespace Htn.Arq.Base.WebApi.Profiles
 {

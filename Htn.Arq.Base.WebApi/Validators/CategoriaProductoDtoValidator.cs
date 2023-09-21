@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
-using Htn.Arq.Base.WebApi.Dto.Resources;
+using Htn.Arq.Base.WebApi.Dtos;
+using Htn.Arq.Base.WebApi.Resources;
 using System.Resources;
 
-namespace Htn.Arq.Base.WebApi.Dto.Validators
+namespace Htn.Arq.Base.WebApi.Validators
 {
     public class CategoriaProductoDtoValidator : AbstractValidator<CategoriaProductoDto>
     {
@@ -14,9 +15,9 @@ namespace Htn.Arq.Base.WebApi.Dto.Validators
             _resourceManager = new ResourceManager(typeof(ValidationResources));
 
             int maxLength = 50;
-            
+
             RuleFor(categoria => categoria.Nombre)
-                .NotEmpty().WithMessage(_resourceManager.GetString("CategoriaNombreRequerido"))              
+                .NotEmpty().WithMessage(_resourceManager.GetString("CategoriaNombreRequerido"))
                 .MaximumLength(maxLength).WithMessage(string.Format(_resourceManager.GetString("CategoriaNombreMaxLength"), maxLength));
         }
     }

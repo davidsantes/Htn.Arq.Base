@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Htn.Arq.Base.WebApi.Dto.Resources {
+namespace Htn.Arq.Base.WebApi.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Htn.Arq.Base.WebApi.Dto.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Htn.Arq.Base.WebApi.Dto.Resources.ValidationResources", typeof(ValidationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Htn.Arq.Base.WebApi.Resources.ValidationResources", typeof(ValidationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
