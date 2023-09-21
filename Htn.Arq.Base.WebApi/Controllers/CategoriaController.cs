@@ -27,7 +27,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
         {
             //TODO: omitir estas líneas que provocan error
@@ -47,7 +47,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)
         {
@@ -63,7 +63,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
             if (insCategoriaResult.IsSuccess)
             {
-                return CreatedAtAction(nameof(GetCategoriasProducto)
+                return CreatedAtAction(nameof(InsCategoriaProducto)
                         , new { id = insCategoriaResult.Value }
                         , nuevaCategoriaDto);
             }
