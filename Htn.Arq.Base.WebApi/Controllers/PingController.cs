@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Htn.Infrastructure.Global.Resources;
 
 namespace Htn.Arq.Base.WebApi.Controllers
 {
@@ -9,8 +10,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [HttpGet]
         public IActionResult GetVersion()
         {
-            //TODO: poner que acceda a un recurso de global.resources
-            string version = "1.0";
+            string version = Global_Resources.version;         
             return Ok(version);
         }
     }

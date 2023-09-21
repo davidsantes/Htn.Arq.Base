@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj" />
+    <ProjectReference Include="..\Htn.Infrastructure.Global.Resources\Htn.Infrastructure.Global.Resources.csproj" />
   </ItemGroup>
 
   <ItemGroup>
