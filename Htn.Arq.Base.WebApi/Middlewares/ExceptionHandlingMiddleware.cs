@@ -35,30 +35,24 @@ namespace Htn.Arq.Base.WebApi.Middlewares
             //Se resuelven aquí:
             var logger = _serviceProvider.GetRequiredService<ILogger<ExceptionHandlingMiddleware>>();
             var exceptionPolicy = _serviceProvider.GetRequiredService<IExceptionPolicy>();
-
             var exceptionSaneada = exceptionPolicy.ApplyPolicy(originalException);
-            var message = $"{ExceptionConstants.ExceptionTitle} - WEB API: ArquitecturaWebAPI \r\n" +
-                          $" Excepción original: {originalException.Message} \r\n" +
-                          $" Excepción saneada: {exceptionSaneada.Message}";
-
-            //TODO: mejorar el sistema de logs: https://www.milanjovanovic.tech/blog/structured-logging-in-asp-net-core-with-serilog
-            logger.LogError(exceptionSaneada, message);
+            logger.LogError("[Exception] LogError. Excepción original: {@originalException}. Excepción saneada: {@exceptionSaneada}", originalException, exceptionSaneada);
 
             context.Response.ContentType = ExceptionConstants.ContentTypeJson;
             var response = context.Response;
-            var errorResponse = new Error();
+            var errorResponse = new ControlledError();
 
             switch (exceptionSaneada)
             {
                 case CustomException:
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString();
-                    errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + exceptionSaneada.Message;
+                    response.StatusCode = StatusCodes.Status500InternalServerError;
+                    errorResponse.Codigo = StatusCodes.Status500InternalServerError.ToString();
+                    errorResponse.Descripcion = $"[Exception] - " + exceptionSaneada.Message;
                     break;
                 default:
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    response.StatusCode = StatusCodes.Status500InternalServerError;
                     errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString();
-                    errorResponse.Descripcion = $"WEB API: ArquitecturaWebAPI - " + exceptionSaneada.Message;
+                    errorResponse.Descripcion = $"[Exception] - " + exceptionSaneada.Message;
                     break;
             }
             var result = JsonSerializer.Serialize(errorResponse);

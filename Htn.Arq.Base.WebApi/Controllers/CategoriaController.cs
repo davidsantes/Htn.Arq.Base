@@ -26,19 +26,17 @@ namespace Htn.Arq.Base.WebApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetCategoriasProducto")]
+        [HttpGet("getCategoriasProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
         {
-            //TODO: omitir estas líneas que provocan error
-            // a custom app exception that will return a 500 response
-            //throw new CustomException("Email or password is incorrect");
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
                 //TODO: ponerlo con recursos
-                return NotFound(new Error() { Codigo = "404", Descripcion = "No encontrado" });
+                return NotFound(new ControlledError() { Codigo = StatusCodes.Status404NotFound.ToString()
+                    , Descripcion = "No encontrado" });
             }
 
             var listaCategoriasDto = _mapper.Map<List<CategoriaProductoDto>>(categorias);
@@ -46,7 +44,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
             return Ok(listaCategoriasDto);
         }
 
-        [HttpPost("InsCategoriaProducto")]
+        [HttpPost("insCategoriaProducto")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)

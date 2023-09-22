@@ -11,13 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//TODO: configurar API Swagger
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 builder.Services.AddEndpointsApiExplorer();
+
+//TODO: configurar API Swagger con options.SwaggerDoc, options.IncludeXmlComments...
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 
-builder.Services.RegisterException()
+builder.Services.RegisterExceptionPolicies()
     .RegisterDalRepositories()
     .RegisterBllServices()
     .RegisterDtoValidators()

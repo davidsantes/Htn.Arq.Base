@@ -40,7 +40,7 @@ namespace Htn.Infrastructure.Di
         /// </summary>
         /// <param name="services">Service collection</param>
         /// <returns>Colección configurada</returns>
-        public static IServiceCollection RegisterException(this IServiceCollection services)
+        public static IServiceCollection RegisterExceptionPolicies(this IServiceCollection services)
         {
             services.AddSingleton<IExceptionPolicy, SanitizeNotCustomExceptionsPolicy>();
             //services.AddSingleton<IExceptionManager, ExceptionManager>();

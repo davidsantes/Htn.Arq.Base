@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Htn.Infrastructure.Core.Exceptions.Entities
 {
+    /// <summary>
+    /// Excepción personalizada. Útil para enviar excepciones controladas
+    /// </summary>
     [Serializable]
     public class CustomException : AbstractCustomException
     {
