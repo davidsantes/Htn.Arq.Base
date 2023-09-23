@@ -3,6 +3,7 @@ using FluentValidation;
 using Htn.Arq.Base.Bll.Entities;
 using Htn.Arq.Base.Bll.Services.Interfaces;
 using Htn.Arq.Base.WebApi.Dtos;
+using Htn.Arq.Base.WebApi.Resources;
 using Htn.Infrastructure.Core.Exceptions.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,10 @@ namespace Htn.Arq.Base.WebApi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retorna las categorías de productos (dato maestro).
+        /// </summary>
+        /// <returns>Listado de categorías</returns>
         [HttpGet("getCategoriasProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -34,9 +39,9 @@ namespace Htn.Arq.Base.WebApi.Controllers
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
-                //TODO: ponerlo con recursos
                 return NotFound(new ControlledError() { Codigo = StatusCodes.Status404NotFound.ToString()
-                    , Descripcion = "No encontrado" });
+                    , Descripcion = BusinessResources.MsgRecursoNoEncontrado
+                });
             }
 
             var listaCategoriasDto = _mapper.Map<List<CategoriaProductoDto>>(categorias);
@@ -44,6 +49,10 @@ namespace Htn.Arq.Base.WebApi.Controllers
             return Ok(listaCategoriasDto);
         }
 
+        /// <summary>
+        /// Inserta una categoría de producto concreta.
+        /// </summary>
+        /// <returns>Si el resultado ha sido satisfactorio</returns>
         [HttpPost("insCategoriaProducto")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

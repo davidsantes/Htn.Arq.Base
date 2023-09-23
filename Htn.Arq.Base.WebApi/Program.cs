@@ -3,6 +3,7 @@ using Htn.Arq.Base.WebApi.Application;
 using Htn.Arq.Base.WebApi.Builder;
 using Htn.Arq.Base.WebApi.HealthChecks;
 using Htn.Arq.Base.WebApi.Middlewares;
+using Htn.Arq.Base.WebApi.Resources;
 using Htn.Infrastructure.Di;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
@@ -13,9 +14,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-//TODO: configurar API Swagger con options.SwaggerDoc, options.IncludeXmlComments...
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSwaggerGen();
+builder.Services.AddCustomSwagger();
 
 builder.Services.RegisterExceptionPolicies()
     .RegisterDalRepositories()
@@ -37,7 +36,11 @@ if (app.Environment.IsDevelopment()
     || app.Environment.IsGesValidacion())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.DocumentTitle = WebApiResources.WebApi_Titulo;
+    });
 }
 
 app.UseSerilogRequestLogging();
@@ -56,6 +59,7 @@ app.MapHealthChecks("/_health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-//TODO: escribir un log para garantizar que la app funciona
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("La aplicación se está ejecutando...");
 
 app.Run();
