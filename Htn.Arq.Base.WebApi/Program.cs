@@ -1,8 +1,8 @@
 using HealthChecks.UI.Client;
-using Htn.Arq.Base.WebApi.Application;
 using Htn.Arq.Base.WebApi.Builder;
 using Htn.Arq.Base.WebApi.HealthChecks;
 using Htn.Arq.Base.WebApi.Middlewares;
+using Htn.Arq.Base.WebApi.RegisterExtensions;
 using Htn.Arq.Base.WebApi.Resources;
 using Htn.Infrastructure.Di;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;

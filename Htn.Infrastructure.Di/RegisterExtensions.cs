@@ -43,7 +43,6 @@ namespace Htn.Infrastructure.Di
         public static IServiceCollection RegisterExceptionPolicies(this IServiceCollection services)
         {
             services.AddSingleton<IExceptionPolicy, SanitizeNotCustomExceptionsPolicy>();
-            //services.AddSingleton<IExceptionManager, ExceptionManager>();
             return services;
         }
     }

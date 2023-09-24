@@ -1,6 +1,6 @@
 ﻿using Htn.Arq.Base.WebApi.Middlewares;
 
-namespace Htn.Arq.Base.WebApi.Application
+namespace Htn.Arq.Base.WebApi.RegisterExtensions
 {
     public static class ExceptionHandlingExtension
     {

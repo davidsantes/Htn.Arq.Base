@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Htn.Arq.Base.WebApi.Application
+namespace Htn.Arq.Base.WebApi.RegisterExtensions
 {
     public static class SwaggerExtension
     {

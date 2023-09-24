@@ -6,4 +6,12 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
