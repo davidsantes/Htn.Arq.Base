@@ -18,6 +18,7 @@ builder.Services.AddCustomSwagger();
 var isSingleton = false;
 builder.Services.RegisterExceptionPolicies()
     .RegisterDalRepositories(isSingleton)
+    .RegisterDalAdapters(isSingleton)
     .RegisterBllServices(isSingleton)
     .RegisterDtoValidators()
     .RegisterAutomapperProfiles();

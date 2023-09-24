@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Htn.Arq.Base.Bll.Entities;
+using Htn.Arq.Base.Dal.Adapters.Interfaces;
 using Htn.Arq.Base.Dal.Repositories.Interfaces;
 using Moq;
 using Xunit;
@@ -14,6 +15,8 @@ namespace Htn.Arq.Base.Bll.Services.Test
         {
             // Arrange
             var mockRepository = new Mock<ICategoriaRepository>();
+            var mockCorreosAdapter = new Mock<ICorreosAdapter>();
+
             var expectedCategories = new List<CategoriaProducto>
             {
                 new CategoriaProducto { Id = 1, Nombre = "Electrónica" },
@@ -23,7 +26,11 @@ namespace Htn.Arq.Base.Bll.Services.Test
 
             mockRepository.Setup(repo => repo.GetAllAsync())
                 .ReturnsAsync(expectedCategories);
-            var service = new CategoriaProductoService(mockRepository.Object);
+            mockCorreosAdapter.Setup(adapter => adapter.InsAsync())
+                .ReturnsAsync(new Result<bool>(true));
+
+            var service = new CategoriaProductoService(mockRepository.Object
+                , mockCorreosAdapter.Object);
 
             // Act
             var result = await service.GetCategoriasProductoAsync();
@@ -38,6 +45,8 @@ namespace Htn.Arq.Base.Bll.Services.Test
         {
             // Arrange
             var mockRepository = new Mock<ICategoriaRepository>();
+            var mockCorreosAdapter = new Mock<ICorreosAdapter>();
+
             var newCategoria = new CategoriaProducto { Id = 0, Nombre = "Nueva Categoría" };
             var expectedNewId = 4; // El siguiente ID esperado
             var expectedResult = new Result<int>(expectedNewId);
@@ -45,7 +54,8 @@ namespace Htn.Arq.Base.Bll.Services.Test
 
             mockRepository.Setup(repo => repo.InsAsync(newCategoria))
                 .ReturnsAsync(expectedResult);
-            var service = new CategoriaProductoService(mockRepository.Object);
+            var service = new CategoriaProductoService(mockRepository.Object
+                , mockCorreosAdapter.Object);
 
             // Act
             var insResult = await service.InsCategoriaProductoAsync(newCategoria);

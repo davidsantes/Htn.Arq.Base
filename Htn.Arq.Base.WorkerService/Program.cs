@@ -7,6 +7,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         var isSingleton = true;
         services.RegisterExceptionPolicies()
             .RegisterDalRepositories(isSingleton)
+            .RegisterDalAdapters(isSingleton)
             .RegisterBllServices(isSingleton);
         services.AddHostedService<Worker>();
     })

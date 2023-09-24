@@ -1,5 +1,7 @@
 ﻿using Htn.Arq.Base.Bll.Services;
 using Htn.Arq.Base.Bll.Services.Interfaces;
+using Htn.Arq.Base.Dal.Adapters;
+using Htn.Arq.Base.Dal.Adapters.Interfaces;
 using Htn.Arq.Base.Dal.Repositories;
 using Htn.Arq.Base.Dal.Repositories.Interfaces;
 using Htn.Infrastructure.Core.Exceptions.Policies.Imp;
@@ -27,6 +29,28 @@ namespace Htn.Infrastructure.Di
             else
             {
                 services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            }
+
+            return services;
+        }
+
+        /// <summary>
+        /// Registra en el contenedor de DI los adapters para apis y servicios externos
+        /// </summary>
+        /// <param name="services">Service collection</param>
+        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
+        /// <returns>Colección configurada</returns>
+        public static IServiceCollection RegisterDalAdapters(
+            this IServiceCollection services,
+            bool isSingleton = false)
+        {
+            if (isSingleton)
+            {
+                services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
+            }
+            else
+            {
+                services.AddScoped<ICorreosAdapter, CorreosAdapter>();
             }
 
             return services;

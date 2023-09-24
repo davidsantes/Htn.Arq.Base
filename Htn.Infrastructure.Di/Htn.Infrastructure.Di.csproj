@@ -13,6 +13,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services\Htn.Arq.Base.Bll.Services.csproj" />
+    <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj" />
+    <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters\Htn.Arq.Base.Dal.Adapters.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Repositories.Interfaces\Htn.Arq.Base.Dal.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Repositories\Htn.Arq.Base.Dal.Repositories.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />

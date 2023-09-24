@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Htn.Arq.Base.Bll.Entities\Htn.Arq.Base.Bll.Entities.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj" />
   </ItemGroup>
 

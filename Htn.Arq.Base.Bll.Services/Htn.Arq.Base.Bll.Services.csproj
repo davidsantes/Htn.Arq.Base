@@ -9,7 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Entities\Htn.Arq.Base.Bll.Entities.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters.Interfaces\Htn.Arq.Base.Dal.Adapters.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Repositories.Interfaces\Htn.Arq.Base.Dal.Repositories.Interfaces.csproj" />
+    <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\Htn.Infrastructure.Global.Resources\Htn.Infrastructure.Global.Resources.csproj" />
   </ItemGroup>
 
 </Project>

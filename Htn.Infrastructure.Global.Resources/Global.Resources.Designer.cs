@@ -61,6 +61,24 @@ namespace Htn.Infrastructure.Global.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se ha podido realizar la operación..
+        /// </summary>
+        public static string MsgOperacionKo {
+            get {
+                return ResourceManager.GetString("MsgOperacionKo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La operación se ha realizado con éxito..
+        /// </summary>
+        public static string MsgOperacionOk {
+            get {
+                return ResourceManager.GetString("MsgOperacionOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1.0.0.
         /// </summary>
         public static string version {

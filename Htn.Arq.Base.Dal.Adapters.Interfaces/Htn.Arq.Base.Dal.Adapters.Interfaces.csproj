@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Htn.Arq.Base.Bll.Entities\Htn.Arq.Base.Bll.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
