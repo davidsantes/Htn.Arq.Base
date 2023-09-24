@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-Htn.Arq.Base.WorkerService-C9F1D558-B27B-4E84-A53D-B0CC41411DCD</UserSecretsId>
   </PropertyGroup>
