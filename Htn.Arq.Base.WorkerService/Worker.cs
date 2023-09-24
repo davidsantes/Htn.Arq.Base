@@ -28,7 +28,8 @@ namespace Htn.Arq.Base.WorkerService
 
                 _logger.LogInformation("Inicio: fin programada: {time}", DateTimeOffset.Now);
 
-                await Task.Delay(1000, stoppingToken);
+                // Espera un tiempo antes de ejecutar la tarea nuevamente
+                await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
         }
     }

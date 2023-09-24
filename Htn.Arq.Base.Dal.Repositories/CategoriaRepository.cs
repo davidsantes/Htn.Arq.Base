@@ -24,9 +24,9 @@ namespace Htn.Arq.Base.Dal.Repositories
             else
             {
                 // Crea una lista ficticia de categorías
-                _categorias.Add(new CategoriaProducto { Id = 1, Nombre = "Electrónica" });
-                _categorias.Add(new CategoriaProducto { Id = 2, Nombre = "Ropa" });
-                _categorias.Add(new CategoriaProducto { Id = 3, Nombre = "Hogar" });
+                _categorias.Add(new CategoriaProducto { Id = 1, Nombre = "Electrónica", Descripcion = "Electrónica" });
+                _categorias.Add(new CategoriaProducto { Id = 2, Nombre = "Ropa", Descripcion = "Ropa" });
+                _categorias.Add(new CategoriaProducto { Id = 3, Nombre = "Hogar", Descripcion = "Hogar" });
             }
 
             // Retornamos la lista de categorías almacenada en el repositorio

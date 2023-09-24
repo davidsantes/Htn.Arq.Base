@@ -14,11 +14,20 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI los repositorios
         /// </summary>
         /// <param name="services">Service collection</param>
+        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
         /// <returns>Colección configurada</returns>
-        public static IServiceCollection RegisterDalRepositories(this IServiceCollection services)
+        public static IServiceCollection RegisterDalRepositories(
+            this IServiceCollection services, 
+            bool isSingleton = false)
         {
-            //Para que mantenga los valores. Si fuera de BDD debería ser Scoped
-            services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+            if (isSingleton)
+            {
+                services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
+            }
+            else
+            {
+                services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            }
 
             return services;
         }
@@ -27,11 +36,20 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI los servicios de dominio 
         /// </summary>
         /// <param name="services">Service collection</param>
+        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
         /// <returns>Colección configurada</returns>
-        public static IServiceCollection RegisterBllServices(this IServiceCollection services)
+        public static IServiceCollection RegisterBllServices(
+            this IServiceCollection services,
+            bool isSingleton = false)
         {
-            // Domain services
-            services.AddScoped<ICategoriaProductoService, CategoriaProductoService>();
+            if (isSingleton)
+            {
+                services.AddSingleton<ICategoriaProductoService, CategoriaProductoService>();
+            }
+            else
+            {
+                services.AddScoped<ICategoriaProductoService, CategoriaProductoService>();
+            }
             return services;
         }
 
@@ -39,10 +57,13 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI las excepciones personalizadas y sus políticas de autorización
         /// </summary>
         /// <param name="services">Service collection</param>
-        /// <returns>Colección configurada</returns>
-        public static IServiceCollection RegisterExceptionPolicies(this IServiceCollection services)
+         /// <returns>Colección configurada</returns>
+        public static IServiceCollection RegisterExceptionPolicies(
+            this IServiceCollection services)
         {
+            //Debe ser singleton porque se utiliza en un middlewares, el cual por defecto es singleton.
             services.AddSingleton<IExceptionPolicy, SanitizeNotCustomExceptionsPolicy>();
+
             return services;
         }
     }

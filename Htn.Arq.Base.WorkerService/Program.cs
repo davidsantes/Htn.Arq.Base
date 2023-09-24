@@ -4,9 +4,10 @@ using Htn.Infrastructure.Di;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
+        var isSingleton = true;
         services.RegisterExceptionPolicies()
-            .RegisterDalRepositories()
-            .RegisterBllServices();
+            .RegisterDalRepositories(isSingleton)
+            .RegisterBllServices(isSingleton);
         services.AddHostedService<Worker>();
     })
     .Build();

@@ -29,10 +29,14 @@ namespace Htn.Arq.Base.WebApi.Middlewares
             }
         }
 
+        /// <summary>
+        /// Manejo de la excpeción.
+        /// Debido al uso constante por cada petición, se inyectan las mínimas clases en el constructor
+        /// y se resuelven en el propio método.
+        /// </summary>
+        /// <returns>Error</returns>
         private async Task HandleExceptionAsync(HttpContext context, Exception originalException)
         {
-            //Debido al uso constante por cada petición, se inyectan las mínimas clases en el constructor.
-            //Se resuelven aquí:
             var logger = _serviceProvider.GetRequiredService<ILogger<ExceptionHandlingMiddleware>>();
             var exceptionPolicy = _serviceProvider.GetRequiredService<IExceptionPolicy>();
             var exceptionSaneada = exceptionPolicy.ApplyPolicy(originalException);
@@ -49,6 +53,7 @@ namespace Htn.Arq.Base.WebApi.Middlewares
                     errorResponse.Codigo = StatusCodes.Status500InternalServerError.ToString();
                     errorResponse.Descripcion = $"[Exception] - " + exceptionSaneada.Message;
                     break;
+
                 default:
                     response.StatusCode = StatusCodes.Status500InternalServerError;
                     errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString();

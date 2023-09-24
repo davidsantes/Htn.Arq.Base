@@ -1,7 +1,6 @@
 using HealthChecks.UI.Client;
 using Htn.Arq.Base.WebApi.Builder;
 using Htn.Arq.Base.WebApi.HealthChecks;
-using Htn.Arq.Base.WebApi.Middlewares;
 using Htn.Arq.Base.WebApi.RegisterExtensions;
 using Htn.Arq.Base.WebApi.Resources;
 using Htn.Infrastructure.Di;
@@ -16,9 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddCustomSwagger();
 
+var isSingleton = false;
 builder.Services.RegisterExceptionPolicies()
-    .RegisterDalRepositories()
-    .RegisterBllServices()
+    .RegisterDalRepositories(isSingleton)
+    .RegisterBllServices(isSingleton)
     .RegisterDtoValidators()
     .RegisterAutomapperProfiles();
 
@@ -29,7 +29,6 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
 var app = builder.Build();
-app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment()
     || app.Environment.IsStaging()
@@ -45,13 +44,13 @@ if (app.Environment.IsDevelopment()
 
 app.UseSerilogRequestLogging();
 
-app.UseExceptionHandling();
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseExceptionHandling();
 
 //Configuración de healthchecks con formato de API Rest, se podrá acceder a través de /_health
 app.MapHealthChecks("/_health", new HealthCheckOptions
