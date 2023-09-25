@@ -25,8 +25,8 @@ namespace Htn.Infrastructure.Di
         {
             switch (project)
             {
-                case ProjectTypes.WorkerService:
-                    //Un worker service es por defecto singleton
+                case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
+                case ProjectTypes.WebBlazorServer:
                     services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
                     break;
                 default:
@@ -49,8 +49,8 @@ namespace Htn.Infrastructure.Di
         {
             switch (project)
             {
-                case ProjectTypes.WorkerService:
-                    //Un worker service es por defecto singleton
+                case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
+                case ProjectTypes.WebBlazorServer:
                     services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
                     break;
                 default:
@@ -73,8 +73,8 @@ namespace Htn.Infrastructure.Di
         {
             switch (project)
             {
-                case ProjectTypes.WorkerService:
-                    //Un worker service es por defecto singleton
+                case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
+                case ProjectTypes.WebBlazorServer:                 
                     services.AddSingleton<ICategoriaProductoService, CategoriaProductoService>();
                     break;
                 default:

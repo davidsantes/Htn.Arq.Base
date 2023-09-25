@@ -1,0 +1,42 @@
+﻿@page
+@model Htn.Arq.Base.Web.Pages.ErrorModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Error</title>
+    <link href="~/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="main">
+        <div class="content px-4">
+            <h1 class="text-danger">Error.</h1>
+            <h2 class="text-danger">Se ha producido un error mientras se procesaba la petición.</h2>
+
+            @if (Model.ShowRequestId)
+            {
+                <p>
+                    <strong>ID de solicitud:</strong> <code>@Model.RequestId</code>
+                </p>
+            }
+
+            <h3>Development Mode</h3>
+            <p>                
+                Cambiar al entorno de <strong>Desarrollo</strong> muestra información detallada sobre el error que ocurrió.
+            </p>
+            <p>
+                <strong>El entorno de Desarrollo no debe estar habilitado en aplicaciones en producción.</strong>
+                Puede resultar en la visualización de información sensible de excepciones para los usuarios finales.
+                Para depurar localmente, habilita el entorno de <strong>Desarrollo</strong> configurando la variable de entorno <strong>ASPNETCORE_ENVIRONMENT</strong> en <strong>Desarrollo</strong>
+                y reiniciando la aplicación.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

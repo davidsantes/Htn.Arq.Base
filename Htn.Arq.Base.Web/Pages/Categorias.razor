@@ -1,0 +1,49 @@
+﻿@page "/"
+@page "/categorias"
+
+<PageTitle>Categorías de productos</PageTitle>
+
+@using Htn.Arq.Base.Bll.Entities
+@using Htn.Arq.Base.Bll.Services.Interfaces
+
+@inject ICategoriaProductoService categoriaProductoService
+
+<h1>Listado de categorías</h1>
+
+<p>Esta página recoge las categorías de productos. No me tomes en serio, ¡es muy mejorable!</p>
+
+@if (categoriaProductos == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoria in categoriaProductos)
+            {
+                <tr>
+                    <td>@categoria.Id</td>
+                    <td>@categoria.Nombre</td>
+                    <td>@categoria.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<CategoriaProducto>? categoriaProductos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categoriaProductos = await categoriaProductoService.GetCategoriasProductoAsync();
+    }
+}

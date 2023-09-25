@@ -6,6 +6,7 @@
         BusinessLogic,
         Entities,
         WebApi,
-        WorkerService
+        WorkerService,
+        WebBlazorServer
     }
 }
