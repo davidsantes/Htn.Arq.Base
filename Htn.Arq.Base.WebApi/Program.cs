@@ -3,6 +3,7 @@ using Htn.Arq.Base.WebApi.Builder;
 using Htn.Arq.Base.WebApi.HealthChecks;
 using Htn.Arq.Base.WebApi.RegisterExtensions;
 using Htn.Arq.Base.WebApi.Resources;
+using Htn.Infrastructure.Core.Layers;
 using Htn.Infrastructure.Di;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
@@ -15,11 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddCustomSwagger();
 
-var isSingleton = false;
 builder.Services.RegisterExceptionPolicies()
-    .RegisterDalRepositories(isSingleton)
-    .RegisterDalAdapters(isSingleton)
-    .RegisterBllServices(isSingleton)
+    .RegisterDalRepositories(ProjectTypes.WebApi)
+    .RegisterDalAdapters(ProjectTypes.WebApi)
+    .RegisterBllServices(ProjectTypes.WebApi)
     .RegisterDtoValidators()
     .RegisterAutomapperProfiles();
 

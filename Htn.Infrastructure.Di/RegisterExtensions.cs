@@ -7,6 +7,7 @@ using Htn.Arq.Base.Dal.Repositories.Interfaces;
 using Htn.Infrastructure.Core.Exceptions.Policies.Imp;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Htn.Infrastructure.Core.Layers;
 
 namespace Htn.Infrastructure.Di
 {
@@ -16,19 +17,21 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI los repositorios
         /// </summary>
         /// <param name="services">Service collection</param>
-        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
+        /// <param name="project">Indica el tipo de proyecto. En función del mismo, cambia el registro de las clases</param>
         /// <returns>Colección configurada</returns>
         public static IServiceCollection RegisterDalRepositories(
-            this IServiceCollection services, 
-            bool isSingleton = false)
+            this IServiceCollection services,
+            ProjectTypes project)
         {
-            if (isSingleton)
+            switch (project)
             {
-                services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
-            }
-            else
-            {
-                services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+                case ProjectTypes.WorkerService:
+                    //Un worker service es por defecto singleton
+                    services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
+                    break;
+                default:
+                    services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+                    break;
             }
 
             return services;
@@ -38,19 +41,21 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI los adapters para apis y servicios externos
         /// </summary>
         /// <param name="services">Service collection</param>
-        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
+        /// <param name="project">Indica el tipo de proyecto. En función del mismo, cambia el registro de las clases</param>
         /// <returns>Colección configurada</returns>
         public static IServiceCollection RegisterDalAdapters(
             this IServiceCollection services,
-            bool isSingleton = false)
+            ProjectTypes project)
         {
-            if (isSingleton)
+            switch (project)
             {
-                services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
-            }
-            else
-            {
-                services.AddScoped<ICorreosAdapter, CorreosAdapter>();
+                case ProjectTypes.WorkerService:
+                    //Un worker service es por defecto singleton
+                    services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
+                    break;
+                default:
+                    services.AddScoped<ICorreosAdapter, CorreosAdapter>();
+                    break;
             }
 
             return services;
@@ -60,20 +65,23 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI los servicios de dominio 
         /// </summary>
         /// <param name="services">Service collection</param>
-        /// <param name="isSingleton">Indica si se tiene que registrar como Singleton, o como Scoped. Transient está descartado</param>
+        /// <param name="project">Indica el tipo de proyecto. En función del mismo, cambia el registro de las clases</param>
         /// <returns>Colección configurada</returns>
         public static IServiceCollection RegisterBllServices(
             this IServiceCollection services,
-            bool isSingleton = false)
+            ProjectTypes project)
         {
-            if (isSingleton)
+            switch (project)
             {
-                services.AddSingleton<ICategoriaProductoService, CategoriaProductoService>();
+                case ProjectTypes.WorkerService:
+                    //Un worker service es por defecto singleton
+                    services.AddSingleton<ICategoriaProductoService, CategoriaProductoService>();
+                    break;
+                default:
+                    services.AddScoped<ICategoriaProductoService, CategoriaProductoService>();
+                    break;
             }
-            else
-            {
-                services.AddScoped<ICategoriaProductoService, CategoriaProductoService>();
-            }
+
             return services;
         }
 
