@@ -22,22 +22,22 @@ namespace Htn.Arq.Base.Bll.Services
         public async Task<IList<CategoriaProducto>> GetCategoriasProductoAsync()
         {
             var categorias = await _categoriaRepository.GetAllAsync();
-            var resultEnvioCorreo = await _correosAdapter.InsAsync();
-
-            if (resultEnvioCorreo.IsSuccess)
-            {
-                return categorias;
-            }
-            else
-            {
-                throw new CustomException(Global_Resources.MsgOperacionKo);
-            }
+            return categorias;
         }
 
         public async Task<Result<int>> InsCategoriaProductoAsync(CategoriaProducto categoria)
         {
             var insResult = await _categoriaRepository.InsAsync(categoria);
-            return insResult;
+            var resultEnvioCorreo = await _correosAdapter.InsAsync();
+
+            if (resultEnvioCorreo.IsSuccess)
+            {
+                return insResult;
+            }
+            else
+            {
+                throw new CustomException(Global_Resources.MsgOperacionKo);
+            }
         }
     }
 }
