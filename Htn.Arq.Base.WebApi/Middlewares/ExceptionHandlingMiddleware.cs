@@ -1,6 +1,7 @@
 ﻿using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
-using System.Net;
+using Htn.Infrastructure.Global.Resources;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace Htn.Arq.Base.WebApi.Middlewares
@@ -30,11 +31,11 @@ namespace Htn.Arq.Base.WebApi.Middlewares
         }
 
         /// <summary>
-        /// Manejo de la excpeción.
+        /// Manejo de la excepción.
         /// Debido al uso constante por cada petición, se inyectan las mínimas clases en el constructor
         /// y se resuelven en el propio método.
         /// </summary>
-        /// <returns>Error</returns>
+        /// <returns>Error en formato ProblemDetails</returns>
         private async Task HandleExceptionAsync(HttpContext context, Exception originalException)
         {
             var logger = _serviceProvider.GetRequiredService<ILogger<ExceptionHandlingMiddleware>>();
@@ -44,23 +45,16 @@ namespace Htn.Arq.Base.WebApi.Middlewares
 
             context.Response.ContentType = ExceptionConstants.ContentTypeJson;
             var response = context.Response;
-            var errorResponse = new ControlledError();
+            response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            switch (exceptionSaneada)
+            var excepcionFormatoProblemDetails = new ProblemDetails
             {
-                case CustomException:
-                    response.StatusCode = StatusCodes.Status500InternalServerError;
-                    errorResponse.Codigo = StatusCodes.Status500InternalServerError.ToString();
-                    errorResponse.Descripcion = $"[Exception] - " + exceptionSaneada.Message;
-                    break;
+                Title = Global_Resources.MsgExcepcionNoControlada,
+                Detail = $"[Exception] - " + exceptionSaneada.Message,
+                Status = StatusCodes.Status500InternalServerError
+            };
 
-                default:
-                    response.StatusCode = StatusCodes.Status500InternalServerError;
-                    errorResponse.Codigo = HttpStatusCode.InternalServerError.ToString();
-                    errorResponse.Descripcion = $"[Exception] - " + exceptionSaneada.Message;
-                    break;
-            }
-            var result = JsonSerializer.Serialize(errorResponse);
+            var result = JsonSerializer.Serialize(excepcionFormatoProblemDetails);
             await context.Response.WriteAsync(result);
         }
     }

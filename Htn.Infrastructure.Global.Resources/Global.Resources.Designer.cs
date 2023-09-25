@@ -61,6 +61,15 @@ namespace Htn.Infrastructure.Global.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se produjo una excepción no controlada..
+        /// </summary>
+        public static string MsgExcepcionNoControlada {
+            get {
+                return ResourceManager.GetString("MsgExcepcionNoControlada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se ha podido realizar la operación..
         /// </summary>
         public static string MsgOperacionKo {
@@ -70,11 +79,56 @@ namespace Htn.Infrastructure.Global.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operación incompleta..
+        /// </summary>
+        public static string MsgOperacionKoTitulo {
+            get {
+                return ResourceManager.GetString("MsgOperacionKoTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La operación se ha realizado con éxito..
         /// </summary>
         public static string MsgOperacionOk {
             get {
                 return ResourceManager.GetString("MsgOperacionOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operación completa..
+        /// </summary>
+        public static string MsgOperacionOkTitulo {
+            get {
+                return ResourceManager.GetString("MsgOperacionOkTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se ha encontrado el recurso que se busca..
+        /// </summary>
+        public static string MsgRecursoNoEncontrado {
+            get {
+                return ResourceManager.GetString("MsgRecursoNoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El elemento a validar contiene errores:.
+        /// </summary>
+        public static string MsgValidacionKo {
+            get {
+                return ResourceManager.GetString("MsgValidacionKo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validación incorrecta..
+        /// </summary>
+        public static string MsgValidacionKoTitulo {
+            get {
+                return ResourceManager.GetString("MsgValidacionKoTitulo", resourceCulture);
             }
         }
         

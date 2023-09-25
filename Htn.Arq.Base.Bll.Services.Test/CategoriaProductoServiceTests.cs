@@ -51,11 +51,14 @@ namespace Htn.Arq.Base.Bll.Services.Test
             var expectedNewId = 4; // El siguiente ID esperado
             var expectedResult = new Result<int>(expectedNewId);
 
-
             mockRepository.Setup(repo => repo.InsAsync(newCategoria))
                 .ReturnsAsync(expectedResult);
+            mockCorreosAdapter.Setup(adapter => adapter.InsAsync())
+                .ReturnsAsync(new Result<bool>(true));
+
             var service = new CategoriaProductoService(mockRepository.Object
                 , mockCorreosAdapter.Object);
+
 
             // Act
             var insResult = await service.InsCategoriaProductoAsync(newCategoria);

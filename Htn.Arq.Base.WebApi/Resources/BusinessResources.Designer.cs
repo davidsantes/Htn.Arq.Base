@@ -59,23 +59,5 @@ namespace Htn.Arq.Base.WebApi.Resources {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Se produjo una excepción no controlada..
-        /// </summary>
-        public static string MsgExcepcionNoControlada {
-            get {
-                return ResourceManager.GetString("MsgExcepcionNoControlada", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No se ha encontrado el recurso que se busca..
-        /// </summary>
-        public static string MsgRecursoNoEncontrado {
-            get {
-                return ResourceManager.GetString("MsgRecursoNoEncontrado", resourceCulture);
-            }
-        }
     }
 }

@@ -3,8 +3,7 @@ using FluentValidation;
 using Htn.Arq.Base.Bll.Entities;
 using Htn.Arq.Base.Bll.Services.Interfaces;
 using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Arq.Base.WebApi.Resources;
-using Htn.Infrastructure.Core.Exceptions.Entities;
+using Htn.Infrastructure.Global.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Arq.Base.WebApi.Controllers
@@ -19,7 +18,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
 
         public CategoriaController(ICategoriaProductoService categoriaService,
             IValidator<CategoriaProductoDto> validator,
-            IMapper mapper, 
+            IMapper mapper,
             ILogger<CategoriaController> logger)
         {
             _categoriaService = categoriaService;
@@ -39,9 +38,14 @@ namespace Htn.Arq.Base.WebApi.Controllers
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
-                return NotFound(new ControlledError() { Codigo = StatusCodes.Status404NotFound.ToString()
-                    , Descripcion = BusinessResources.MsgRecursoNoEncontrado
-                });
+                var problemaEnBusqueda = new ProblemDetails
+                {
+                    Title = Global_Resources.MsgRecursoNoEncontrado,
+                    Detail = Global_Resources.MsgRecursoNoEncontrado,
+                    Status = StatusCodes.Status404NotFound
+                };
+
+                return NotFound(problemaEnBusqueda);
             }
 
             var listaCategoriasDto = _mapper.Map<List<CategoriaProductoDto>>(categorias);
@@ -61,7 +65,13 @@ namespace Htn.Arq.Base.WebApi.Controllers
             var result = await _validator.ValidateAsync(nuevaCategoriaDto);
             if (!result.IsValid)
             {
-                return BadRequest("Objeto no válido: " + string.Join(",", result.Errors));
+                var problemaEnValidacion = new ProblemDetails
+                {
+                    Title = Global_Resources.MsgValidacionKoTitulo,
+                    Detail = Global_Resources.MsgValidacionKo + string.Join(",", result.Errors),
+                    Status = StatusCodes.Status400BadRequest
+                };
+                return BadRequest(problemaEnValidacion);
             }
 
             var _mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaDto);
@@ -76,7 +86,13 @@ namespace Htn.Arq.Base.WebApi.Controllers
             }
             else
             {
-                return BadRequest("Objeto no válido: " + string.Join(",", insCategoriaResult.Errors));
+                var problemaEnInsercion = new ProblemDetails
+                {
+                    Title = Global_Resources.MsgOperacionKoTitulo,
+                    Detail = Global_Resources.MsgOperacionKo + string.Join(",", insCategoriaResult.Errors),
+                    Status = StatusCodes.Status400BadRequest
+                };
+                return BadRequest(problemaEnInsercion);
             }
         }
     }

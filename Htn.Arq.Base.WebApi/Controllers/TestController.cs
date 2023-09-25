@@ -1,5 +1,4 @@
-﻿using Htn.Arq.Base.WebApi.Resources;
-using Htn.Infrastructure.Global.Resources;
+﻿using Htn.Infrastructure.Global.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Arq.Base.WebApi.Controllers
@@ -64,7 +63,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
 #pragma warning restore S1481
 
             return StatusCode(StatusCodes.Status500InternalServerError
-                , new { Message = BusinessResources.MsgExcepcionNoControlada });
+                , new { Message = Global_Resources.MsgExcepcionNoControlada });
         }
     }
 }

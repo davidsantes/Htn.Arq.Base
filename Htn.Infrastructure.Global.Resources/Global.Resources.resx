@@ -117,11 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MsgExcepcionNoControlada" xml:space="preserve">
+    <value>Se produjo una excepción no controlada.</value>
+  </data>
   <data name="MsgOperacionKo" xml:space="preserve">
     <value>No se ha podido realizar la operación.</value>
   </data>
+  <data name="MsgOperacionKoTitulo" xml:space="preserve">
+    <value>Operación incompleta.</value>
+  </data>
   <data name="MsgOperacionOk" xml:space="preserve">
     <value>La operación se ha realizado con éxito.</value>
+  </data>
+  <data name="MsgOperacionOkTitulo" xml:space="preserve">
+    <value>Operación completa.</value>
+  </data>
+  <data name="MsgRecursoNoEncontrado" xml:space="preserve">
+    <value>No se ha encontrado el recurso que se busca.</value>
+  </data>
+  <data name="MsgValidacionKo" xml:space="preserve">
+    <value>El elemento a validar contiene errores:</value>
+  </data>
+  <data name="MsgValidacionKoTitulo" xml:space="preserve">
+    <value>Validación incorrecta.</value>
   </data>
   <data name="version" xml:space="preserve">
     <value>1.0.0</value>
