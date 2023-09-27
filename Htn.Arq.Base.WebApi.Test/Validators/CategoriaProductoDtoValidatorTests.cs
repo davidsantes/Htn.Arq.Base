@@ -2,7 +2,6 @@
 using Htn.Arq.Base.WebApi.Dtos;
 using Htn.Arq.Base.WebApi.Resources;
 using Htn.Arq.Base.WebApi.Validators;
-using System.Resources;
 using Xunit;
 
 namespace Htn.Arq.Base.WebApi.Test.Validators
@@ -10,15 +9,12 @@ namespace Htn.Arq.Base.WebApi.Test.Validators
     [Trait("Categoria", "ValidacionCategoriaProductoDto")]
     public class CategoriaProductoDtoValidatorTests
     {
-        private readonly ResourceManager _resourceManager;
-
         public CategoriaProductoDtoValidatorTests()
         {
-            _resourceManager = new ResourceManager(typeof(ValidationResources));
         }
 
         [Fact]
-        public void Dado_CategoriaProductoDtoValidator_CuandoValoresObligatoriosSiInformados_EntoncesOk()
+        public void Dado_CategoriaProductoDtoValidator_CuandoValoresObligatoriosSiEstanInformados_EntoncesOk()
         {
             // Arrange
             var validator = new CategoriaProductoDtoValidator();
@@ -36,24 +32,24 @@ namespace Htn.Arq.Base.WebApi.Test.Validators
         }
 
         [Fact]
-        public void Dado_CategoriaProductoDtoValidator_CuandoValoresObligatoriosNoInformados_EntoncesKo()
+        public void Dado_CategoriaProductoDtoValidator_CuandoValoresObligatoriosNoEstanInformados_EntoncesKo()
         {
             // Arrange
             var validator = new CategoriaProductoDtoValidator();
             var categoria = new CategoriaProductoDto
             {
-                Id = 1,
-                Nombre = "" // Nombre vacío, debería fallar
+                Nombre = ""
             };
-
-            var categoriaNombreRequerido = _resourceManager.GetString("CategoriaNombreRequerido");
 
             // Act
             var result = validator.TestValidate(categoria);
 
             // Assert
+            result.ShouldHaveValidationErrorFor(c => c.Id)
+                .WithErrorMessage(ValidationResources.CategoriaIdRequerido);
+
             result.ShouldHaveValidationErrorFor(c => c.Nombre)
-                .WithErrorMessage(categoriaNombreRequerido);
+                .WithErrorMessage(ValidationResources.CategoriaNombreRequerido);
         }
 
         [Fact]
@@ -68,7 +64,7 @@ namespace Htn.Arq.Base.WebApi.Test.Validators
             };
 
             int maxLength = 50;
-            var categoriaNombreRequerido = string.Format(_resourceManager.GetString("CategoriaNombreMaxLength"), maxLength);
+            var categoriaNombreRequerido = string.Format(ValidationResources.CategoriaNombreMaxLength, maxLength);
 
             // Act
             var result = validator.TestValidate(categoria);

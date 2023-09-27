@@ -61,6 +61,15 @@ namespace Htn.Arq.Base.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El id de la categoría es obligatorio..
+        /// </summary>
+        public static string CategoriaIdRequerido {
+            get {
+                return ResourceManager.GetString("CategoriaIdRequerido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El nombre de la categoría no puede tener más de {0} caracteres..
         /// </summary>
         public static string CategoriaNombreMaxLength {

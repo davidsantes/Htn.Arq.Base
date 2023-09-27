@@ -10,6 +10,9 @@ namespace Htn.Arq.Base.WebApi.Validators
         {
             int maxLength = 50;
 
+            RuleFor(categoria => categoria.Id)
+                .NotEmpty().WithMessage(ValidationResources.CategoriaIdRequerido);
+
             RuleFor(categoria => categoria.Nombre)
                 .NotEmpty().WithMessage(ValidationResources.CategoriaNombreRequerido)
                 .MaximumLength(maxLength).WithMessage(string.Format(ValidationResources.CategoriaNombreMaxLength, maxLength));
