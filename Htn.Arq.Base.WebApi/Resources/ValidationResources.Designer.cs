@@ -61,6 +61,15 @@ namespace Htn.Arq.Base.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El campo debe contener un formato válido..
+        /// </summary>
+        public static string CampoFormatoNoValido {
+            get {
+                return ResourceManager.GetString("CampoFormatoNoValido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El id de la categoría es obligatorio..
         /// </summary>
         public static string CategoriaIdRequerido {

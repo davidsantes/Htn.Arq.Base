@@ -20,7 +20,7 @@ namespace Htn.Arq.Base.WebApi.Test.Validators
             var validator = new CategoriaProductoDtoValidator();
             var categoria = new CategoriaProductoDto
             {
-                Id = 1,
+                Id = "1",
                 Nombre = "Nombre de categoría válido"
             };
 
@@ -59,7 +59,7 @@ namespace Htn.Arq.Base.WebApi.Test.Validators
             var validator = new CategoriaProductoDtoValidator();
             var categoria = new CategoriaProductoDto
             {
-                Id = 1,
+                Id = "1",
                 Nombre = "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados"
             };
 
