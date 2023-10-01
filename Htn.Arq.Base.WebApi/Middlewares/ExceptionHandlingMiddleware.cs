@@ -1,11 +1,16 @@
-﻿using Htn.Infrastructure.Core.Exceptions.Entities;
+﻿using FluentValidation;
+using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Htn.Infrastructure.Global.Resources;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Htn.Arq.Base.WebApi.Middlewares
 {
+    /// <summary>
+    /// Manejo de excepciones no controladas.
+    /// Debido al uso en cada petición, se inyectan las mínimas clases en el constructor
+    /// y se resuelven en el propio método.
+    /// </summary>
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -24,24 +29,52 @@ namespace Htn.Arq.Base.WebApi.Middlewares
             {
                 await _next(httpContext);
             }
-            catch (Exception ex)
+            catch (ValidationException exValidationException)
             {
-                await HandleExceptionAsync(httpContext, ex);
+                await HandleValidationDataExceptionAsync(httpContext, exValidationException);
+            }
+            catch (Exception exUnexpectedException)
+            {
+                await HandleExceptionAsync(httpContext, exUnexpectedException);
             }
         }
 
         /// <summary>
-        /// Manejo de la excepción.
+        /// Manejo de excepciones de validación de entrada de datos (fluent validation / data annotations.
+        /// </summary>
+        /// <returns>Error en formato ProblemDetails</returns>
+        private async Task HandleValidationDataExceptionAsync(HttpContext context, ValidationException validationException)
+        {
+            var problemDetails = new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = ExceptionConstantsTypes.ExceptionTypeValidationFailure,
+                Title = Global_Resources.MsgValidacionKoTitulo,
+                Detail = Global_Resources.MsgValidacionKo
+            };
+
+            if (validationException.Errors is not null)
+            {
+                problemDetails.Extensions["errors"] = validationException.Errors;
+            }
+
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsJsonAsync(problemDetails);
+        }
+
+        /// <summary>
+        /// Manejo de excepciones no controladas.
         /// Debido al uso constante por cada petición, se inyectan las mínimas clases en el constructor
         /// y se resuelven en el propio método.
         /// </summary>
         /// <returns>Error en formato ProblemDetails</returns>
-        private async Task HandleExceptionAsync(HttpContext context, Exception originalException)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exUnexpectedException)
         {
             var logger = _serviceProvider.GetRequiredService<ILogger<ExceptionHandlingMiddleware>>();
             var exceptionPolicy = _serviceProvider.GetRequiredService<IExceptionPolicy>();
-            var exceptionSaneada = exceptionPolicy.ApplyPolicy(originalException);
-            logger.LogError("[Exception] LogError. Excepción original: {@originalException}. Excepción saneada: {@exceptionSaneada}", originalException, exceptionSaneada);
+            var exceptionSaneada = exceptionPolicy.ApplyPolicy(exUnexpectedException);
+            logger.LogError("[Exception] LogError. Excepción original: {@originalException}. Excepción saneada: {@exceptionSaneada}"
+                , exUnexpectedException, exceptionSaneada);
 
             context.Response.ContentType = ExceptionConstants.ContentTypeJson;
             var response = context.Response;
@@ -49,13 +82,14 @@ namespace Htn.Arq.Base.WebApi.Middlewares
 
             var excepcionFormatoProblemDetails = new ProblemDetails
             {
+                Status = StatusCodes.Status500InternalServerError,
+                Type = ExceptionConstantsTypes.ExceptionTypeUnexpectedException,
                 Title = Global_Resources.MsgExcepcionNoControlada,
-                Detail = $"[Exception] - " + exceptionSaneada.Message,
-                Status = StatusCodes.Status500InternalServerError
+                Detail = $"[Exception] - " + exceptionSaneada.Message
             };
 
-            var result = JsonSerializer.Serialize(excepcionFormatoProblemDetails);
-            await context.Response.WriteAsync(result);
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(excepcionFormatoProblemDetails);
         }
     }
 }

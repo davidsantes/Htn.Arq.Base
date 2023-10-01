@@ -20,7 +20,7 @@ namespace Htn.Infrastructure.Core.Exceptions.Entities
         {
             get
             {
-                return String.Format(ExceptionConstants.SanitizedException, Guid);
+                return String.Format(ExceptionConstants.SanitizedExceptioMessage, Guid);
             }
         }
 

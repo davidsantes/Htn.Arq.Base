@@ -33,6 +33,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [HttpGet("getCategoriasProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IList<CategoriaProductoDto>>> GetCategoriasProducto()
         {
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
@@ -60,19 +61,10 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [HttpPost("insCategoriaProducto")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> InsCategoriaProducto(CategoriaProductoDto nuevaCategoriaDto)
         {
-            var result = await _validator.ValidateAsync(nuevaCategoriaDto);
-            if (!result.IsValid)
-            {
-                var problemaEnValidacion = new ProblemDetails
-                {
-                    Title = Global_Resources.MsgValidacionKoTitulo,
-                    Detail = Global_Resources.MsgValidacionKo + string.Join(",", result.Errors),
-                    Status = StatusCodes.Status400BadRequest
-                };
-                return BadRequest(problemaEnValidacion);
-            }
+            _validator.ValidateAndThrow(nuevaCategoriaDto);
 
             var _mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaDto);
 

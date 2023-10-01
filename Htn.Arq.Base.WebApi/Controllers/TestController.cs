@@ -22,7 +22,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetVersion()
         {
-            string version = Global_Resources.version;
+            string version = Global_Resources.VersionApp;
             return Ok(version);
         }
 
@@ -35,7 +35,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult InsLog()
         {
-            string version = Global_Resources.version;
+            string version = Global_Resources.VersionApp;
             var guidControl = Guid.NewGuid();
 
             _logger.LogDebug("LogDebug. Versión de producto {@version} - {@guidControl}", version, guidControl.ToString());

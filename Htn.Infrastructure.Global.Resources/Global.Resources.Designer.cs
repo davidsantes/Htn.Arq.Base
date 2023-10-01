@@ -115,7 +115,7 @@ namespace Htn.Infrastructure.Global.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El elemento a validar contiene errores:.
+        ///   Looks up a localized string similar to El elemento a validar tiene uno o más errores..
         /// </summary>
         public static string MsgValidacionKo {
             get {
@@ -135,9 +135,9 @@ namespace Htn.Infrastructure.Global.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1.0.0.
         /// </summary>
-        public static string version {
+        public static string VersionApp {
             get {
-                return ResourceManager.GetString("version", resourceCulture);
+                return ResourceManager.GetString("VersionApp", resourceCulture);
             }
         }
     }
