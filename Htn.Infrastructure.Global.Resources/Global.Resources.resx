@@ -135,6 +135,9 @@
   <data name="MsgRecursoNoEncontrado" xml:space="preserve">
     <value>No se ha encontrado el recurso que se busca.</value>
   </data>
+  <data name="MsgRecursoNoEncontradoTitulo" xml:space="preserve">
+    <value>Recurso no encontrado.</value>
+  </data>
   <data name="MsgValidacionKo" xml:space="preserve">
     <value>El elemento a validar tiene uno o más errores.</value>
   </data>

@@ -115,6 +115,15 @@ namespace Htn.Infrastructure.Global.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recurso no encontrado..
+        /// </summary>
+        public static string MsgRecursoNoEncontradoTitulo {
+            get {
+                return ResourceManager.GetString("MsgRecursoNoEncontradoTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El elemento a validar tiene uno o más errores..
         /// </summary>
         public static string MsgValidacionKo {

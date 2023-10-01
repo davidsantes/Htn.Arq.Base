@@ -27,11 +27,12 @@ namespace Htn.Arq.Base.Bll.Entities.Test
             var resultado = new Result<int>(idMoq);
 
             // Act
-            resultado.AddErrorMessage("Error 1");
+            resultado.AddErrorMessage("Error1", "Error 1");
 
             // Assert
-            resultado.Errors.Should().HaveCount(1);
-            resultado.Errors.First().Should().Be("Error 1");
+            resultado.IsSuccess.Should().BeFalse();
+            resultado.Errors.Should().ContainKey("Error1");
+            resultado.Errors["Error1"].Should().Be("Error 1");
         }
 
         [Fact]
@@ -42,13 +43,17 @@ namespace Htn.Arq.Base.Bll.Entities.Test
             var resultado = new Result<int>(idMoq);
 
             // Act
-            resultado.AddErrorMessage("Error 1");
-            resultado.AddErrorMessage("Error 2");
-            resultado.AddErrorMessage("Error 3");
+            resultado.AddErrorMessage("Error1", "Error 1");
+            resultado.AddErrorMessage("Error2", "Error 2");
+            resultado.AddErrorMessage("Error3", "Error 3");
 
             // Assert
+            resultado.IsSuccess.Should().BeFalse();
             resultado.Errors.Should().HaveCount(3);
-            resultado.Errors.Should().Contain("Error 1", "Error 2", "Error 3");
+            resultado.Errors.Should().ContainKeys("Error1", "Error2", "Error3");
+            resultado.Errors["Error1"].Should().Be("Error 1");
+            resultado.Errors["Error2"].Should().Be("Error 2");
+            resultado.Errors["Error3"].Should().Be("Error 3");
         }
     }
 }

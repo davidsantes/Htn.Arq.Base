@@ -3,7 +3,7 @@ using FluentValidation;
 using Htn.Arq.Base.Bll.Entities;
 using Htn.Arq.Base.Bll.Services.Interfaces;
 using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Infrastructure.Global.Resources;
+using Htn.Arq.Base.WebApi.Factories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Arq.Base.WebApi.Controllers
@@ -15,15 +15,18 @@ namespace Htn.Arq.Base.WebApi.Controllers
         private readonly ICategoriaProductoService _categoriaService;
         private readonly IValidator<CategoriaProductoDto> _validator;
         public readonly IMapper _mapper;
+        public readonly IProblemDetailsFactory _problemDetailsFactory;
 
         public CategoriaController(ICategoriaProductoService categoriaService,
             IValidator<CategoriaProductoDto> validator,
             IMapper mapper,
-            ILogger<CategoriaController> logger)
+            ILogger<CategoriaController> logger,
+            IProblemDetailsFactory problemDetailsFactory)
         {
             _categoriaService = categoriaService;
             _validator = validator;
             _mapper = mapper;
+            _problemDetailsFactory = problemDetailsFactory;
         }
 
         /// <summary>
@@ -39,14 +42,7 @@ namespace Htn.Arq.Base.WebApi.Controllers
             var categorias = await _categoriaService.GetCategoriasProductoAsync();
             if (!categorias.Any())
             {
-                var problemaEnBusqueda = new ProblemDetails
-                {
-                    Title = Global_Resources.MsgRecursoNoEncontrado,
-                    Detail = Global_Resources.MsgRecursoNoEncontrado,
-                    Status = StatusCodes.Status404NotFound
-                };
-
-                return NotFound(problemaEnBusqueda);
+                return NotFound(_problemDetailsFactory.CreateRecursoNoEncontrado());
             }
 
             var listaCategoriasDto = _mapper.Map<List<CategoriaProductoDto>>(categorias);
@@ -78,12 +74,8 @@ namespace Htn.Arq.Base.WebApi.Controllers
             }
             else
             {
-                var problemaEnInsercion = new ProblemDetails
-                {
-                    Title = Global_Resources.MsgOperacionKoTitulo,
-                    Detail = Global_Resources.MsgOperacionKo + string.Join(",", insCategoriaResult.Errors),
-                    Status = StatusCodes.Status400BadRequest
-                };
+                var problemaEnInsercion = _problemDetailsFactory
+                    .CreateProblemaEnBackEnd(insCategoriaResult.Errors);
                 return BadRequest(problemaEnInsercion);
             }
         }
