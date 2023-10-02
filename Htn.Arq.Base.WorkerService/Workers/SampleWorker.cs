@@ -1,13 +1,13 @@
 using Htn.Arq.Base.Bll.Services.Interfaces;
 
-namespace Htn.Arq.Base.WorkerService
+namespace Htn.Arq.Base.WorkerService.Workers
 {
-    public class Worker : BackgroundService
+    public class SampleWorker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<SampleWorker> _logger;
         private readonly ICategoriaProductoService _categoriaProductoService;
 
-        public Worker(ILogger<Worker> logger
+        public SampleWorker(ILogger<SampleWorker> logger
             , ICategoriaProductoService categoriaProductoService)
         {
             _logger = logger;
@@ -18,7 +18,7 @@ namespace Htn.Arq.Base.WorkerService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Inicio: tarea programada: {time}", DateTimeOffset.Now);
+                _logger.LogInformation("INICIO: tarea programada: {time}", DateTimeOffset.Now);
 
                 var categorias = await _categoriaProductoService.GetCategoriasProductoAsync();
                 foreach (var categoria in categorias)
@@ -26,7 +26,7 @@ namespace Htn.Arq.Base.WorkerService
                     _logger.LogInformation(categoria.Descripcion);
                 }
 
-                _logger.LogInformation("Inicio: fin programada: {time}", DateTimeOffset.Now);
+                _logger.LogInformation("FIN: tarea programada: {time}", DateTimeOffset.Now);
 
                 // Espera un tiempo antes de ejecutar la tarea nuevamente
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
