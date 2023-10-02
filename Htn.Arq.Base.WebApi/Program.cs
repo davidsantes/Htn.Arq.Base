@@ -62,4 +62,4 @@ app.MapHealthChecks("/_health", new HealthCheckOptions
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("La aplicación se está ejecutando...");
 
-app.Run();
+await app.RunAsync();
