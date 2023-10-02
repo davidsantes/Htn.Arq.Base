@@ -6,12 +6,12 @@ using Htn.Arq.Base.Dal.Repositories;
 using Htn.Arq.Base.Dal.Repositories.Interfaces;
 using Htn.Infrastructure.Core.Exceptions.Policies.Imp;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using Htn.Infrastructure.Core.Layers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Htn.Infrastructure.Di
 {
-    public static class RegisterExtensions
+    public static class RegisterServicesExtensions
     {
         /// <summary>
         /// Registra en el contenedor de DI los repositorios
@@ -29,6 +29,7 @@ namespace Htn.Infrastructure.Di
                 case ProjectTypes.WebBlazorServer:
                     services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
                     break;
+
                 default:
                     services.AddScoped<ICategoriaRepository, CategoriaRepository>();
                     break;
@@ -53,6 +54,7 @@ namespace Htn.Infrastructure.Di
                 case ProjectTypes.WebBlazorServer:
                     services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
                     break;
+
                 default:
                     services.AddScoped<ICorreosAdapter, CorreosAdapter>();
                     break;
@@ -62,7 +64,7 @@ namespace Htn.Infrastructure.Di
         }
 
         /// <summary>
-        /// Registra en el contenedor de DI los servicios de dominio 
+        /// Registra en el contenedor de DI los servicios de dominio
         /// </summary>
         /// <param name="services">Service collection</param>
         /// <param name="project">Indica el tipo de proyecto. En función del mismo, cambia el registro de las clases</param>
@@ -74,9 +76,10 @@ namespace Htn.Infrastructure.Di
             switch (project)
             {
                 case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
-                case ProjectTypes.WebBlazorServer:                 
+                case ProjectTypes.WebBlazorServer:
                     services.AddSingleton<ICategoriaProductoService, CategoriaProductoService>();
                     break;
+
                 default:
                     services.AddScoped<ICategoriaProductoService, CategoriaProductoService>();
                     break;
@@ -89,7 +92,7 @@ namespace Htn.Infrastructure.Di
         /// Registra en el contenedor de DI las excepciones personalizadas y sus políticas de autorización
         /// </summary>
         /// <param name="services">Service collection</param>
-         /// <returns>Colección configurada</returns>
+        /// <returns>Colección configurada</returns>
         public static IServiceCollection RegisterExceptionPolicies(
             this IServiceCollection services)
         {

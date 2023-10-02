@@ -1,10 +1,13 @@
-﻿using FluentValidation;
-using Htn.Infrastructure.Core.Exceptions.Entities;
+﻿using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Htn.Infrastructure.Global.Resources;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using FluentValidation;
 
-namespace Htn.Arq.Base.WebApi.Middlewares
+namespace Htn.Infrastructure.Core.Exceptions.Middlewares
 {
     /// <summary>
     /// Manejo de excepciones no controladas.

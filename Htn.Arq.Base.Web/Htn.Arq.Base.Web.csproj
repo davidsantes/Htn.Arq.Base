@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj" />
