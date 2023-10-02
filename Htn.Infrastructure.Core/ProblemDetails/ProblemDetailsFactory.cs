@@ -5,10 +5,7 @@ using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Infrastructure.Core.ProblemDetails
 {
-    /// <summary>
-    /// DefaultProblemDetailsFactory, Microsoft.AspNetCore.Mvc.Infrastructure
-    /// https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.Core/src/Infrastructure/DefaultProblemDetailsFactory.cs
-    /// </summary>
+    /// <inheritdoc />
     public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         /// <inheritdoc />

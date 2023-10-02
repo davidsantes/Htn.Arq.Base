@@ -2,6 +2,11 @@
 
 namespace Htn.Infrastructure.Core.ProblemDetails
 {
+    /// <summary>
+    /// Factoría para la creación de ProblemDetails personalizados
+    /// Otra alternativa es la utilización de DefaultProblemDetailsFactory, Microsoft.AspNetCore.Mvc.Infrastructure
+    /// https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.Core/src/Infrastructure/DefaultProblemDetailsFactory.cs
+    /// </summary>
     public interface IProblemDetailsFactory
     {
         /// <summary>
