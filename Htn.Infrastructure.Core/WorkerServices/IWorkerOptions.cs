@@ -1,4 +1,4 @@
-﻿namespace Htn.Infrastructure.Core.WorkerService
+﻿namespace Htn.Infrastructure.Core.WorkerServices
 {
     public interface IWorkerOptions
     {

@@ -1,4 +1,4 @@
-﻿using Htn.Infrastructure.Core.WorkerService;
+﻿using Htn.Infrastructure.Core.WorkerServices;
 
 namespace Htn.Arq.Base.WorkerService.Workers
 {

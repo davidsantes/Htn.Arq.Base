@@ -2,7 +2,7 @@
 using Serilog;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Htn.Infrastructure.Core.WorkerService
+namespace Htn.Infrastructure.Core.WorkerServices
 {
     /// <summary>
     /// Worker provides consistent logging (including a logger enriched with the type of the

@@ -1,5 +1,5 @@
 ﻿using Htn.Arq.Base.Bll.Services.Interfaces;
-using Htn.Infrastructure.Core.WorkerService;
+using Htn.Infrastructure.Core.WorkerServices;
 using Microsoft.Extensions.Options;
 
 namespace Htn.Arq.Base.WorkerService.Workers
