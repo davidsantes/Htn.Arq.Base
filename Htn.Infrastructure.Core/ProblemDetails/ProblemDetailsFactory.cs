@@ -1,5 +1,6 @@
 ﻿using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Global.Resources;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Arq.Base.WebApi.Factories

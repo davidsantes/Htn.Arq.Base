@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.RegisterExceptionPolicies()
+builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterDalRepositories(ProjectTypes.WebBlazorServer)
     .RegisterDalAdapters(ProjectTypes.WebBlazorServer)
     .RegisterBllServices(ProjectTypes.WebBlazorServer);

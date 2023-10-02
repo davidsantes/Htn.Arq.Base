@@ -1,6 +1,5 @@
 using HealthChecks.UI.Client;
 using Htn.Arq.Base.WebApi.Builder;
-using Htn.Arq.Base.WebApi.Factories;
 using Htn.Arq.Base.WebApi.HealthChecks;
 using Htn.Arq.Base.WebApi.RegisterExtensions;
 using Htn.Arq.Base.WebApi.Resources;
@@ -17,15 +16,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddCustomSwagger();
 
-builder.Services.RegisterExceptionPolicies()
+builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterDalRepositories(ProjectTypes.WebApi)
     .RegisterDalAdapters(ProjectTypes.WebApi)
     .RegisterBllServices(ProjectTypes.WebApi)
     .RegisterDtoValidators()
     .RegisterAutomapperProfiles();
-
-//TODO: ponerlo en un proyecto compartido
-builder.Services.AddScoped<IProblemDetailsFactory, ProblemDetailsFactory>();
 
 builder.Services.AddHealthChecks()
     .AddCheck<MyCustomHealthCheck>("MyCustomHealthCheck");

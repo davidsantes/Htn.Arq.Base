@@ -4,6 +4,7 @@ using Htn.Arq.Base.Dal.Adapters;
 using Htn.Arq.Base.Dal.Adapters.Interfaces;
 using Htn.Arq.Base.Dal.Repositories;
 using Htn.Arq.Base.Dal.Repositories.Interfaces;
+using Htn.Arq.Base.WebApi.Factories;
 using Htn.Infrastructure.Core.Exceptions.Policies.Imp;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Htn.Infrastructure.Core.Layers;
@@ -89,15 +90,16 @@ namespace Htn.Infrastructure.Di
         }
 
         /// <summary>
-        /// Registra en el contenedor de DI las excepciones personalizadas y sus políticas de autorización
+        /// Registra en el contenedor de DI las políticas de saneamiento de excepciones y los problem details
         /// </summary>
         /// <param name="services">Service collection</param>
         /// <returns>Colección configurada</returns>
-        public static IServiceCollection RegisterExceptionPolicies(
+        public static IServiceCollection RegisterExceptionAndProblemDetails(
             this IServiceCollection services)
         {
             //Debe ser singleton porque se utiliza en un middlewares, el cual por defecto es singleton.
             services.AddSingleton<IExceptionPolicy, SanitizeNotCustomExceptionsPolicy>();
+            services.AddSingleton<IProblemDetailsFactory, ProblemDetailsFactory>();
 
             return services;
         }

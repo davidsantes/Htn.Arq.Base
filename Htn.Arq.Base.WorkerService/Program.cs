@@ -13,7 +13,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices(services =>
     {
-        services.RegisterExceptionPolicies()
+        services.RegisterExceptionAndProblemDetails()
             .RegisterDalRepositories(ProjectTypes.WorkerService)
             .RegisterDalAdapters(ProjectTypes.WorkerService)
             .RegisterBllServices(ProjectTypes.WorkerService);
