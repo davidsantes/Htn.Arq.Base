@@ -4,10 +4,10 @@ using Htn.Arq.Base.Dal.Adapters;
 using Htn.Arq.Base.Dal.Adapters.Interfaces;
 using Htn.Arq.Base.Dal.Repositories;
 using Htn.Arq.Base.Dal.Repositories.Interfaces;
-using Htn.Arq.Base.WebApi.Factories;
 using Htn.Infrastructure.Core.Exceptions.Policies.Imp;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Htn.Infrastructure.Core.Layers;
+using Htn.Infrastructure.Core.ProblemDetails;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Htn.Infrastructure.Di

@@ -3,7 +3,7 @@ using FluentValidation;
 using Htn.Arq.Base.Bll.Entities;
 using Htn.Arq.Base.Bll.Services.Interfaces;
 using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Arq.Base.WebApi.Factories;
+using Htn.Infrastructure.Core.ProblemDetails;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Arq.Base.WebApi.Controllers

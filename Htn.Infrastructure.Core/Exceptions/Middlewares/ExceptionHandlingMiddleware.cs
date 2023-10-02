@@ -1,11 +1,11 @@
-﻿using Htn.Infrastructure.Core.Exceptions.Entities;
+﻿using FluentValidation;
+using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Core.Exceptions.Policies.Interfaces;
 using Htn.Infrastructure.Global.Resources;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FluentValidation;
+using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Htn.Infrastructure.Core.Exceptions.Middlewares
 {
@@ -48,7 +48,7 @@ namespace Htn.Infrastructure.Core.Exceptions.Middlewares
         /// <returns>Error en formato ProblemDetails</returns>
         private async Task HandleValidationDataExceptionAsync(HttpContext context, ValidationException validationException)
         {
-            var problemDetails = new ProblemDetails
+            var problemDetails = new ProblemDetailsAspNetCoreMvc.ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
                 Type = ExceptionConstantsTypes.ExceptionTypeValidationFailure,
@@ -83,7 +83,7 @@ namespace Htn.Infrastructure.Core.Exceptions.Middlewares
             var response = context.Response;
             response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            var excepcionFormatoProblemDetails = new ProblemDetails
+            var excepcionFormatoProblemDetails = new ProblemDetailsAspNetCoreMvc.ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
                 Type = ExceptionConstantsTypes.ExceptionTypeUnexpectedException,

@@ -1,24 +1,29 @@
 ﻿using Htn.Infrastructure.Core.Exceptions.Entities;
 using Htn.Infrastructure.Global.Resources;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
-namespace Htn.Arq.Base.WebApi.Factories
+namespace Htn.Infrastructure.Core.ProblemDetails
 {
-    public class ProblemDetailsFactory: IProblemDetailsFactory
+    /// <summary>
+    /// DefaultProblemDetailsFactory, Microsoft.AspNetCore.Mvc.Infrastructure
+    /// https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.Core/src/Infrastructure/DefaultProblemDetailsFactory.cs
+    /// </summary>
+    public class ProblemDetailsFactory : IProblemDetailsFactory
     {
-        public ProblemDetails Create(int statusCode
+        /// <inheritdoc />
+        public ProblemDetailsAspNetCoreMvc.ProblemDetails Create(int statusCode
             , string type
             , string title
             , string detail
-            , IDictionary<string, object>? extensions = null)
+            , IDictionary<string, object> extensions = null)
         {
-            var problemDetails = new ProblemDetails
+            var problemDetails = new ProblemDetailsAspNetCoreMvc.ProblemDetails
             {
                 Status = statusCode,
                 Type = type,
                 Title = title,
-                Detail = detail,                
+                Detail = detail,
             };
 
             if (extensions != null)
@@ -29,7 +34,8 @@ namespace Htn.Arq.Base.WebApi.Factories
             return problemDetails;
         }
 
-        public ProblemDetails CreateRecursoNoEncontrado()
+        /// <inheritdoc />
+        public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado()
         {
             return Create(StatusCodes.Status404NotFound
                 , ExceptionConstantsTypes.ExceptionTypeNotFound
@@ -37,7 +43,8 @@ namespace Htn.Arq.Base.WebApi.Factories
                 , Global_Resources.MsgRecursoNoEncontrado);
         }
 
-        public ProblemDetails CreateProblemaEnBackEnd(IDictionary<string, object>? extensions = null)
+        /// <inheritdoc />
+        public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaEnBackEnd(IDictionary<string, object> extensions = null)
         {
             return Create(StatusCodes.Status500InternalServerError
                 , ExceptionConstantsTypes.ExceptionTypeControlledInBackend
