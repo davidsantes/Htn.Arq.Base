@@ -1,10 +1,10 @@
 ﻿using FluentValidation.TestHelper;
-using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Arq.Base.WebApi.Resources;
-using Htn.Arq.Base.WebApi.Validators;
+using Hacienda.WebApi.Dtos;
+using Hacienda.WebApi.Resources;
+using Hacienda.WebApi.Validators;
 using Xunit;
 
-namespace Htn.Arq.Base.WebApi.Test.Validators
+namespace Hacienda.WebApi.Test.Validators
 {
     [Trait("Categoria", "ValidacionCategoriaProductoDto")]
     public class CategoriaProductoDtoValidatorTests

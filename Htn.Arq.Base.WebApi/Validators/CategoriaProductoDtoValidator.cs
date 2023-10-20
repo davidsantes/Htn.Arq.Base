@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Arq.Base.WebApi.Resources;
+using Hacienda.WebApi.Dtos;
+using Hacienda.WebApi.Resources;
 
-namespace Htn.Arq.Base.WebApi.Validators
+namespace Hacienda.WebApi.Validators
 {
     public class CategoriaProductoDtoValidator : AbstractValidator<CategoriaProductoDto>
     {

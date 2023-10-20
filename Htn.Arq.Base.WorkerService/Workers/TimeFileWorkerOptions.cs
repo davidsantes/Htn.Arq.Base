@@ -1,6 +1,6 @@
-﻿using Htn.Infrastructure.Core.WorkerServices;
+﻿using Hacienda.Shared.Core.WorkerServices;
 
-namespace Htn.Arq.Base.WorkerService.Workers
+namespace Hacienda.WorkerService.Workers
 {
     public class TimeFileWorkerOptions : IWorkerOptions
     {

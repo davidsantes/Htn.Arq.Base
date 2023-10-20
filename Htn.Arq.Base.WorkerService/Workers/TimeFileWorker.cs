@@ -1,8 +1,8 @@
-﻿using Htn.Arq.Base.Bll.Services.Interfaces;
-using Htn.Infrastructure.Core.WorkerServices;
+﻿using Hacienda.Bll.Services.Interfaces;
+using Hacienda.Shared.Core.WorkerServices;
 using Microsoft.Extensions.Options;
 
-namespace Htn.Arq.Base.WorkerService.Workers
+namespace Hacienda.WorkerService.Workers
 {
     public class TimeFileWorker : WorkerBase
     {

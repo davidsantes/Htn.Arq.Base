@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Arq.Base.WebApi.Validators;
+using Hacienda.WebApi.Dtos;
+using Hacienda.WebApi.Validators;
 
-namespace Htn.Arq.Base.WebApi.Builder
+namespace Hacienda.WebApi.Builder
 {
     public static class RegisterExtensionsDtoValidators
     {

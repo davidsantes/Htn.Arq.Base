@@ -1,7 +1,7 @@
-﻿using Htn.Infrastructure.Global.Resources;
+﻿using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Htn.Arq.Base.WebApi.Controllers
+namespace Hacienda.WebApi.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

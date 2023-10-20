@@ -9,21 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.UI"/>
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client"/>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection"/>
-    <PackageReference Include="FluentValidation"/>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces"/>
-    <PackageReference Include="Serilog.AspNetCore"/>
-    <PackageReference Include="Serilog.Formatting.Compact"/>
-    <PackageReference Include="Swashbuckle.AspNetCore"/>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Formatting.Compact" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Htn.Arq.Base.Bll.Services.Interfaces.csproj" />
-    <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
-    <ProjectReference Include="..\Htn.Infrastructure.Di\Htn.Infrastructure.Di.csproj" />
-    <ProjectReference Include="..\Htn.Infrastructure.Global.Resources\Htn.Infrastructure.Global.Resources.csproj" />
+    <ProjectReference Include="..\Hacienda.Shared.Core\Hacienda.Shared.Core.csproj" />
+    <ProjectReference Include="..\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj" />
+    <ProjectReference Include="..\Htn.Arq.Base.Bll.Services.Interfaces\Hacienda.Bll.Services.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

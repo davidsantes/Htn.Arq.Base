@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Htn.Arq.Base.Bll.Entities;
-using Htn.Arq.Base.Bll.Services.Interfaces;
-using Htn.Arq.Base.WebApi.Dtos;
-using Htn.Infrastructure.Core.ProblemDetails;
+using Hacienda.Bll.Entities;
+using Hacienda.Bll.Services.Interfaces;
+using Hacienda.Shared.Core.ProblemDetails;
+using Hacienda.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Htn.Arq.Base.WebApi.Controllers
+namespace Hacienda.WebApi.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

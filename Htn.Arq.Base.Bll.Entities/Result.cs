@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.Bll.Entities
+﻿namespace Hacienda.Bll.Entities
 {
     /// <summary>
     /// Patrón result pattern, para poder devolver resultados controlados y tipados

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Htn.Arq.Base.Bll.Entities;
+using Hacienda.Bll.Entities;
 using Xunit;
 
 namespace Htn.Arq.Base.Dal.Repositories.Test

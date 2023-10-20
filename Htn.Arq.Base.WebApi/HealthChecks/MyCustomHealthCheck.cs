@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Htn.Arq.Base.WebApi.HealthChecks
+namespace Hacienda.WebApi.HealthChecks
 {
     public class MyCustomHealthCheck : IHealthCheck
     {

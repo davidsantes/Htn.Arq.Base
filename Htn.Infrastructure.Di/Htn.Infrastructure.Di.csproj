@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,7 +17,6 @@
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Adapters\Htn.Arq.Base.Dal.Adapters.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Repositories.Interfaces\Htn.Arq.Base.Dal.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\Htn.Arq.Base.Dal.Repositories\Htn.Arq.Base.Dal.Repositories.csproj" />
-    <ProjectReference Include="..\Htn.Infrastructure.Core\Htn.Infrastructure.Core.csproj" />
   </ItemGroup>
 
 </Project>

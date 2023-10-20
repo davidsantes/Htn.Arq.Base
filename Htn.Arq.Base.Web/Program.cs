@@ -1,5 +1,5 @@
-using Htn.Infrastructure.Core.Layers;
-using Htn.Infrastructure.Di;
+using Hacienda.Shared.Core.Layers;
+using Hacienda.Shared.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

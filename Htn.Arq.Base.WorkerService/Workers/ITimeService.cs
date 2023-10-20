@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.WorkerService.Workers
+﻿namespace Hacienda.WorkerService.Workers
 {
     public interface ITimeService
     {

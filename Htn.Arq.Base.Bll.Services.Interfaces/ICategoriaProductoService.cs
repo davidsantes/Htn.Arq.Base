@@ -1,6 +1,6 @@
-﻿using Htn.Arq.Base.Bll.Entities;
+﻿using Hacienda.Bll.Entities;
 
-namespace Htn.Arq.Base.Bll.Services.Interfaces
+namespace Hacienda.Bll.Services.Interfaces
 {
     public interface ICategoriaProductoService
     {

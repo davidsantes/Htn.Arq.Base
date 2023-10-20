@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Htn.Arq.Base.WebApi": {
+    "Hacienda.WebApi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -1,8 +1,8 @@
-﻿using Htn.Arq.Base.WebApi.Resources;
+﻿using Hacienda.WebApi.Resources;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Htn.Arq.Base.WebApi.RegisterExtensions
+namespace Hacienda.WebApi.RegisterExtensions
 {
     public static class SwaggerExtension
     {

@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-    <PackageReference Include="Moq"/>
-    <PackageReference Include="xunit"/>
+    <Compile Remove="Middlewares\**" />
+    <EmbeddedResource Remove="Middlewares\**" />
+    <None Remove="Middlewares\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Htn.Arq.Base.Bll.Entities\Htn.Arq.Base.Bll.Entities.csproj" />
-    <ProjectReference Include="..\Htn.Arq.Base.Bll.Services\Htn.Arq.Base.Bll.Services.csproj" />
+    <ProjectReference Include="..\Htn.Arq.Base.WebApi\Hacienda.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

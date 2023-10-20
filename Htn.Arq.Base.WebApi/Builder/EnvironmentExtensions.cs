@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.WebApi.Builder
+﻿namespace Hacienda.WebApi.Builder
 {
     public static class EnvironmentExtensions
     {

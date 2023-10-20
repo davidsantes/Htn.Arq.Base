@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace Htn.Arq.Base.Bll.Entities.Test
+namespace Hacienda.Bll.Entities.Test
 {
     [Trait("Entities", "Result")]
     public class ResultTests

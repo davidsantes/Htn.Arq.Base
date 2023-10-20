@@ -1,6 +1,6 @@
-using Htn.Arq.Base.Bll.Services.Interfaces;
+using Hacienda.Bll.Services.Interfaces;
 
-namespace Htn.Arq.Base.WorkerService.Workers
+namespace Hacienda.WorkerService.Workers
 {
     public class SampleWorker : BackgroundService
     {

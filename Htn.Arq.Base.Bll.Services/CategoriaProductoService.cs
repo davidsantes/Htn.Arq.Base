@@ -1,11 +1,11 @@
-﻿using Htn.Arq.Base.Bll.Entities;
-using Htn.Arq.Base.Bll.Services.Interfaces;
-using Htn.Arq.Base.Dal.Adapters.Interfaces;
-using Htn.Arq.Base.Dal.Repositories.Interfaces;
-using Htn.Infrastructure.Core.Exceptions.Entities;
-using Htn.Infrastructure.Global.Resources;
+﻿using Hacienda.Bll.Entities;
+using Hacienda.Bll.Services.Interfaces;
+using Hacienda.Dal.Interfaces.Adapters;
+using Hacienda.Dal.Interfaces.Repositories;
+using Hacienda.Shared.Core.Exceptions.Entities;
+using Hacienda.Shared.Global.Resources;
 
-namespace Htn.Arq.Base.Bll.Services
+namespace Hacienda.Bll.Services.Services
 {
     public class CategoriaProductoService : ICategoriaProductoService
     {

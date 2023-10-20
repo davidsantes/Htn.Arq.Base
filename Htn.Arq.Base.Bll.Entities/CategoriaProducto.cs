@@ -1,4 +1,4 @@
-﻿namespace Htn.Arq.Base.Bll.Entities
+﻿namespace Hacienda.Bll.Entities
 {
     public class CategoriaProducto
     {

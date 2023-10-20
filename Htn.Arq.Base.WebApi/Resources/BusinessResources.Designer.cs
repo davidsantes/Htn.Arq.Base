@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Htn.Arq.Base.WebApi.Resources {
+namespace Hacienda.WebApi.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Htn.Arq.Base.WebApi.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Htn.Arq.Base.WebApi.Resources.BusinessResources", typeof(BusinessResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hacienda.WebApi.Resources.BusinessResources", typeof(BusinessResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

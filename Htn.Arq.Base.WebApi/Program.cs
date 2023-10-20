@@ -1,10 +1,10 @@
+using Hacienda.Shared.Core.Layers;
+using Hacienda.Shared.DependencyInjection;
+using Hacienda.WebApi.Builder;
+using Hacienda.WebApi.HealthChecks;
+using Hacienda.WebApi.RegisterExtensions;
+using Hacienda.WebApi.Resources;
 using HealthChecks.UI.Client;
-using Htn.Arq.Base.WebApi.Builder;
-using Htn.Arq.Base.WebApi.HealthChecks;
-using Htn.Arq.Base.WebApi.RegisterExtensions;
-using Htn.Arq.Base.WebApi.Resources;
-using Htn.Infrastructure.Core.Layers;
-using Htn.Infrastructure.Di;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 

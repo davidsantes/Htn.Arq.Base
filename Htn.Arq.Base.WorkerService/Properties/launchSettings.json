@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Htn.Arq.Base.WorkerService": {
+    "Hacienda.WorkerService": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {

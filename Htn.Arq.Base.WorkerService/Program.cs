@@ -1,6 +1,6 @@
-using Htn.Arq.Base.WorkerService.Workers;
-using Htn.Infrastructure.Core.Layers;
-using Htn.Infrastructure.Di;
+using Hacienda.Shared.Core.Layers;
+using Hacienda.Shared.DependencyInjection;
+using Hacienda.WorkerService.Workers;
 using Serilog;
 
 IHost host = Host.CreateDefaultBuilder(args)

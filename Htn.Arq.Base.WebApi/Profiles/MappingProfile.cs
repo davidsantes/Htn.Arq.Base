@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Htn.Arq.Base.Bll.Entities;
-using Htn.Arq.Base.WebApi.Dtos;
+using Hacienda.Bll.Entities;
+using Hacienda.WebApi.Dtos;
 
-namespace Htn.Arq.Base.WebApi.Profiles
+namespace Hacienda.WebApi.Profiles
 {
     public class MappingProfiles : Profile
     {

@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
-using Htn.Arq.Base.Bll.Entities;
-using Htn.Arq.Base.Dal.Adapters.Interfaces;
-using Htn.Arq.Base.Dal.Repositories.Interfaces;
+using Hacienda.Bll.Entities;
+using Hacienda.Bll.Services.Services;
+using Hacienda.Dal.Interfaces.Adapters;
+using Hacienda.Dal.Interfaces.Repositories;
 using Moq;
 using Xunit;
 
-namespace Htn.Arq.Base.Bll.Services.Test
+namespace Hacienda.Bll.Services.Test
 {
     [Trait("Categoria", "CategoriaProductoService")]
     public class CategoriaProductoServiceTests
@@ -58,7 +59,6 @@ namespace Htn.Arq.Base.Bll.Services.Test
 
             var service = new CategoriaProductoService(mockRepository.Object
                 , mockCorreosAdapter.Object);
-
 
             // Act
             var insResult = await service.InsCategoriaProductoAsync(newCategoria);
