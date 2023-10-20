@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Htn.Arq.Base.WorkerService-C9F1D558-B27B-4E84-A53D-B0CC41411DCD</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Formatting.Compact" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hacienda.Application\Hacienda.Application.csproj" />
+    <ProjectReference Include="..\Hacienda.Shared.Core\Hacienda.Shared.Core.csproj" />
+    <ProjectReference Include="..\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj" />
+  </ItemGroup>
+</Project>

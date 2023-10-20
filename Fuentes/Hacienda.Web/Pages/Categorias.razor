@@ -1,0 +1,47 @@
+﻿@page "/"
+@page "/categorias"
+@using Hacienda.Application.Dtos
+@using Hacienda.Domain.Entities;
+@using Hacienda.Application.Services;
+
+<PageTitle>Categorías de productos</PageTitle>
+
+@inject ICategoriaProductoService categoriaProductoService
+
+<h1>Listado de categorías</h1>
+
+<p>Esta página recoge las categorías de productos. No me tomes en serio, ¡es muy mejorable!</p>
+
+@if (categoriaProductos == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoria in categoriaProductos)
+            {
+                <tr>
+                    <td>@categoria.Id</td>
+                    <td>@categoria.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<GetCategoriaProductoResponse>? categoriaProductos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categoriaProductos = await categoriaProductoService.GetCategoriasProductoAsync();
+    }
+}
