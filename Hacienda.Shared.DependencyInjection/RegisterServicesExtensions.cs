@@ -1,9 +1,9 @@
-﻿using Hacienda.Bll.Services.Interfaces;
-using Hacienda.Bll.Services.Services;
-using Hacienda.Dal.Adapters;
-using Hacienda.Dal.Interfaces.Adapters;
-using Hacienda.Dal.Interfaces.Repositories;
-using Hacienda.Dal.Repositories;
+﻿using Hacienda.Application.Contracts.Adapters;
+using Hacienda.Application.Contracts.Repositories;
+using Hacienda.Application.Contracts.Services;
+using Hacienda.Application.Services;
+using Hacienda.Infrastructure.Adapters;
+using Hacienda.Infrastructure.Repositories;
 using Hacienda.Shared.Core.Exceptions.Policies.Imp;
 using Hacienda.Shared.Core.Exceptions.Policies.Interfaces;
 using Hacienda.Shared.Core.Layers;

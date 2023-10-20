@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hacienda.Bll.Services.Interfaces\Hacienda.Bll.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Hacienda.Application.Contracts\Hacienda.Application.Contracts.csproj" />
     <ProjectReference Include="..\Hacienda.Shared.Core\Hacienda.Shared.Core.csproj" />
     <ProjectReference Include="..\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj" />
     <ProjectReference Include="..\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj" />    

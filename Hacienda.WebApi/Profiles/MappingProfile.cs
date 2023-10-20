@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Hacienda.Bll.Entities;
+using Hacienda.Domain.Entities;
 using Hacienda.WebApi.Dtos;
 
 namespace Hacienda.WebApi.Profiles

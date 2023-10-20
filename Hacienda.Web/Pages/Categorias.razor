@@ -1,10 +1,9 @@
 ﻿@page "/"
 @page "/categorias"
+@using Hacienda.Domain.Entities;
+@using Hacienda.Application.Contracts.Services;
 
 <PageTitle>Categorías de productos</PageTitle>
-
-@using Hacienda.Bll.Entities
-@using Hacienda.Bll.Services.Interfaces
 
 @inject ICategoriaProductoService categoriaProductoService
 

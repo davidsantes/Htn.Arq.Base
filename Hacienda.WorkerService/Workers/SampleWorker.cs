@@ -1,4 +1,4 @@
-using Hacienda.Bll.Services.Interfaces;
+using Hacienda.Application.Contracts.Services;
 
 namespace Hacienda.WorkerService.Workers
 {

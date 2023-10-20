@@ -1,4 +1,4 @@
-﻿using Hacienda.Bll.Services.Interfaces;
+﻿using Hacienda.Application.Contracts.Services;
 using Hacienda.Shared.Core.WorkerServices;
 using Microsoft.Extensions.Options;
 

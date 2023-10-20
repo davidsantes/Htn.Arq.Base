@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Hacienda.Bll.Entities;
-using Hacienda.Bll.Services.Interfaces;
+using Hacienda.Application.Contracts.Services;
+using Hacienda.Domain.Entities;
 using Hacienda.Shared.Core.ProblemDetails;
 using Hacienda.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
