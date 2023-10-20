@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Htn.Arq.Base.Bll.Entities\Hacienda.Bll.Entities.csproj" />
+    <ProjectReference Include="..\Hacienda.Bll.Entities\Hacienda.Bll.Entities.csproj" />
   </ItemGroup>
 
 </Project>
