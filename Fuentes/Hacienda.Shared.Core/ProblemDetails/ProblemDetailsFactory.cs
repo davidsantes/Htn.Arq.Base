@@ -25,7 +25,7 @@ namespace Hacienda.Shared.Core.ProblemDetails
 
             if (extensions != null)
             {
-                problemDetails.Extensions[title] = extensions;
+                problemDetails.Extensions[type] = extensions;
             }
 
             return problemDetails;

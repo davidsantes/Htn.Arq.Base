@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hacienda.Shared.Core\Hacienda.Shared.Core.csproj" />
+  </ItemGroup>
+
 </Project>
