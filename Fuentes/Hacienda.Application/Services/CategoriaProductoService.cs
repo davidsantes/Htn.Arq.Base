@@ -4,8 +4,8 @@ using Hacienda.Application.Clients;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
+using Hacienda.Domain.Entities.Exceptions;
 using Hacienda.Domain.Repositories;
-using Hacienda.Shared.Core.Exceptions.Entities;
 using Hacienda.Shared.Global.Resources;
 
 namespace Hacienda.Application.Services

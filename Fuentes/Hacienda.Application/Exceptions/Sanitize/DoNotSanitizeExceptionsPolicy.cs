@@ -1,6 +1,4 @@
-﻿using Hacienda.Shared.Core.Exceptions.Policies.Interfaces;
-
-namespace Hacienda.Shared.Core.Exceptions.Policies.Imp
+﻿namespace Hacienda.Application.Exceptions.Sanitize
 {
     /// <summary>
     /// Política de saneamiento de excepciones.

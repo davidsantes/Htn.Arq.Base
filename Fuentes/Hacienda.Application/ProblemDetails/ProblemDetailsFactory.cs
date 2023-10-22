@@ -1,9 +1,9 @@
-﻿using Hacienda.Shared.Core.Exceptions.Entities;
+﻿using Hacienda.Application.Exceptions;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
-namespace Hacienda.Shared.Core.ProblemDetails
+namespace Hacienda.Application.ProblemDetails
 {
     /// <inheritdoc />
     public class ProblemDetailsFactory : IProblemDetailsFactory

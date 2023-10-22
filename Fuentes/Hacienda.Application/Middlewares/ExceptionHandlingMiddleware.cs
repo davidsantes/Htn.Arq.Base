@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
-using Hacienda.Shared.Core.Exceptions.Entities;
-using Hacienda.Shared.Core.Exceptions.Policies.Interfaces;
+using Hacienda.Application.Exceptions;
+using Hacienda.Application.Exceptions.Sanitize;
+using Hacienda.Domain.Entities.Exceptions;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;

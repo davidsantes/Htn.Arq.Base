@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
-using Hacienda.Shared.Core.Exceptions.Entities;
+using Hacienda.Application.Exceptions;
+using Hacienda.Application.ProblemDetails;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
-namespace Hacienda.Shared.Core.ProblemDetails
+namespace Hacienda.Application.Test.ProblemDetails
 {
     [Trait("ProblemDetails", "ProblemDetailsFactory")]
     public class ProblemDetailsFactoryTest
@@ -33,7 +34,7 @@ namespace Hacienda.Shared.Core.ProblemDetails
 
             // Act
             var result = factory.Create(statusCode, type, title, detail, extensions);
- 
+
             // Assert
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(expectedError);

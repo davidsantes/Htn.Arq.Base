@@ -1,12 +1,11 @@
-﻿using Hacienda.Shared.Core.Logging.Entities;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace Hacienda.Shared.Core.Exceptions.Entities
+namespace Hacienda.Domain.Entities.Exceptions
 {
     [Serializable]
     public abstract class AbstractCustomException : Exception
     {
-        public abstract Priority Priority
+        public abstract ExceptionPriority Priority
         {
             get;
         }

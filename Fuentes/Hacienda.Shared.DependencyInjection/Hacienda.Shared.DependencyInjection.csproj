@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Hacienda.Application\Hacienda.Application.csproj" />
     <ProjectReference Include="..\Hacienda.Infrastructure\Hacienda.Infrastructure.csproj" />
-    <ProjectReference Include="..\Hacienda.Shared.Core\Hacienda.Shared.Core.csproj" />
   </ItemGroup>
 
 </Project>

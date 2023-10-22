@@ -1,6 +1,4 @@
-﻿using Hacienda.Shared.Core.Logging.Entities;
-
-namespace Hacienda.Shared.Core.Exceptions.Entities
+﻿namespace Hacienda.Domain.Entities.Exceptions
 {
     /// <summary>
     /// Excepción genérica con un guid de seguimiento.
@@ -20,15 +18,15 @@ namespace Hacienda.Shared.Core.Exceptions.Entities
         {
             get
             {
-                return String.Format(ExceptionConstants.SanitizedExceptioMessage, Guid);
+                return string.Format(ExceptionConstants.SanitizedExceptionMessage, Guid);
             }
         }
 
-        public override Priority Priority
+        public override ExceptionPriority Priority
         {
             get
             {
-                return Priority.Low;
+                return ExceptionPriority.Low;
             }
         }
 

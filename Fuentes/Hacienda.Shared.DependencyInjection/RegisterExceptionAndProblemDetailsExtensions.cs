@@ -1,6 +1,5 @@
-﻿using Hacienda.Shared.Core.Exceptions.Policies.Imp;
-using Hacienda.Shared.Core.Exceptions.Policies.Interfaces;
-using Hacienda.Shared.Core.ProblemDetails;
+﻿using Hacienda.Application.Exceptions.Sanitize;
+using Hacienda.Application.ProblemDetails;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection

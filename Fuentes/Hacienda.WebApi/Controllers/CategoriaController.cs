@@ -1,6 +1,6 @@
 ﻿using Hacienda.Application.Dtos;
+using Hacienda.Application.ProblemDetails;
 using Hacienda.Application.Services;
-using Hacienda.Shared.Core.ProblemDetails;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hacienda.WebApi.Controllers

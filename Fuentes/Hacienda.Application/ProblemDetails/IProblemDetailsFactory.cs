@@ -1,6 +1,6 @@
 ﻿using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
-namespace Hacienda.Shared.Core.ProblemDetails
+namespace Hacienda.Application.ProblemDetails
 {
     /// <summary>
     /// Factoría para la creación de ProblemDetails personalizados
@@ -18,7 +18,7 @@ namespace Hacienda.Shared.Core.ProblemDetails
             , string title
             , string detail
             , IDictionary<string, object> extensions = null);
-        
+
         /// <summary>
         /// Genera un ProblemDetails indicando que no ha encontrado un recurso concreto (cliente, usuario, etc).
         /// StatusCodes devuelto = StatusCodes.Status404NotFound
