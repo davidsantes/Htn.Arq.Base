@@ -1,4 +1,4 @@
-﻿namespace Hacienda.Shared.Core.WorkerServices
+﻿namespace Hacienda.WorkerService.WorkerBase
 {
     public interface IWorkerOptions
     {

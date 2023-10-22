@@ -1,10 +1,11 @@
 ﻿using FluentValidation.TestHelper;
 using Hacienda.Application.Dtos;
+using Hacienda.Application.Dtos.Categorias;
+using Hacienda.Application.Dtos.Primitives;
 using Hacienda.Application.Resources;
-using Hacienda.WebApi.Validators;
 using Xunit;
 
-namespace Hacienda.Application.Test.Validators
+namespace Hacienda.Application.Test.Dtos.Categorias
 {
     [Trait("Categoria", "ValidacionCategoriaProductoDto")]
     public class InsertCategoriaProductoRequestValidatorTests
@@ -16,7 +17,7 @@ namespace Hacienda.Application.Test.Validators
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
-                Id = "1",
+                Id = new CategoriaProductoIdRequest("1"),
                 Nombre = "Nombre de categoría válido"
             };
 
@@ -34,6 +35,7 @@ namespace Hacienda.Application.Test.Validators
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
+                Id = new CategoriaProductoIdRequest("1"),
                 Nombre = ""
             };
 
@@ -41,9 +43,6 @@ namespace Hacienda.Application.Test.Validators
             var result = validator.TestValidate(categoria);
 
             // Assert
-            result.ShouldHaveValidationErrorFor(c => c.Id)
-                .WithErrorMessage(ValidationResources.CategoriaIdRequerido);
-
             result.ShouldHaveValidationErrorFor(c => c.Nombre)
                 .WithErrorMessage(ValidationResources.CategoriaNombreRequerido);
         }
@@ -55,7 +54,7 @@ namespace Hacienda.Application.Test.Validators
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
-                Id = "1",
+                Id = new CategoriaProductoIdRequest("1"),
                 Nombre = "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados"
             };
 

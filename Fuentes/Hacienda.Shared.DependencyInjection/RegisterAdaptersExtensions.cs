@@ -1,6 +1,6 @@
-﻿using Hacienda.Application.Adapters;
-using Hacienda.Infrastructure.Adapters;
-using Hacienda.Shared.Core.Layers;
+﻿using Hacienda.Application.Clients;
+using Hacienda.Infrastructure.Clients;
+using Hacienda.Shared.DependencyInjection.Projects;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection
@@ -21,11 +21,11 @@ namespace Hacienda.Shared.DependencyInjection
             {
                 case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
                 case ProjectTypes.WebBlazorServer:
-                    services.AddSingleton<ICorreosAdapter, CorreosAdapter>();
+                    services.AddSingleton<ICorreosClientAdapter, CorreosClientAdapter>();
                     break;
 
                 default:
-                    services.AddScoped<ICorreosAdapter, CorreosAdapter>();
+                    services.AddScoped<ICorreosClientAdapter, CorreosClientAdapter>();
                     break;
             }
 

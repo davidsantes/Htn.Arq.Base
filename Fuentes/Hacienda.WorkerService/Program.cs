@@ -1,5 +1,5 @@
-using Hacienda.Shared.Core.Layers;
 using Hacienda.Shared.DependencyInjection;
+using Hacienda.Shared.DependencyInjection.Projects;
 using Hacienda.WorkerService.Workers;
 using Serilog;
 
@@ -16,7 +16,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.RegisterExceptionAndProblemDetails()
             .RegisterRepositories(ProjectTypes.WorkerService)
             .RegisterAdapters(ProjectTypes.WorkerService)
-            .RegisterServices(ProjectTypes.WorkerService)   
+            .RegisterServices(ProjectTypes.WorkerService)
             .RegisterRequestValidators()
             .RegisterAutomapperProfiles();
         //services.AddHostedService<SampleWorker>();

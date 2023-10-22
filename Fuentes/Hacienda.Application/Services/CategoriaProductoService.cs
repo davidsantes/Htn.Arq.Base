@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Hacienda.Application.Adapters;
+using Hacienda.Application.Clients;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
@@ -13,12 +13,12 @@ namespace Hacienda.Application.Services
     public class CategoriaProductoService : ICategoriaProductoService
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        private readonly ICorreosAdapter _correosAdapter;
+        private readonly ICorreosClientAdapter _correosAdapter;
         public readonly IMapper _mapper;
         private readonly IValidator<InsertCategoriaProductoRequest> _validatorInsertCategoria;
 
         public CategoriaProductoService(ICategoriaRepository categoriaRepository,
-            ICorreosAdapter correosAdapter,
+            ICorreosClientAdapter correosAdapter,
             IMapper mapper,
             IValidator<InsertCategoriaProductoRequest> validator)
         {

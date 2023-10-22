@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Hacienda.Infrastructure.Adapters;
+using Hacienda.Infrastructure.Clients;
 using Xunit;
 
 namespace Hacienda.Infrastructure.Test.Adapters
@@ -11,7 +11,7 @@ namespace Hacienda.Infrastructure.Test.Adapters
         public async Task Dado_UnCorreo_CuandoInsertoNuevo_EntoncesOk()
         {
             // Arrange
-            var correosAdapter = new CorreosAdapter();
+            var correosAdapter = new CorreosClientAdapter();
 
             // Act
             var result = await correosAdapter.InsAsync();

@@ -1,5 +1,5 @@
 ﻿using Hacienda.Application.Services;
-using Hacienda.Shared.Core.Layers;
+using Hacienda.Shared.DependencyInjection.Projects;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection

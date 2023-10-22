@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Hacienda.Application.Dtos;
-using Hacienda.WebApi.Validators;
+using Hacienda.Application.Dtos.Categorias;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection

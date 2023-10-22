@@ -1,10 +1,9 @@
 ﻿using Hacienda.Application.Services;
-using Hacienda.Shared.Core.WorkerServices;
 using Microsoft.Extensions.Options;
 
 namespace Hacienda.WorkerService.Workers
 {
-    public class TimeFileWorker : WorkerBase
+    public class TimeFileWorker : WorkerBase.WorkerBase
     {
         private readonly TimeFileWorkerOptions _workerOptions;
         private readonly ILogger<TimeFileWorker> _logger;

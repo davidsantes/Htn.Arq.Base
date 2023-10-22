@@ -1,9 +1,9 @@
-﻿using Hacienda.Application.Adapters;
+﻿using Hacienda.Application.Clients;
 using Hacienda.Domain.Entities;
 
-namespace Hacienda.Infrastructure.Adapters
+namespace Hacienda.Infrastructure.Clients
 {
-    public class CorreosAdapter : ICorreosAdapter
+    public class CorreosClientAdapter : ICorreosClientAdapter
     {
         /// <summary>
         /// TODO: Revisar uso de httpclient:

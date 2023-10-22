@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using FluentValidation;
-using Hacienda.Application.Adapters;
+using Hacienda.Application.Clients;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Services;
 using Hacienda.Domain.Entities;
 using Hacienda.Domain.Repositories;
 using Moq;
 using Xunit;
+using Hacienda.Application.Dtos.Primitives;
 
 namespace Hacienda.Application.Test.Services
 {
@@ -24,15 +25,15 @@ namespace Hacienda.Application.Test.Services
 
             var categoriasEnRepositorio = new List<CategoriaProducto>
             {
-                new CategoriaProducto { Id = 1, Nombre = "Electrónica", Descripcion = "Desc" },
-                new CategoriaProducto { Id = 2, Nombre = "Ropa", Descripcion = "Desc"  },
-                new CategoriaProducto { Id = 3, Nombre = "Hogar", Descripcion = "Desc"  },
+                new CategoriaProducto(1) { Nombre = "Electrónica", Descripcion = "Desc" },
+                new CategoriaProducto(2) { Nombre = "Ropa", Descripcion = "Desc"  },
+                new CategoriaProducto(3) { Nombre = "Hogar", Descripcion = "Desc"  },
             };
             var mappedResponse = new List<GetCategoriaProductoResponse>
             {
-                new GetCategoriaProductoResponse { Id = "1", Nombre = "Electrónica" },
-                new GetCategoriaProductoResponse { Id = "2", Nombre = "Ropa"},
-                new GetCategoriaProductoResponse { Id = "3", Nombre = "Hogar"},
+                new GetCategoriaProductoResponse { Id = new CategoriaProductoIdResponse("1"), Nombre = "Electrónica" },
+                new GetCategoriaProductoResponse { Id = new CategoriaProductoIdResponse("2"), Nombre = "Ropa"},
+                new GetCategoriaProductoResponse { Id = new CategoriaProductoIdResponse("3"), Nombre = "Hogar"},
             };
 
             categoriaRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(categoriasEnRepositorio);
@@ -51,7 +52,7 @@ namespace Hacienda.Application.Test.Services
         {
             // Arrange
             var categoriaRepository = new Mock<ICategoriaRepository>();
-            var correosAdapter = new Mock<ICorreosAdapter>();
+            var correosAdapter = new Mock<ICorreosClientAdapter>();
             var mapper = new Mock<IMapper>();
             var validator = new Mock<IValidator<InsertCategoriaProductoRequest>>();
             var service = new CategoriaProductoService(categoriaRepository.Object
@@ -59,7 +60,9 @@ namespace Hacienda.Application.Test.Services
                 , mapper.Object
                 , validator.Object);
 
-            var nuevaCategoriaRequest = new InsertCategoriaProductoRequest { Id = "1", Nombre = "Nueva Categoría" };
+            var nuevaCategoriaRequest = new InsertCategoriaProductoRequest { 
+                Id = new CategoriaProductoIdRequest("1"), 
+                Nombre = "Nueva Categoría" };
 
             var resultadoCategoriaRepository = new Result<int>(1);
             categoriaRepository.Setup(repo => repo.InsAsync(It.IsAny<CategoriaProducto>()))
@@ -74,7 +77,7 @@ namespace Hacienda.Application.Test.Services
             
             // Assert
             result.Should().NotBeNull();
-            result.Value.Should().Be(int.Parse(nuevaCategoriaRequest.Id));
+            result.Value.Should().Be(int.Parse(nuevaCategoriaRequest.Id.Valor));
             categoriaRepository.Verify(repo => repo.InsAsync(It.IsAny<CategoriaProducto>()), Times.Once);
             correosAdapter.Verify(ca => ca.InsAsync(), Times.Once);
         }

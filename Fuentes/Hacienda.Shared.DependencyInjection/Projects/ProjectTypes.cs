@@ -1,13 +1,10 @@
-﻿namespace Hacienda.Shared.Core.Layers
+﻿namespace Hacienda.Shared.DependencyInjection.Projects
 {
     /// <summary>
     /// Tipos de proyectos utilizados en el producto
     /// </summary>
     public enum ProjectTypes
     {
-        DataAccess,
-        BusinessLogic,
-        Entities,
         WebApi,
         WorkerService,
         WebBlazorServer

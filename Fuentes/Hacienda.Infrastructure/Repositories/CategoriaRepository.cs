@@ -6,6 +6,7 @@ namespace Hacienda.Infrastructure.Repositories
     public class CategoriaRepository : ICategoriaRepository
     {
         private readonly List<CategoriaProducto> _categorias;
+        private int _nextId = 1; // Variable para generar nuevos IDs simulados
 
         public CategoriaRepository()
         {
@@ -24,9 +25,9 @@ namespace Hacienda.Infrastructure.Repositories
             else
             {
                 // Crea una lista ficticia de categorías
-                _categorias.Add(new CategoriaProducto { Id = 1, Nombre = "Electrónica", Descripcion = "Electrónica" });
-                _categorias.Add(new CategoriaProducto { Id = 2, Nombre = "Ropa", Descripcion = "Ropa" });
-                _categorias.Add(new CategoriaProducto { Id = 3, Nombre = "Hogar", Descripcion = "Hogar" });
+                _categorias.Add(new CategoriaProducto(_nextId++) { Nombre = "Electrónica", Descripcion = "Electrónica" });
+                _categorias.Add(new CategoriaProducto(_nextId++) { Nombre = "Ropa", Descripcion = "Ropa" });
+                _categorias.Add(new CategoriaProducto(_nextId++) { Nombre = "Hogar", Descripcion = "Hogar" });
             }
 
             // Retornamos la lista de categorías almacenada en el repositorio
@@ -38,15 +39,11 @@ namespace Hacienda.Infrastructure.Repositories
             // Simulamos una operación asíncrona de creación, como una inserción en la base de datos
             await Task.Delay(100);
 
-            // Generamos un nuevo ID (esto puede variar según tu base de datos)
-            int newId = _categorias.Count + 1;
-            categoria.Id = newId;
-
             // Agregamos la nueva categoría al repositorio
             _categorias.Add(categoria);
 
             //Simulamos que ha ido correctamente
-            var result = new Result<int>(newId);
+            var result = new Result<int>(categoria.Id.Valor);
 
             return result;
         }

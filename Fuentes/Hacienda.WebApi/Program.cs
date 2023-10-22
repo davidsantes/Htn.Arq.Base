@@ -1,5 +1,5 @@
-using Hacienda.Shared.Core.Layers;
 using Hacienda.Shared.DependencyInjection;
+using Hacienda.Shared.DependencyInjection.Projects;
 using Hacienda.WebApi.Builder;
 using Hacienda.WebApi.HealthChecks;
 using Hacienda.WebApi.RegisterExtensions;

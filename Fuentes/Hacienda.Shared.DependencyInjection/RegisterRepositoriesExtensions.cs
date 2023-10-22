@@ -1,6 +1,6 @@
 ﻿using Hacienda.Domain.Repositories;
 using Hacienda.Infrastructure.Repositories;
-using Hacienda.Shared.Core.Layers;
+using Hacienda.Shared.DependencyInjection.Projects;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection

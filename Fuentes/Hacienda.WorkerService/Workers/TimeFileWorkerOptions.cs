@@ -1,4 +1,4 @@
-﻿using Hacienda.Shared.Core.WorkerServices;
+﻿using Hacienda.WorkerService.WorkerBase;
 
 namespace Hacienda.WorkerService.Workers
 {

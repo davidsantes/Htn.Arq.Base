@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
-using Serilog;
+﻿using Serilog;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Hacienda.Shared.Core.WorkerServices
+namespace Hacienda.WorkerService.WorkerBase
 {
     /// <summary>
     /// Worker provides consistent logging (including a logger enriched with the type of the
@@ -21,14 +20,14 @@ namespace Hacienda.Shared.Core.WorkerServices
             Logger = Log.ForContext("Type", WorkerName);
             Logger.Information(
                 "Starting {worker}. Runs every {minutes} minutes. All options {@options}",
-                this.WorkerName,
+                WorkerName,
                 this.workerOptions.RepeatIntervalSeconds,
                 this.workerOptions);
         }
 
         public string WorkerName { get; }
 
-        public ILogger Logger { get; }
+        public Serilog.ILogger Logger { get; }
 
         /// <summary>
         /// Work method run based on <see cref="IWorkerOptions.RepeatIntervalSeconds"/>. Exceptions
