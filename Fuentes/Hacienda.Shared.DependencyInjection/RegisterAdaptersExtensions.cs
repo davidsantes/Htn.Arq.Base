@@ -1,5 +1,5 @@
-﻿using Hacienda.Application.Clients;
-using Hacienda.Infrastructure.Clients;
+﻿using Hacienda.Domain.ExternalClients;
+using Hacienda.Infrastructure.ExternalClients;
 using Hacienda.Shared.DependencyInjection.Projects;
 using Microsoft.Extensions.DependencyInjection;
 

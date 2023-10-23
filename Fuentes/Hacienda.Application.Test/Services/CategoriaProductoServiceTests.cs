@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using FluentValidation;
-using Hacienda.Application.Clients;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Services;
 using Hacienda.Domain.Entities;
@@ -9,6 +8,7 @@ using Hacienda.Domain.Repositories;
 using Moq;
 using Xunit;
 using Hacienda.Application.Dtos.Primitives;
+using Hacienda.Domain.ExternalClients;
 
 namespace Hacienda.Application.Test.Services
 {

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Hacienda.Application.Clients;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
 using Hacienda.Domain.Entities.Exceptions;
 using Hacienda.Domain.Repositories;
 using Hacienda.Shared.Global.Resources;
+using Hacienda.Domain.ExternalClients;
 
 namespace Hacienda.Application.Services
 {
@@ -38,7 +38,8 @@ namespace Hacienda.Application.Services
         public async Task<ResultRequest<int>> InsCategoriaProductoAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
         {
             _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
-            var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);
+
+            var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);        
             var insResult = await _categoriaRepository.InsAsync(mappedCategoria);
             var resultEnvioCorreo = await _correosAdapter.InsAsync();
 

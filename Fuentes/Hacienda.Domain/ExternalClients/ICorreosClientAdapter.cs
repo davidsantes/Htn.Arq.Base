@@ -1,6 +1,6 @@
 ﻿using Hacienda.Domain.Entities;
 
-namespace Hacienda.Application.Clients
+namespace Hacienda.Domain.ExternalClients
 {
     public interface ICorreosClientAdapter
     {

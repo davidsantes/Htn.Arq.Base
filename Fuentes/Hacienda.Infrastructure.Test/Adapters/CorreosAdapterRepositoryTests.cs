@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Hacienda.Infrastructure.Clients;
+using Hacienda.Infrastructure.ExternalClients;
 using Xunit;
 
 namespace Hacienda.Infrastructure.Test.Adapters

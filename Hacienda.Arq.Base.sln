@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.1 - Solution Items", "0.1 - Solution Items", "{2C892ACA-6B49-4207-B321-5ADF84460C28}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.0 - Infrastructure Layer", "3.0 - Infrastructure Layer", "{D037D48D-E16E-4D17-BDAD-30756CCBB998}"
 EndProject

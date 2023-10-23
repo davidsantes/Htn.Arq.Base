@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hacienda.Application\Hacienda.Application.csproj" />
+    <ProjectReference Include="..\Hacienda.Domain\Hacienda.Domain.csproj" />
     <ProjectReference Include="..\Hacienda.Infrastructure\Hacienda.Infrastructure.csproj" />
   </ItemGroup>
 

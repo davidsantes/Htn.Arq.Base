@@ -1,7 +1,7 @@
-﻿using Hacienda.Application.Clients;
-using Hacienda.Domain.Entities;
+﻿using Hacienda.Domain.Entities;
+using Hacienda.Domain.ExternalClients;
 
-namespace Hacienda.Infrastructure.Clients
+namespace Hacienda.Infrastructure.ExternalClients
 {
     public class CorreosClientAdapter : ICorreosClientAdapter
     {
