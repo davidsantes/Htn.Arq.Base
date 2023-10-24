@@ -51,6 +51,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{1F7805B7-A212-4C86-AF7D-10AB201C6CCF}"
 	ProjectSection(SolutionItems) = preProject
 		Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql = Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql
+		Solution Items\Sql\02.Bdd_Ejemplo_TiendaDb_Create_Data.sql = Solution Items\Sql\02.Bdd_Ejemplo_TiendaDb_Create_Data.sql
+		Solution Items\Sql\EsquemaBdd.JPG = Solution Items\Sql\EsquemaBdd.JPG
 	EndProjectSection
 EndProject
 Global

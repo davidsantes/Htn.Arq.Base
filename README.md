@@ -11,6 +11,7 @@ El objetivo de este documento es indicar las características principales de esta
 
 ## Índice
 
+0. Prerequisitos
 1. Un vistazo general
 2. Capas transversales
 3. Capa de dominio (XXX.Domain)
@@ -19,6 +20,17 @@ El objetivo de este documento es indicar las características principales de esta
 6. Capa web - Web API (XXX.WebApi)
 7. Capa web - Web (XXX.Web)
 8. Capa task (XXX.WorkerService)
+
+## 0. Prerequisitos
+Será necesario que en local esté configurada la base de datos **[TiendaDb]**. Se anexan los Scripts para poder generar la base de datos (tanto esquema como carga de datos) 
+En función de la versión de SQL Server, la cadena de conexión podría variar. Por ejemplo:
+```json
+"Server=DESKTOP-SRUHI3C\\SQLEXPRESS;Database=TiendaDb;Trusted_Connection=True;TrustServerCertificate=True;"
+```
+o:
+```json
+"Server=(LocalDb)\\MSSQLLocalDB;Database=Ejemplo_Tienda;Integrated Security=True"
+```
 
 ## 1. Un vistazo general
 
