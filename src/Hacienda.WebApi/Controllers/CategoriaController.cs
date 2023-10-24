@@ -46,7 +46,7 @@ public class CategoriaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]
-    [Route("Categoria/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult<GetCategoriaProductoResponse>> Get(int id)
     {
         var categoria = await _categoriaService.GetAsync(id);

@@ -12,16 +12,6 @@ namespace Hacienda.Application.ProblemDetails;
 public interface IProblemDetailsFactory
 {
     /// <summary>
-    /// Genera un ProblemDetails genérico
-    /// </summary>
-    /// <returns>ProblemDetails generado</returns>
-    ProblemDetailsAspNetCoreMvc.ProblemDetails Create(int statusCode
-        , string type
-        , string title
-        , string detail
-        , IDictionary<string, object> extensions = null);
-
-    /// <summary>
     /// Genera un ProblemDetails indicando que no ha encontrado un recurso concreto (cliente, usuario, etc).
     /// StatusCodes devuelto = StatusCodes.Status404NotFound
     /// </summary>
@@ -50,4 +40,11 @@ public interface IProblemDetailsFactory
     /// <param name="ex">Excepción de tipo validación</param>
     /// <returns>ProblemDetails generado</returns>
     ProblemDetailsAspNetCoreMvc.ProblemDetails CreateValidacionIncorrecta(ValidationException ex);
+
+    /// <summary>
+    /// Genera un ProblemDetails a raíz de un problema no controlado.
+    /// </summary>
+    /// <param name="message">mensaje de la excepción</param>
+    /// <returns>ProblemDetails generado</returns>
+    ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaInesperado(string message);
 }

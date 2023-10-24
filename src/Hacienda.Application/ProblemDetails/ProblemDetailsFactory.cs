@@ -11,7 +11,7 @@ namespace Hacienda.Application.ProblemDetails;
 public class ProblemDetailsFactory : IProblemDetailsFactory
 {
     /// <inheritdoc />
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails Create(int statusCode
+    private ProblemDetailsAspNetCoreMvc.ProblemDetails Create(int statusCode
         , string type
         , string title
         , string detail
@@ -76,6 +76,16 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
             , title: Global_Resources.MsgOperacionKoTitulo
             , detail: Global_Resources.MsgOperacionKo
             , extensions: extensions);
+        return problemDetails;
+    }
+
+    /// <inheritdoc />
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaInesperado(string message)
+    {
+        var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
+            , type: ExceptionConstantsTypes.ExceptionTypeUnexpectedException
+            , title: Global_Resources.MsgExcepcionNoControlada
+            , detail: $"[Exception] - " + message);
         return problemDetails;
     }
 }

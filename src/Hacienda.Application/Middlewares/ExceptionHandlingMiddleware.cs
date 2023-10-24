@@ -1,13 +1,11 @@
 ﻿using FluentValidation;
-using Hacienda.Application.Exceptions;
 using Hacienda.Application.Exceptions.Sanitize;
 using Hacienda.Application.ProblemDetails;
 using Hacienda.Domain.Exceptions.Generic;
-using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Hacienda.Shared.Core.Exceptions.Middlewares;
 
@@ -18,8 +16,6 @@ namespace Hacienda.Shared.Core.Exceptions.Middlewares;
 /// </summary>
 public class ExceptionHandlingMiddleware
 {
-    //TODO: simplificar. Revisar vídeo de Clean Architecture With .NET 6 And CQRS - Project Setup
-    //https://www.youtube.com/watch?v=tLk4pZZtiDY
     private readonly RequestDelegate _next;
 
     private readonly IServiceProvider _serviceProvider;
@@ -45,7 +41,10 @@ public class ExceptionHandlingMiddleware
             {
                 await HandleControlledExceptionAsync(httpContext, ex);
             }
-            await HandleUnexpectedExceptionAsync(httpContext, ex);
+            else
+            {
+                await HandleUnexpectedExceptionAsync(httpContext, ex);
+            }
         }
     }
 
@@ -56,23 +55,13 @@ public class ExceptionHandlingMiddleware
     private async Task HandleControlledExceptionAsync(HttpContext context, Exception exception)
     {
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
-
-        switch (exception)
+        if (exception is ValidationException validationException)
         {
-            case ValidationException:
-                var problemDetailsValidation = problemDetailsFactory.CreateValidacionIncorrecta((ValidationException)exception);
-                context.Response.StatusCode = problemDetailsValidation.Status.Value;
-                await context.Response.WriteAsJsonAsync(problemDetailsValidation);
-                break;
-
-            case NotFoundException:
-                var problemDetails = problemDetailsFactory.CreateRecursoNoEncontrado((NotFoundException)exception);
-                context.Response.StatusCode = problemDetails.Status.Value;
-                await context.Response.WriteAsJsonAsync(problemDetails);
-                break;
-
-            default:
-                break;
+            await HandleProblemDetails(context, problemDetailsFactory.CreateValidacionIncorrecta(validationException));
+        }
+        else if (exception is NotFoundException notFoundException)
+        {
+            await HandleProblemDetails(context, problemDetailsFactory.CreateRecursoNoEncontrado(notFoundException));
         }
     }
 
@@ -94,15 +83,16 @@ public class ExceptionHandlingMiddleware
         var response = context.Response;
         response.StatusCode = StatusCodes.Status500InternalServerError;
 
-        var excepcionFormatoProblemDetails = new ProblemDetailsAspNetCoreMvc.ProblemDetails
-        {
-            Status = StatusCodes.Status500InternalServerError,
-            Type = ExceptionConstantsTypes.ExceptionTypeUnexpectedException,
-            Title = Global_Resources.MsgExcepcionNoControlada,
-            Detail = $"[Exception] - " + exceptionSaneada.Message
-        };
+        var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
+        var excepcionFormatoProblemDetails = problemDetailsFactory.CreateProblemaInesperado(exceptionSaneada.Message);
 
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        await context.Response.WriteAsJsonAsync(excepcionFormatoProblemDetails);
+        await HandleProblemDetails(context, excepcionFormatoProblemDetails);
+    }
+
+    private async Task HandleProblemDetails(HttpContext context, ProblemDetails problemDetails)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;
+        await context.Response.WriteAsJsonAsync(problemDetails);
     }
 }
