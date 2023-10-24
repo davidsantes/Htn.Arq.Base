@@ -30,9 +30,9 @@ public class CategoriaProductoServiceTests
         };
         var mappedResponse = new List<GetCategoriaProductoResponse>
         {
-            new GetCategoriaProductoResponse { Id = "1", Nombre = "Electrónica" },
-            new GetCategoriaProductoResponse { Id = "2", Nombre = "Ropa"},
-            new GetCategoriaProductoResponse { Id = "3", Nombre = "Hogar"},
+            new GetCategoriaProductoResponse { Id = "1", Nombre = "Electrónica", Descripcion="Desc" },
+            new GetCategoriaProductoResponse { Id = "2", Nombre = "Ropa", Descripcion="Desc"},
+            new GetCategoriaProductoResponse { Id = "3", Nombre = "Hogar", Descripcion="Desc"},
         };
 
         categoriaRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(categoriasEnRepositorio);

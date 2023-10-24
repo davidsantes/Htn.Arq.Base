@@ -73,9 +73,9 @@ public class CategoriaController : ControllerBase
 
         if (insCategoriaResult.IsSuccess)
         {
-            return CreatedAtAction(nameof(InsCategoriaProducto)
-                    , new { id = insCategoriaResult.Value }
-                    , nuevaCategoriaRequest);
+            return CreatedAtAction(nameof(Get)
+                , new { id = insCategoriaResult.Value }
+                , nuevaCategoriaRequest);
         }
         else
         {
