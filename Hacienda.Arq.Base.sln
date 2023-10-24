@@ -44,6 +44,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0 - Task Layer", "6.0 - Task Layer", "{115ED63C-3992-4B38-9B2B-22DF9CDA1372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{79C40653-FB0B-40B7-987E-06C1E3424FC4}"
+	ProjectSection(SolutionItems) = preProject
+		Recursos\Sql\Bdd_Ejemplo_Tienda.zip = Recursos\Sql\Bdd_Ejemplo_Tienda.zip
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Driven Design", "Domain Driven Design", "{80C64F16-8AA8-4594-900A-B05BBB003821}"
 	ProjectSection(SolutionItems) = preProject
