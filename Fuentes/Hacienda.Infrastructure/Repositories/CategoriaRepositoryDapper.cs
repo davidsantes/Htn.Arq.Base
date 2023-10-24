@@ -8,7 +8,7 @@ namespace Hacienda.Infrastructure.Repositories
 {
     public class CategoriaRepositoryDapper : ICategoriaRepository
     {
-        private const string GetCategoriaStoredProcedure = "GetCategoria";
+        private const string GetCategoriaStoredProcedure = "Get_Categoria_By_Id";
         private readonly IConnectionFactory _connectionFactory;
 
         public CategoriaRepositoryDapper(IConnectionFactory connectionFactory)
