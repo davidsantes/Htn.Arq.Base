@@ -2,6 +2,8 @@
 
 public class ExceptionConstantsTypes
 {
+    public const string ExceptionTypeValidationFailure = "ValidationFailure";
+
     public const string ExceptionTypeUnexpectedException = "UnexpectedException";
 
     public const string ExceptionTypeNotFound = "ResourceNotFound";

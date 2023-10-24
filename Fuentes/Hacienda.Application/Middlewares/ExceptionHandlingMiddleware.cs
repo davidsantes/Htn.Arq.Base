@@ -5,7 +5,6 @@ using Hacienda.Application.ProblemDetails;
 using Hacienda.Domain.Exceptions.Generic;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
@@ -61,33 +60,20 @@ public class ExceptionHandlingMiddleware
         switch (exception)
         {
             case ValidationException:
-                //var problemDetailsValidation = problemDetailsFactory.CreateRecursoNoEncontrado();
+                var problemDetailsValidation = problemDetailsFactory.CreateValidacionIncorrecta((ValidationException)exception);
+                context.Response.StatusCode = problemDetailsValidation.Status.Value;
+                await context.Response.WriteAsJsonAsync(problemDetailsValidation);
                 break;
+
             case NotFoundException:
                 var problemDetails = problemDetailsFactory.CreateRecursoNoEncontrado((NotFoundException)exception);
                 context.Response.StatusCode = problemDetails.Status.Value;
                 await context.Response.WriteAsJsonAsync(problemDetails);
                 break;
+
             default:
                 break;
         }
-
-
-        //var problemDetails = new ProblemDetailsAspNetCoreMvc.ProblemDetails
-        //{
-        //    Status = StatusCodes.Status400BadRequest,
-        //    Type = ExceptionConstantsTypes.ExceptionTypeValidationFailure,
-        //    Title = Global_Resources.MsgValidacionKoTitulo,
-        //    Detail = Global_Resources.MsgValidacionKo
-        //};
-
-        //if (validationException.Errors is not null)
-        //{
-        //    problemDetails.Extensions["errors"] = validationException.Errors;
-        //}
-
-        //context.Response.StatusCode = StatusCodes.Status400BadRequest;
-        //await context.Response.WriteAsJsonAsync(problemDetails);
     }
 
     /// <summary>

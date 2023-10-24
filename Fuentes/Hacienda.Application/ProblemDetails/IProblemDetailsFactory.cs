@@ -1,4 +1,5 @@
-﻿using Hacienda.Domain.Exceptions.Generic;
+﻿using FluentValidation;
+using Hacienda.Domain.Exceptions.Generic;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Hacienda.Application.ProblemDetails;
@@ -42,4 +43,11 @@ public interface IProblemDetailsFactory
     /// <param name="extensions">Lista de problemas</param>
     /// <returns>ProblemDetails generado</returns>
     ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaEnBackEnd(IDictionary<string, object> extensions = null);
+
+    /// <summary>
+    /// Genera un ProblemDetails a raíz de una validación.
+    /// </summary>
+    /// <param name="ex">Excepción de tipo validación</param>
+    /// <returns>ProblemDetails generado</returns>
+    ProblemDetailsAspNetCoreMvc.ProblemDetails CreateValidacionIncorrecta(ValidationException ex);
 }

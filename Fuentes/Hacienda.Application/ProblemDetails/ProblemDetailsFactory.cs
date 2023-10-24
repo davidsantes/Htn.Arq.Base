@@ -1,4 +1,5 @@
-﻿using Hacienda.Application.Exceptions;
+﻿using FluentValidation;
+using Hacienda.Application.Exceptions;
 using Hacienda.Domain.Exceptions.Generic;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,22 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
         if (extensions != null)
         {
             problemDetails.Extensions[type] = extensions;
+        }
+
+        return problemDetails;
+    }
+
+    /// <inheritdoc />
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateValidacionIncorrecta(ValidationException ex)
+    {
+        var problemDetails = Create(statusCode: StatusCodes.Status400BadRequest
+            , type: ExceptionConstantsTypes.ExceptionTypeValidationFailure
+            , title: Global_Resources.MsgValidacionKoTitulo
+            , detail: Global_Resources.MsgValidacionKo);
+
+        if (ex.Errors is not null)
+        {
+            problemDetails.Extensions["errors"] = ex.Errors;
         }
 
         return problemDetails;
