@@ -32,7 +32,7 @@ public class CategoriaController : ControllerBase
         var categorias = await _categoriaService.GetAllAsync();
         if (!categorias.Any())
         {
-            return NotFound(_problemDetailsFactory.CreateRecursoNoEncontrado());
+            return NotFound(_problemDetailsFactory.GetResourceNotFound());
         }
 
         return Ok(categorias);
@@ -80,7 +80,7 @@ public class CategoriaController : ControllerBase
         else
         {
             var problemaEnInsercion = _problemDetailsFactory
-                .CreateProblemaEnBackEnd(insCategoriaResult.Errors);
+                .GetBackendProblem(insCategoriaResult.Errors);
             return BadRequest(problemaEnInsercion);
         }
     }

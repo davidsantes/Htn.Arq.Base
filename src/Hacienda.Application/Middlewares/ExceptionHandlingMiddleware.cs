@@ -57,11 +57,11 @@ public class ExceptionHandlingMiddleware
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
         if (exception is ValidationException validationException)
         {
-            await HandleProblemDetails(context, problemDetailsFactory.CreateValidacionIncorrecta(validationException));
+            await HandleProblemDetails(context, problemDetailsFactory.GetInvalidValidation(validationException));
         }
         else if (exception is NotFoundException notFoundException)
         {
-            await HandleProblemDetails(context, problemDetailsFactory.CreateRecursoNoEncontrado(notFoundException));
+            await HandleProblemDetails(context, problemDetailsFactory.GetResourceNotFound(notFoundException));
         }
     }
 
@@ -84,7 +84,7 @@ public class ExceptionHandlingMiddleware
         response.StatusCode = StatusCodes.Status500InternalServerError;
 
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
-        var excepcionFormatoProblemDetails = problemDetailsFactory.CreateProblemaInesperado(exceptionSaneada.Message);
+        var excepcionFormatoProblemDetails = problemDetailsFactory.GetUnexpectedProblem(exceptionSaneada.Message);
 
         await HandleProblemDetails(context, excepcionFormatoProblemDetails);
     }

@@ -82,7 +82,7 @@ public class ProblemDetailsFactoryTest
         expectedError.Extensions[expectedError.Type] = extensions;
 
         // Act
-        var result = factory.CreateProblemaEnBackEnd(extensions);
+        var result = factory.GetBackendProblem(extensions);
 
         // Assert
         result.Should().NotBeNull();

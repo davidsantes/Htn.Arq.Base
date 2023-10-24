@@ -34,7 +34,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     }
 
     /// <inheritdoc />
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateValidacionIncorrecta(ValidationException ex)
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails GetInvalidValidation(ValidationException ex)
     {
         var problemDetails = Create(statusCode: StatusCodes.Status400BadRequest
             , type: ExceptionConstantsTypes.ExceptionTypeValidationFailure
@@ -49,7 +49,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
         return problemDetails;
     }
 
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado(NotFoundException ex)
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails GetResourceNotFound(NotFoundException ex)
     {
         var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
             , type: ExceptionConstantsTypes.ExceptionTypeNotFound
@@ -59,7 +59,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     }
 
     /// <inheritdoc />
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado()
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails GetResourceNotFound()
     {
         var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
             , type: ExceptionConstantsTypes.ExceptionTypeNotFound
@@ -69,7 +69,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     }
 
     /// <inheritdoc />
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaEnBackEnd(IDictionary<string, object> extensions = null)
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails GetBackendProblem(IDictionary<string, object> extensions = null)
     {
         var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
             , type: ExceptionConstantsTypes.ExceptionTypeControlledInBackend
@@ -80,7 +80,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     }
 
     /// <inheritdoc />
-    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaInesperado(string message)
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails GetUnexpectedProblem(string message)
     {
         var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
             , type: ExceptionConstantsTypes.ExceptionTypeUnexpectedException
