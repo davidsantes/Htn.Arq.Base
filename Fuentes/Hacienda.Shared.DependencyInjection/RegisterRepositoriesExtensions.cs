@@ -21,11 +21,10 @@ namespace Hacienda.Shared.DependencyInjection
             {
                 case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
                 case ProjectTypes.WebBlazorServer:
-                    services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
+                    services.AddSingleton<ICategoriaRepository, CategoriaRepositoryDapper>();
                     break;
-
                 default:
-                    services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+                    services.AddScoped<ICategoriaRepository, CategoriaRepositoryDapper>();
                     break;
             }
 

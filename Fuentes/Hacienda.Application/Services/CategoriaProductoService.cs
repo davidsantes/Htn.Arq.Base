@@ -28,14 +28,21 @@ namespace Hacienda.Application.Services
             _validatorInsertCategoria = validator;
         }
 
-        public async Task<IList<GetCategoriaProductoResponse>> GetCategoriasProductoAsync()
+        public async Task<IList<GetCategoriaProductoResponse>> GetAllAsync()
         {
             var categorias = await _categoriaRepository.GetAllAsync();
             var listaCategoriasProductoResponse = _mapper.Map<List<GetCategoriaProductoResponse>>(categorias);
             return listaCategoriasProductoResponse;
         }
 
-        public async Task<ResultRequest<int>> InsCategoriaProductoAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
+        public async Task<GetCategoriaProductoResponse> GetAsync(int id)
+        {
+            var categoria = await _categoriaRepository.GetAsync(id);
+            var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
+            return categoriaProductoResponse;
+        }
+
+        public async Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
         {
             _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
 

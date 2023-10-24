@@ -120,13 +120,10 @@
   <data name="CampoFormatoNoValido" xml:space="preserve">
     <value>El campo debe contener un formato válido.</value>
   </data>
-  <data name="CategoriaIdRequerido" xml:space="preserve">
-    <value>El id de la categoría es obligatorio.</value>
+  <data name="CampoLongitudMaxima" xml:space="preserve">
+    <value>El campo no puede tener más de {0} caracteres.</value>
   </data>
-  <data name="CategoriaNombreMaxLength" xml:space="preserve">
-    <value>El nombre de la categoría no puede tener más de {0} caracteres.</value>
-  </data>
-  <data name="CategoriaNombreRequerido" xml:space="preserve">
-    <value>El nombre de la categoría es obligatorio.</value>
+  <data name="CampoObligatorio" xml:space="preserve">
+    <value>El campo es obligatorio.</value>
   </data>
 </root>

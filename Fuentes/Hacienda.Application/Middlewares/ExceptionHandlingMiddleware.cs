@@ -17,6 +17,8 @@ namespace Hacienda.Shared.Core.Exceptions.Middlewares
     /// </summary>
     public class ExceptionHandlingMiddleware
     {
+        //TODO: simplificar. Revisar vídeo de Clean Architecture With .NET 6 And CQRS - Project Setup
+        //https://www.youtube.com/watch?v=tLk4pZZtiDY
         private readonly RequestDelegate _next;
         private readonly IServiceProvider _serviceProvider;
 

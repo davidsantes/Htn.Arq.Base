@@ -23,6 +23,10 @@ builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterRequestValidators()
     .RegisterAutomapperProfiles();
 
+//Prueba de concepto con acceso mediante Dapper a la base de datos
+builder.Services
+    .RegisterDapper(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 builder.Services.AddHealthChecks()
     .AddCheck<MyCustomHealthCheck>("MyCustomHealthCheck");
 

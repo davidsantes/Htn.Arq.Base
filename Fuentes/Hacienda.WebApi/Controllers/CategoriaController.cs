@@ -29,13 +29,34 @@ namespace Hacienda.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IList<GetCategoriaProductoResponse>>> GetCategoriasProducto()
         {
-            var categorias = await _categoriaService.GetCategoriasProductoAsync();
+            var categorias = await _categoriaService.GetAllAsync();
             if (!categorias.Any())
             {
                 return NotFound(_problemDetailsFactory.CreateRecursoNoEncontrado());
             }
 
             return Ok(categorias);
+        }
+
+        /// <summary>
+        /// Retorna una categoría de producto concreta (dato maestro).
+        /// </summary>
+        /// <returns>Categoría buscada</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet]
+        [Route("Categoria/{id}")]
+        public async Task<ActionResult<GetCategoriaProductoResponse>> Get(int id)
+        {
+            var categoria = await _categoriaService.GetAsync(id);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(categoria);
         }
 
         /// <summary>
@@ -48,7 +69,7 @@ namespace Hacienda.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> InsCategoriaProducto(InsertCategoriaProductoRequest nuevaCategoriaRequest)
         {
-            var insCategoriaResult = await _categoriaService.InsCategoriaProductoAsync(nuevaCategoriaRequest);
+            var insCategoriaResult = await _categoriaService.InsAsync(nuevaCategoriaRequest);
 
             if (insCategoriaResult.IsSuccess)
             {

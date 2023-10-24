@@ -14,6 +14,10 @@ builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterRequestValidators()
     .RegisterAutomapperProfiles();
 
+//Prueba de concepto con acceso mediante Dapper a la base de datos
+builder.Services
+    .RegisterDapper(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

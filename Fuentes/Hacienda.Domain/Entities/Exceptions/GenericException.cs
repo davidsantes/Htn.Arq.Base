@@ -7,6 +7,8 @@
     [Serializable]
     public class GenericException : AbstractCustomException
     {
+        //TODO: simplificar. Revisar vídeo de Clean Architecture With .NET 6 And CQRS - Project Setup
+        //https://www.youtube.com/watch?v=tLk4pZZtiDY
         public Guid Guid { get; set; }
 
         public GenericException(Exception exception) : base(exception)

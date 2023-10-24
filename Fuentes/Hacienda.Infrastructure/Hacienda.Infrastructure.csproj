@@ -10,4 +10,9 @@
     <ProjectReference Include="..\Hacienda.Domain\Hacienda.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+  </ItemGroup>
+
 </Project>

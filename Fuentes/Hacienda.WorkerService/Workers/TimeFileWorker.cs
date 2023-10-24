@@ -42,7 +42,7 @@ namespace Hacienda.WorkerService.Workers
 
         private async Task InsCategorias()
         {
-            var categorias = await _categoriaProductoService.GetCategoriasProductoAsync();
+            var categorias = await _categoriaProductoService.GetAllAsync();
             foreach (var categoria in categorias)
             {
                 _logger.LogInformation(categoria.Nombre);

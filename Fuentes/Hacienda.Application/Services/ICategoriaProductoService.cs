@@ -5,8 +5,8 @@ namespace Hacienda.Application.Services
 {
     public interface ICategoriaProductoService
     {
-        Task<IList<GetCategoriaProductoResponse>> GetCategoriasProductoAsync();
-
-        Task<ResultRequest<int>> InsCategoriaProductoAsync(InsertCategoriaProductoRequest categoria);
+        Task<IList<GetCategoriaProductoResponse>> GetAllAsync();
+        Task<GetCategoriaProductoResponse> GetAsync(int id);
+        Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest categoria);
     }
 }

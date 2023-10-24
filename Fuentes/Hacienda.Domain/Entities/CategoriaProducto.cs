@@ -1,17 +1,12 @@
-﻿using Hacienda.Domain.Primitives;
-
-namespace Hacienda.Domain.Entities
+﻿namespace Hacienda.Domain.Entities
 {
     public class CategoriaProducto
     {
-        public CategoriaProductoId Id { get; private set; }
+        //TODO: revisar How To Use Domain-Driven Design In Clean Architecture
+        //https://www.youtube.com/watch?v=1Lcr2c3MVF4
+        public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; } = string.Empty;
-        public DateOnly FechaAlta { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-
-        public CategoriaProducto(int id)
-        {
-            Id = new CategoriaProductoId(id);
-        }
+        public string Descripcion { get; set; }
+        public DateTime FechaAlta { get; set; } = DateTime.Now;
     }
 }

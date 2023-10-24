@@ -7,25 +7,13 @@ namespace Hacienda.Application.Dtos.Categorias
     {
         public InsertCategoriaProductoRequestValidator()
         {
-            int maxLength = 50;
-
-            RuleFor(categoriaRequest => categoriaRequest.Id)
-                .NotNull();
-
-            RuleFor(categoriaRequest => categoriaRequest.Id.Valor.ToString())
-                .NotEmpty().WithMessage(ValidationResources.CategoriaIdRequerido)
-                .Must(BeConvertibleToInt)
-                .WithMessage(ValidationResources.CampoFormatoNoValido);
-
             RuleFor(categoria => categoria.Nombre)
-                .NotEmpty().WithMessage(ValidationResources.CategoriaNombreRequerido)
-                .MaximumLength(maxLength)
-                .WithMessage(string.Format(ValidationResources.CategoriaNombreMaxLength, maxLength));
-        }
+                .NotEmpty().WithMessage(ValidationResources.CampoObligatorio)
+                .MaximumLength(50).WithMessage(string.Format(ValidationResources.CampoLongitudMaxima, 50));
 
-        private bool BeConvertibleToInt(string id)
-        {
-            return int.TryParse(id, out _);
+            RuleFor(categoria => categoria.Descripcion)
+                .NotEmpty().WithMessage(ValidationResources.CampoObligatorio)
+                .MaximumLength(100).WithMessage(string.Format(ValidationResources.CampoLongitudMaxima, 100));
         }
     }
 }

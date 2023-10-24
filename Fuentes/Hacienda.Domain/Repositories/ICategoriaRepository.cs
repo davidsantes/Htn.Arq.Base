@@ -6,6 +6,8 @@ namespace Hacienda.Domain.Repositories
     {
         Task<IList<CategoriaProducto>> GetAllAsync();
 
+        Task<CategoriaProducto> GetAsync(int id);
+
         Task<Result<int>> InsAsync(CategoriaProducto categoria);
     }
 }

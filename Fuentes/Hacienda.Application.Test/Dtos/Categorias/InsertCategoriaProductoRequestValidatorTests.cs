@@ -1,7 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Categorias;
-using Hacienda.Application.Dtos.Primitives;
 using Hacienda.Application.Resources;
 using Xunit;
 
@@ -17,8 +16,8 @@ namespace Hacienda.Application.Test.Dtos.Categorias
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
-                Id = new CategoriaProductoIdRequest("1"),
-                Nombre = "Nombre de categoría válido"
+                Nombre = "Nombre de categoría válido",
+                Descripcion = "Descripción de categoría válido"
             };
 
             // Act
@@ -35,7 +34,6 @@ namespace Hacienda.Application.Test.Dtos.Categorias
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
-                Id = new CategoriaProductoIdRequest("1"),
                 Nombre = ""
             };
 
@@ -44,7 +42,7 @@ namespace Hacienda.Application.Test.Dtos.Categorias
 
             // Assert
             result.ShouldHaveValidationErrorFor(c => c.Nombre)
-                .WithErrorMessage(ValidationResources.CategoriaNombreRequerido);
+                .WithErrorMessage(ValidationResources.CampoObligatorio);
         }
 
         [Fact]
@@ -54,12 +52,11 @@ namespace Hacienda.Application.Test.Dtos.Categorias
             var validator = new InsertCategoriaProductoRequestValidator();
             var categoria = new InsertCategoriaProductoRequest
             {
-                Id = new CategoriaProductoIdRequest("1"),
                 Nombre = "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados"
             };
 
             int maxLength = 50;
-            var categoriaNombreRequerido = string.Format(ValidationResources.CategoriaNombreMaxLength, maxLength);
+            var categoriaNombreRequerido = string.Format(ValidationResources.CampoLongitudMaxima, maxLength);
 
             // Act
             var result = validator.TestValidate(categoria);

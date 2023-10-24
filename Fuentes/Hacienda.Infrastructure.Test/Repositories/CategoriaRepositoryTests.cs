@@ -30,7 +30,7 @@ namespace Hacienda.Infrastructure.Test.Repositories
         {
             // Arrange
             var repository = new CategoriaRepository();
-            var newCategoria = new CategoriaProducto(1) { Nombre = "Juguetes" };
+            var newCategoria = new CategoriaProducto() { Id=1, Nombre = "Juguetes" };
 
             // Act
             var allCategories = await repository.GetAllAsync();

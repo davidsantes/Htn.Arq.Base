@@ -42,6 +42,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        categoriaProductos = await categoriaProductoService.GetCategoriasProductoAsync();
+        categoriaProductos = await categoriaProductoService.GetAllAsync();
     }
 }

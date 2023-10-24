@@ -70,29 +70,20 @@ namespace Hacienda.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El id de la categoría es obligatorio..
+        ///   Looks up a localized string similar to El campo no puede tener más de {0} caracteres..
         /// </summary>
-        public static string CategoriaIdRequerido {
+        public static string CampoLongitudMaxima {
             get {
-                return ResourceManager.GetString("CategoriaIdRequerido", resourceCulture);
+                return ResourceManager.GetString("CampoLongitudMaxima", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El nombre de la categoría no puede tener más de {0} caracteres..
+        ///   Looks up a localized string similar to El campo es obligatorio..
         /// </summary>
-        public static string CategoriaNombreMaxLength {
+        public static string CampoObligatorio {
             get {
-                return ResourceManager.GetString("CategoriaNombreMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to El nombre de la categoría es obligatorio..
-        /// </summary>
-        public static string CategoriaNombreRequerido {
-            get {
-                return ResourceManager.GetString("CategoriaNombreRequerido", resourceCulture);
+                return ResourceManager.GetString("CampoObligatorio", resourceCulture);
             }
         }
     }

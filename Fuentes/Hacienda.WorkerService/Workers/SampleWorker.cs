@@ -20,7 +20,7 @@ namespace Hacienda.WorkerService.Workers
             {
                 _logger.LogInformation("INICIO: tarea programada: {time}", DateTimeOffset.Now);
 
-                var categorias = await _categoriaProductoService.GetCategoriasProductoAsync();
+                var categorias = await _categoriaProductoService.GetAllAsync();
                 foreach (var categoria in categorias)
                 {
                     _logger.LogInformation(categoria.Nombre);

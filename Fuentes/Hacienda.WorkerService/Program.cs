@@ -21,6 +21,10 @@ IHost host = Host.CreateDefaultBuilder(args)
             .RegisterAutomapperProfiles();
         //services.AddHostedService<SampleWorker>();
 
+        //Prueba de concepto con acceso mediante Dapper a la base de datos:
+        services
+            .RegisterDapper(hostContext.Configuration.GetConnectionString("DefaultConnection"));
+
         services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
         services.AddHostedService<TimeFileWorker>();
         services.AddSingleton<ITimeService, TimeService>();
