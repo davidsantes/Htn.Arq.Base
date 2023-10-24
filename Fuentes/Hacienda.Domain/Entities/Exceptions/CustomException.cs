@@ -1,34 +1,33 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Hacienda.Domain.Entities.Exceptions
+namespace Hacienda.Domain.Entities.Exceptions;
+
+/// <summary>
+/// Excepción personalizada. Útil para enviar excepciones controladas
+/// </summary>
+[Serializable]
+public class CustomException : AbstractCustomException
 {
-    /// <summary>
-    /// Excepción personalizada. Útil para enviar excepciones controladas
-    /// </summary>
-    [Serializable]
-    public class CustomException : AbstractCustomException
+    public override ExceptionPriority Priority
     {
-        public override ExceptionPriority Priority
+        get
         {
-            get
-            {
-                return ExceptionPriority.Medium;
-            }
+            return ExceptionPriority.Medium;
         }
+    }
 
-        public CustomException()
-            : base()
-        {
-        }
+    public CustomException()
+        : base()
+    {
+    }
 
-        public CustomException(string message)
-            : base(message)
-        {
-        }
+    public CustomException(string message)
+        : base(message)
+    {
+    }
 
-        public CustomException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+    public CustomException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
     }
 }

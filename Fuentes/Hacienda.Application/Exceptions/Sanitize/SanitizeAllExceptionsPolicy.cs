@@ -1,20 +1,19 @@
 ﻿using Hacienda.Domain.Entities.Exceptions;
 
-namespace Hacienda.Application.Exceptions.Sanitize
+namespace Hacienda.Application.Exceptions.Sanitize;
+
+/// <summary>
+/// Política de saneamiento de excepciones.
+/// </summary>
+public class SanitizeAllExceptionsPolicy : IExceptionPolicy
 {
     /// <summary>
-    /// Política de saneamiento de excepciones.
+    /// Sanea todo
     /// </summary>
-    public class SanitizeAllExceptionsPolicy : IExceptionPolicy
+    /// <param name="sourceException">Excepción generada</param>
+    /// <returns>Devuelve GenericException</returns>
+    public Exception ApplyPolicy(Exception sourceException)
     {
-        /// <summary>
-        /// Sanea todo
-        /// </summary>
-        /// <param name="sourceException">Excepción generada</param>
-        /// <returns>Devuelve GenericException</returns>
-        public Exception ApplyPolicy(Exception sourceException)
-        {
-            return new GenericException(sourceException);
-        }
+        return new GenericException(sourceException);
     }
 }

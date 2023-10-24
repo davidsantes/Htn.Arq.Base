@@ -8,56 +8,55 @@ using Hacienda.Domain.Repositories;
 using Hacienda.Shared.Global.Resources;
 using Hacienda.Domain.ExternalClients;
 
-namespace Hacienda.Application.Services
+namespace Hacienda.Application.Services;
+
+public class CategoriaProductoService : ICategoriaProductoService
 {
-    public class CategoriaProductoService : ICategoriaProductoService
+    private readonly ICategoriaRepository _categoriaRepository;
+    private readonly ICorreosClientAdapter _correosAdapter;
+    public readonly IMapper _mapper;
+    private readonly IValidator<InsertCategoriaProductoRequest> _validatorInsertCategoria;
+
+    public CategoriaProductoService(ICategoriaRepository categoriaRepository,
+        ICorreosClientAdapter correosAdapter,
+        IMapper mapper,
+        IValidator<InsertCategoriaProductoRequest> validator)
     {
-        private readonly ICategoriaRepository _categoriaRepository;
-        private readonly ICorreosClientAdapter _correosAdapter;
-        public readonly IMapper _mapper;
-        private readonly IValidator<InsertCategoriaProductoRequest> _validatorInsertCategoria;
+        _categoriaRepository = categoriaRepository;
+        _correosAdapter = correosAdapter;
+        _mapper = mapper;
+        _validatorInsertCategoria = validator;
+    }
 
-        public CategoriaProductoService(ICategoriaRepository categoriaRepository,
-            ICorreosClientAdapter correosAdapter,
-            IMapper mapper,
-            IValidator<InsertCategoriaProductoRequest> validator)
+    public async Task<IList<GetCategoriaProductoResponse>> GetAllAsync()
+    {
+        var categorias = await _categoriaRepository.GetAllAsync();
+        var listaCategoriasProductoResponse = _mapper.Map<List<GetCategoriaProductoResponse>>(categorias);
+        return listaCategoriasProductoResponse;
+    }
+
+    public async Task<GetCategoriaProductoResponse> GetAsync(int id)
+    {
+        var categoria = await _categoriaRepository.GetAsync(id);
+        var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
+        return categoriaProductoResponse;
+    }
+
+    public async Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
+    {
+        _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
+
+        var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);        
+        var insResult = await _categoriaRepository.InsAsync(mappedCategoria);
+        var resultEnvioCorreo = await _correosAdapter.InsAsync();
+
+        if (resultEnvioCorreo.IsSuccess)
         {
-            _categoriaRepository = categoriaRepository;
-            _correosAdapter = correosAdapter;
-            _mapper = mapper;
-            _validatorInsertCategoria = validator;
+            return new ResultRequest<int>(insResult);
         }
-
-        public async Task<IList<GetCategoriaProductoResponse>> GetAllAsync()
+        else
         {
-            var categorias = await _categoriaRepository.GetAllAsync();
-            var listaCategoriasProductoResponse = _mapper.Map<List<GetCategoriaProductoResponse>>(categorias);
-            return listaCategoriasProductoResponse;
-        }
-
-        public async Task<GetCategoriaProductoResponse> GetAsync(int id)
-        {
-            var categoria = await _categoriaRepository.GetAsync(id);
-            var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
-            return categoriaProductoResponse;
-        }
-
-        public async Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
-        {
-            _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
-
-            var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);        
-            var insResult = await _categoriaRepository.InsAsync(mappedCategoria);
-            var resultEnvioCorreo = await _correosAdapter.InsAsync();
-
-            if (resultEnvioCorreo.IsSuccess)
-            {
-                return new ResultRequest<int>(insResult);
-            }
-            else
-            {
-                throw new CustomException(Global_Resources.MsgOperacionKo);
-            }
+            throw new CustomException(Global_Resources.MsgOperacionKo);
         }
     }
 }

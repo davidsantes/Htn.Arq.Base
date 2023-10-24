@@ -1,10 +1,9 @@
-﻿namespace Hacienda.WorkerService.WorkerBase
+﻿namespace Hacienda.WorkerService.WorkerBase;
+
+public interface IWorkerOptions
 {
-    public interface IWorkerOptions
-    {
-        /// <summary>
-        /// Defines the period between the end of one unit of work and the start of the next.
-        /// </summary>
-        int RepeatIntervalSeconds { get; set; }
-    }
+    /// <summary>
+    /// Defines the period between the end of one unit of work and the start of the next.
+    /// </summary>
+    int RepeatIntervalSeconds { get; set; }
 }

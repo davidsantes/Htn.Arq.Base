@@ -1,9 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Hacienda.Infrastructure.DbContextDapper
+namespace Hacienda.Infrastructure.DbContextDapper;
+
+public interface IConnectionFactory
 {
-    public interface IConnectionFactory
-    {
-        SqlConnection GetOpenConnection();
-    }
+    SqlConnection GetOpenConnection();
 }

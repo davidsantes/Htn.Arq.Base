@@ -1,13 +1,12 @@
 ﻿using Hacienda.Domain.Entities;
 
-namespace Hacienda.Domain.Repositories
+namespace Hacienda.Domain.Repositories;
+
+public interface ICategoriaRepository
 {
-    public interface ICategoriaRepository
-    {
-        Task<IList<CategoriaProducto>> GetAllAsync();
+    Task<IList<CategoriaProducto>> GetAllAsync();
 
-        Task<CategoriaProducto> GetAsync(int id);
+    Task<CategoriaProducto> GetAsync(int id);
 
-        Task<Result<int>> InsAsync(CategoriaProducto categoria);
-    }
+    Task<Result<int>> InsAsync(CategoriaProducto categoria);
 }

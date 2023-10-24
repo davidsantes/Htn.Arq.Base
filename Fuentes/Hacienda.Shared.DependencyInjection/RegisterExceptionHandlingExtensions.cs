@@ -1,20 +1,19 @@
 ﻿using Hacienda.Shared.Core.Exceptions.Middlewares;
 using Microsoft.AspNetCore.Builder;
 
-namespace Hacienda.Shared.DependencyInjection
+namespace Hacienda.Shared.DependencyInjection;
+
+public static class RegisterExceptionHandlingExtensions
 {
-    public static class RegisterExceptionHandlingExtensions
+    /// <summary>
+    /// Registra en el contenedor de DI los middlewares de excepciones personalizadas
+    /// </summary>
+    /// <param name="app">Application Builder</param>
+    /// <returns>Application Builder configurada</returns>
+    public static IApplicationBuilder UseExceptionHandling(
+        this IApplicationBuilder app)
     {
-        /// <summary>
-        /// Registra en el contenedor de DI los middlewares de excepciones personalizadas
-        /// </summary>
-        /// <param name="app">Application Builder</param>
-        /// <returns>Application Builder configurada</returns>
-        public static IApplicationBuilder UseExceptionHandling(
-            this IApplicationBuilder app)
-        {
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
-            return app;
-        }
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+        return app;
     }
 }

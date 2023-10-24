@@ -1,13 +1,12 @@
-﻿namespace Hacienda.Application.Exceptions
+﻿namespace Hacienda.Application.Exceptions;
+
+public class ExceptionConstantsTypes
 {
-    public class ExceptionConstantsTypes
-    {
-        public const string ExceptionTypeValidationFailure = "ValidationFailure";
+    public const string ExceptionTypeValidationFailure = "ValidationFailure";
 
-        public const string ExceptionTypeUnexpectedException = "UnexpectedException";
+    public const string ExceptionTypeUnexpectedException = "UnexpectedException";
 
-        public const string ExceptionTypeNotFound = "ResourceNotFound";
+    public const string ExceptionTypeNotFound = "ResourceNotFound";
 
-        public const string ExceptionTypeControlledInBackend = "ExceptionTypeControlledInBackend";
-    }
+    public const string ExceptionTypeControlledInBackend = "ExceptionTypeControlledInBackend";
 }

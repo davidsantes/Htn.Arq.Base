@@ -1,9 +1,8 @@
-﻿namespace Hacienda.Domain.Entities.Exceptions
+﻿namespace Hacienda.Domain.Entities.Exceptions;
+
+public enum ExceptionPriority
 {
-    public enum ExceptionPriority
-    {
-        High,
-        Medium,
-        Low
-    }
+    High,
+    Medium,
+    Low
 }

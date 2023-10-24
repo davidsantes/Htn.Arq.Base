@@ -1,9 +1,8 @@
 ﻿using Hacienda.Domain.Entities;
 
-namespace Hacienda.Domain.ExternalClients
+namespace Hacienda.Domain.ExternalClients;
+
+public interface ICorreosClientAdapter
 {
-    public interface ICorreosClientAdapter
-    {
-        Task<Result<bool>> InsAsync();
-    }
+    Task<Result<bool>> InsAsync();
 }

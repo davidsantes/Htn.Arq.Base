@@ -1,9 +1,8 @@
-﻿namespace Hacienda.Application.Dtos
-{
-    public class InsertCategoriaProductoRequest
-    {
-        public string Nombre { get; set; }
+﻿namespace Hacienda.Application.Dtos;
 
-        public string Descripcion { get; set; }
-    }
+public class InsertCategoriaProductoRequest
+{
+    public string Nombre { get; set; }
+
+    public string Descripcion { get; set; }
 }

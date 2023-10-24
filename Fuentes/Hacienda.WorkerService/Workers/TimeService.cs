@@ -1,7 +1,6 @@
-﻿namespace Hacienda.WorkerService.Workers
+﻿namespace Hacienda.WorkerService.Workers;
+
+public class TimeService : ITimeService
 {
-    public class TimeService : ITimeService
-    {
-        public DateTime GetDateTime() => DateTime.Now;
-    }
+    public DateTime GetDateTime() => DateTime.Now;
 }
