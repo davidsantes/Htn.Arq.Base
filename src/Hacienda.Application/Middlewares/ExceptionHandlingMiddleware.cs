@@ -79,10 +79,6 @@ public class ExceptionHandlingMiddleware
         logger.LogError("[Exception] LogError. Excepción original: {@originalException}. Excepción saneada: {@exceptionSaneada}"
             , exUnexpectedException, exceptionSaneada);
 
-        context.Response.ContentType = "application/json";
-        var response = context.Response;
-        response.StatusCode = StatusCodes.Status500InternalServerError;
-
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
         var excepcionFormatoProblemDetails = problemDetailsFactory.GetUnexpectedProblem(exceptionSaneada.Message);
 
