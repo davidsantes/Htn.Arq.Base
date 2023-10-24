@@ -1,4 +1,5 @@
-﻿using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
+﻿using Hacienda.Domain.Exceptions.Generic;
+using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Hacienda.Application.ProblemDetails;
 
@@ -25,6 +26,14 @@ public interface IProblemDetailsFactory
     /// </summary>
     /// <returns>ProblemDetails generado</returns>
     ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado();
+
+    /// <summary>
+    /// Genera un ProblemDetails indicando que no ha encontrado un recurso concreto (cliente, usuario, etc).
+    /// StatusCodes devuelto = StatusCodes.Status404NotFound
+    /// </summary>
+    /// <param name="ex">Excepción de tipo not found</param>
+    /// <returns>ProblemDetails generado</returns>
+    ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado(NotFoundException ex);
 
     /// <summary>
     /// Genera un ProblemDetails con la lista de problemas especificados.

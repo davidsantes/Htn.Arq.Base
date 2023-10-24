@@ -1,4 +1,5 @@
 ﻿using Hacienda.Application.Exceptions;
+using Hacienda.Domain.Exceptions.Generic;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
@@ -31,22 +32,33 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
         return problemDetails;
     }
 
+    public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado(NotFoundException ex)
+    {
+        var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
+            , type: ExceptionConstantsTypes.ExceptionTypeNotFound
+            , title: string.Format(Global_Resources.MsgRecursoNoEncontradoTitulo)
+            , detail: ex.Message);
+        return problemDetails;
+    }
+
     /// <inheritdoc />
     public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateRecursoNoEncontrado()
     {
-        return Create(StatusCodes.Status404NotFound
-            , ExceptionConstantsTypes.ExceptionTypeNotFound
-            , Global_Resources.MsgRecursoNoEncontradoTitulo
-            , Global_Resources.MsgRecursoNoEncontrado);
+        var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
+            , type: ExceptionConstantsTypes.ExceptionTypeNotFound
+            , title: Global_Resources.MsgRecursoNoEncontradoTitulo
+            , detail: Global_Resources.MsgRecursoNoEncontrado);
+        return problemDetails;
     }
 
     /// <inheritdoc />
     public ProblemDetailsAspNetCoreMvc.ProblemDetails CreateProblemaEnBackEnd(IDictionary<string, object> extensions = null)
     {
-        return Create(StatusCodes.Status500InternalServerError
-            , ExceptionConstantsTypes.ExceptionTypeControlledInBackend
-            , Global_Resources.MsgOperacionKoTitulo
-            , Global_Resources.MsgOperacionKo
-            , extensions);
+        var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
+            , type: ExceptionConstantsTypes.ExceptionTypeControlledInBackend
+            , title: Global_Resources.MsgOperacionKoTitulo
+            , detail: Global_Resources.MsgOperacionKo
+            , extensions: extensions);
+        return problemDetails;
     }
 }

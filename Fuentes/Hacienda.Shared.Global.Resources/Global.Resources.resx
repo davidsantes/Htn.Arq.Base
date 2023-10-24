@@ -133,7 +133,7 @@
     <value>Operación completa.</value>
   </data>
   <data name="MsgRecursoNoEncontrado" xml:space="preserve">
-    <value>No se ha encontrado el recurso que se busca.</value>
+    <value>No se ha encontrado el recurso con identificador {0}.</value>
   </data>
   <data name="MsgRecursoNoEncontradoTitulo" xml:space="preserve">
     <value>Recurso no encontrado.</value>

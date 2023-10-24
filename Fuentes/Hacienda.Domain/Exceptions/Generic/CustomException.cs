@@ -1,23 +1,14 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Hacienda.Domain.Entities.Exceptions;
+namespace Hacienda.Domain.Exceptions.Generic;
 
 /// <summary>
 /// Excepción personalizada. Útil para enviar excepciones controladas
 /// </summary>
 [Serializable]
-public class CustomException : AbstractCustomException
+public class CustomException : Exception
 {
-    public override ExceptionPriority Priority
-    {
-        get
-        {
-            return ExceptionPriority.Medium;
-        }
-    }
-
     public CustomException()
-        : base()
     {
     }
 
@@ -30,4 +21,6 @@ public class CustomException : AbstractCustomException
         : base(info, context)
     {
     }
+
+    public override string Message => "Ha ocurrido un error personalizado.";
 }

@@ -1,4 +1,5 @@
-﻿using Hacienda.Domain.Entities.Exceptions;
+﻿using Hacienda.Domain.Exceptions;
+using Hacienda.Domain.Exceptions.Generic;
 
 namespace Hacienda.Application.Exceptions.Sanitize;
 

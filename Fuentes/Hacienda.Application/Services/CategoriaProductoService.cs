@@ -3,10 +3,11 @@ using FluentValidation;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
-using Hacienda.Domain.Entities.Exceptions;
+using Hacienda.Domain.Exceptions.Generic;
+using Hacienda.Domain.Exceptions.Specific;
+using Hacienda.Domain.ExternalClients;
 using Hacienda.Domain.Repositories;
 using Hacienda.Shared.Global.Resources;
-using Hacienda.Domain.ExternalClients;
 
 namespace Hacienda.Application.Services;
 
@@ -38,6 +39,12 @@ public class CategoriaProductoService : ICategoriaProductoService
     public async Task<GetCategoriaProductoResponse> GetAsync(int id)
     {
         var categoria = await _categoriaRepository.GetAsync(id);
+
+        if (categoria == null)
+        {
+            throw new CategoriaNotFoundException(id);
+        }
+
         var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
         return categoriaProductoResponse;
     }
@@ -46,7 +53,7 @@ public class CategoriaProductoService : ICategoriaProductoService
     {
         _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
 
-        var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);        
+        var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);
         var insResult = await _categoriaRepository.InsAsync(mappedCategoria);
         var resultEnvioCorreo = await _correosAdapter.InsAsync();
 
