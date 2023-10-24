@@ -43,6 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Shared.DependencyI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0 - Task Layer", "6.0 - Task Layer", "{115ED63C-3992-4B38-9B2B-22DF9CDA1372}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{79C40653-FB0B-40B7-987E-06C1E3424FC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Driven Design", "Domain Driven Design", "{80C64F16-8AA8-4594-900A-B05BBB003821}"
+	ProjectSection(SolutionItems) = preProject
+		Recursos\Domain Driven Design\EsquemaDdd.PNG = Recursos\Domain Driven Design\EsquemaDdd.PNG
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +116,8 @@ Global
 		{3D349B70-10DD-4CB8-A46F-7B285C9CE7DA} = {5B860279-3535-4A66-85CA-E5B8A3EAD587}
 		{81F6B440-6A52-40A5-A931-0C40B7CF6DC6} = {5B860279-3535-4A66-85CA-E5B8A3EAD587}
 		{701D9445-38D7-4FA1-92AE-D395914FE544} = {9DE7A2EA-772B-461C-928D-EFBAD7CB6B92}
+		{79C40653-FB0B-40B7-987E-06C1E3424FC4} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
+		{80C64F16-8AA8-4594-900A-B05BBB003821} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57E59C06-82B0-4946-A824-18BA119F263D}
