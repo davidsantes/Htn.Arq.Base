@@ -24,11 +24,12 @@ builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterAutomapperProfiles();
 
 //Prueba de concepto con acceso mediante Dapper a la base de datos
-builder.Services
-    .RegisterDapper(builder.Configuration.GetConnectionString("DefaultConnection"));
+var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.RegisterDapper(databaseConnectionString);
 
+builder.Services.AddSingleton<WebApiHealthCheck>(new WebApiHealthCheck(databaseConnectionString));
 builder.Services.AddHealthChecks()
-    .AddCheck<MyCustomHealthCheck>("MyCustomHealthCheck");
+    .AddCheck<WebApiHealthCheck>("WebApiHealthCheck");
 
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
