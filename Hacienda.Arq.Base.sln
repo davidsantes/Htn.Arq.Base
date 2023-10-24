@@ -15,42 +15,42 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0 - Application Layer", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.0 - Web Layer", "5.0 - Web Layer", "{3FEABFDA-2851-4CC4-B503-F3604438BDAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.WebApi", "Fuentes\Hacienda.WebApi\Hacienda.WebApi.csproj", "{136A09E5-F11F-4CAF-9B51-F60BE190E616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.WebApi", "src\Hacienda.WebApi\Hacienda.WebApi.csproj", "{136A09E5-F11F-4CAF-9B51-F60BE190E616}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.WorkerService", "Fuentes\Hacienda.WorkerService\Hacienda.WorkerService.csproj", "{C3A7040E-8512-4C44-8490-05E5A8FF98DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.WorkerService", "src\Hacienda.WorkerService\Hacienda.WorkerService.csproj", "{C3A7040E-8512-4C44-8490-05E5A8FF98DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Web", "Fuentes\Hacienda.Web\Hacienda.Web.csproj", "{C83000ED-8C5B-4FD5-AB3F-4DDD76A2215A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Web", "src\Hacienda.Web\Hacienda.Web.csproj", "{C83000ED-8C5B-4FD5-AB3F-4DDD76A2215A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Shared.Global.Resources", "Fuentes\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj", "{8535DB12-C4F0-4796-AF7D-D14B8BDBAC3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Shared.Global.Resources", "src\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj", "{8535DB12-C4F0-4796-AF7D-D14B8BDBAC3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.0 - Domain Layer", "2.0 - Domain Layer", "{FBD3F59C-7077-4B50-8CDA-D13184F0E8E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.0 - Cross cutting Layer", "1.0 - Cross cutting Layer", "{9DE7A2EA-772B-461C-928D-EFBAD7CB6B92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Domain", "Fuentes\Hacienda.Domain\Hacienda.Domain.csproj", "{23D27001-8D6B-42D5-BE5C-8A48CF201A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Domain", "src\Hacienda.Domain\Hacienda.Domain.csproj", "{23D27001-8D6B-42D5-BE5C-8A48CF201A98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Domain.Test", "Fuentes\Hacienda.Domain.Test\Hacienda.Domain.Test.csproj", "{918A3533-046B-46D4-A595-05D5D86EA8F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Domain.Test", "src\Hacienda.Domain.Test\Hacienda.Domain.Test.csproj", "{918A3533-046B-46D4-A595-05D5D86EA8F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Infrastructure.Test", "Fuentes\Hacienda.Infrastructure.Test\Hacienda.Infrastructure.Test.csproj", "{316409CA-A876-44DA-B0E4-C0FDF4FB08A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Infrastructure.Test", "src\Hacienda.Infrastructure.Test\Hacienda.Infrastructure.Test.csproj", "{316409CA-A876-44DA-B0E4-C0FDF4FB08A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Infrastructure", "Fuentes\Hacienda.Infrastructure\Hacienda.Infrastructure.csproj", "{C64C4511-7A86-429B-B8F6-4460AC2F62DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Infrastructure", "src\Hacienda.Infrastructure\Hacienda.Infrastructure.csproj", "{C64C4511-7A86-429B-B8F6-4460AC2F62DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Application.Test", "Fuentes\Hacienda.Application.Test\Hacienda.Application.Test.csproj", "{3D349B70-10DD-4CB8-A46F-7B285C9CE7DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Application.Test", "src\Hacienda.Application.Test\Hacienda.Application.Test.csproj", "{3D349B70-10DD-4CB8-A46F-7B285C9CE7DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Application", "Fuentes\Hacienda.Application\Hacienda.Application.csproj", "{81F6B440-6A52-40A5-A931-0C40B7CF6DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Application", "src\Hacienda.Application\Hacienda.Application.csproj", "{81F6B440-6A52-40A5-A931-0C40B7CF6DC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Shared.DependencyInjection", "Fuentes\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj", "{701D9445-38D7-4FA1-92AE-D395914FE544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hacienda.Shared.DependencyInjection", "src\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj", "{701D9445-38D7-4FA1-92AE-D395914FE544}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0 - Task Layer", "6.0 - Task Layer", "{115ED63C-3992-4B38-9B2B-22DF9CDA1372}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{79C40653-FB0B-40B7-987E-06C1E3424FC4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{239E4121-9E38-422B-B9AF-034A0D38BD2F}"
 	ProjectSection(SolutionItems) = preProject
-		Recursos\Sql\Bdd_Ejemplo_Tienda.zip = Recursos\Sql\Bdd_Ejemplo_Tienda.zip
+		Solution Items\Docs\EsquemaDdd.PNG = Solution Items\Docs\EsquemaDdd.PNG
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Driven Design", "Domain Driven Design", "{80C64F16-8AA8-4594-900A-B05BBB003821}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{1F7805B7-A212-4C86-AF7D-10AB201C6CCF}"
 	ProjectSection(SolutionItems) = preProject
-		Recursos\Domain Driven Design\EsquemaDdd.PNG = Recursos\Domain Driven Design\EsquemaDdd.PNG
+		Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql = Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql
 	EndProjectSection
 EndProject
 Global
@@ -119,8 +119,8 @@ Global
 		{3D349B70-10DD-4CB8-A46F-7B285C9CE7DA} = {5B860279-3535-4A66-85CA-E5B8A3EAD587}
 		{81F6B440-6A52-40A5-A931-0C40B7CF6DC6} = {5B860279-3535-4A66-85CA-E5B8A3EAD587}
 		{701D9445-38D7-4FA1-92AE-D395914FE544} = {9DE7A2EA-772B-461C-928D-EFBAD7CB6B92}
-		{79C40653-FB0B-40B7-987E-06C1E3424FC4} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
-		{80C64F16-8AA8-4594-900A-B05BBB003821} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
+		{239E4121-9E38-422B-B9AF-034A0D38BD2F} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
+		{1F7805B7-A212-4C86-AF7D-10AB201C6CCF} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57E59C06-82B0-4946-A824-18BA119F263D}
