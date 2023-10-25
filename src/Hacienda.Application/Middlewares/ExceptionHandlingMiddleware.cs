@@ -57,11 +57,11 @@ public class ExceptionHandlingMiddleware
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
         if (exception is ValidationException validationException)
         {
-            await HandleProblemDetails(context, problemDetailsFactory.GetInvalidValidation(validationException));
+            await WriteProblemDetails(context, problemDetailsFactory.GetInvalidValidation(validationException));
         }
         else if (exception is NotFoundException notFoundException)
         {
-            await HandleProblemDetails(context, problemDetailsFactory.GetResourceNotFound(notFoundException));
+            await WriteProblemDetails(context, problemDetailsFactory.GetResourceNotFound(notFoundException));
         }
     }
 
@@ -82,10 +82,10 @@ public class ExceptionHandlingMiddleware
         var problemDetailsFactory = _serviceProvider.GetRequiredService<IProblemDetailsFactory>();
         var excepcionFormatoProblemDetails = problemDetailsFactory.GetUnexpectedProblem(exceptionSaneada.Message);
 
-        await HandleProblemDetails(context, excepcionFormatoProblemDetails);
+        await WriteProblemDetails(context, excepcionFormatoProblemDetails);
     }
 
-    private async Task HandleProblemDetails(HttpContext context, ProblemDetails problemDetails)
+    private async Task WriteProblemDetails(HttpContext context, ProblemDetails problemDetails)
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;

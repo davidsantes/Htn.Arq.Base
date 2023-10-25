@@ -29,7 +29,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddHostedService<TimeFileWorker>();
         services.AddSingleton<ITimeService, TimeService>();
     })
-    //TODO: utilizar un middleware de control de excepciones
+    //TODO: ver cómo controlar las excepciones
     .Build();
 
 await host.RunAsync();
