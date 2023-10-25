@@ -33,24 +33,34 @@ public class CategoriaRepositoryDapper : ICategoriaRepository
 
     public async Task<CategoriaProducto> GetAsync(int id)
     {
-        var sql = @"
+        //Cambiar si quiere hacerse una prueba de concepto query directa vs procedimiento almacenado:
+        var ejecutarConProcedimientoAlmacenado = false;
+        if (ejecutarConProcedimientoAlmacenado)
+        {
+            using (var connection = _connectionFactory.GetOpenConnection())
+            {
+                var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(
+                    GetCategoriaStoredProcedure,
+                    new { Id = id }, // Parámetros del procedimiento almacenado
+                    commandType: CommandType.StoredProcedure // Especifica que es un procedimiento almacenado
+                );
+                return categoria;
+            }
+        }
+        else
+        {
+            var sql = @"
                 SELECT IdCategoriaProducto AS Id,
                        Nombre,
                        Descripcion
                 FROM CategoriasProductos
                 WHERE IdCategoriaProducto = @Id";
 
-        using (var connection = _connectionFactory.GetOpenConnection())
-        {
-            var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(
-                GetCategoriaStoredProcedure,
-                new { Id = id }, // Parámetros del procedimiento almacenado
-                commandType: CommandType.StoredProcedure // Especifica que es un procedimiento almacenado
-            );
-
-            //Si se quiere llamar directamente:
-            //var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(sql, new { Id = id });
-            return categoria;
+            using (var connection = _connectionFactory.GetOpenConnection())
+            {
+                var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(sql, new { Id = id });
+                return categoria;
+            }
         }
     }
 
