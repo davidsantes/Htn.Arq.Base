@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Hacienda.Domain.Entities;
+using Hacienda.Domain.ResultErrors;
 using Xunit;
 
 namespace Hacienda.Domain.Test.Entities;

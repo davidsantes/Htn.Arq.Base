@@ -10,6 +10,7 @@ public class CategoriaMappingProfile : Profile
     {
         //Request
         CreateMap<InsertCategoriaProductoRequest, CategoriaProducto>();
+        CreateMap<UpdateCategoriaProductoRequest, CategoriaProducto>();        
 
         //Response
         CreateMap<CategoriaProducto, GetCategoriaProductoResponse>();

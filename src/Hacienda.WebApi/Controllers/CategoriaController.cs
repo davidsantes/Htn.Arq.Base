@@ -23,11 +23,11 @@ public class CategoriaController : ControllerBase
     /// Retorna las categorías de productos (dato maestro).
     /// </summary>
     /// <returns>Listado de categorías</returns>
-    [HttpGet("getCategoriasProducto")]
+    [HttpGet("getCategorias")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<IList<GetCategoriaProductoResponse>>> GetCategoriasProducto()
+    public async Task<ActionResult<IList<GetCategoriaProductoResponse>>> GetCategorias()
     {
         var categorias = await _categoriaService.GetAllAsync();
         if (!categorias.Any())
@@ -42,11 +42,12 @@ public class CategoriaController : ControllerBase
     /// Retorna una categoría de producto concreta (dato maestro).
     /// </summary>
     /// <returns>Categoría buscada</returns>
+    //[HttpGet]
+    //[Route("{id}")]
+    [HttpGet("{id}", Name = "Get")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet]
-    [Route("{id}")]
     public async Task<ActionResult<GetCategoriaProductoResponse>> Get(int id)
     {
         var categoria = await _categoriaService.GetAsync(id);
@@ -63,25 +64,84 @@ public class CategoriaController : ControllerBase
     /// Inserta una categoría de producto concreta.
     /// </summary>
     /// <returns>Si el resultado ha sido satisfactorio</returns>
-    [HttpPost("insCategoriaProducto")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> InsCategoriaProducto(InsertCategoriaProductoRequest nuevaCategoriaRequest)
+    public async Task<IActionResult> InsCategoria(InsertCategoriaProductoRequest nuevaCategoriaRequest)
     {
         var insCategoriaResult = await _categoriaService.InsAsync(nuevaCategoriaRequest);
 
         if (insCategoriaResult.IsSuccess)
         {
-            return CreatedAtAction(nameof(Get)
-                , new { id = insCategoriaResult.Value }
-                , nuevaCategoriaRequest);
+            //Devolvemos la Url para poder buscar este elemento
+            var locationUri = Url.Link(nameof(Get), new { id = insCategoriaResult.Value });
+            return Created(locationUri, nuevaCategoriaRequest);
         }
         else
         {
-            var problemaEnInsercion = _problemDetailsFactory
-                .GetBackendProblem(insCategoriaResult.Errors);
+            var problemaEnInsercion = _problemDetailsFactory.GetBackendProblem(insCategoriaResult.Errors);
             return BadRequest(problemaEnInsercion);
+        }
+    }
+
+    /// <summary>
+    /// Actualiza una categoría de producto concreta.
+    /// </summary>
+    /// <returns>Si el resultado ha sido satisfactorio</returns>
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdCategoria(UpdateCategoriaProductoRequest categoriaRequest)
+    {
+        var updCategoriaResult = await _categoriaService.UpdAsync(categoriaRequest);
+
+        if (updCategoriaResult.IsSuccess)
+        {
+            int elementoActualizadoId = categoriaRequest.Id;
+            string locationUri = Url.Action(nameof(Get), new { id = elementoActualizadoId });
+            // Devuelve una respuesta con código de estado 200 OK y el elemento actualizado
+            return Ok(new { id = categoriaRequest.Id, Location = locationUri });
+        }
+        else if (updCategoriaResult.Errors.ContainsKey("CategoriaNoEncontrada"))
+        {
+            return NotFound(_problemDetailsFactory.GetResourceNotFound());
+        }
+        else
+        {
+            var problemaEnActualizacion = _problemDetailsFactory.GetBackendProblem(updCategoriaResult.Errors);
+            return BadRequest(problemaEnActualizacion);
+        }
+    }
+
+    /// <summary>
+    /// Elimina una categoría de producto concreta.
+    /// </summary>
+    /// <returns>Si el resultado ha sido satisfactorio</returns>
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DelCategoria(int id)
+    {
+        var delCategoriaResult = await _categoriaService.DelAsync(id);
+
+        if (delCategoriaResult.IsSuccess)
+        {
+            return NoContent();
+        }
+        else if (delCategoriaResult.Errors.ContainsKey("CategoriaNoEncontrada"))
+        {
+            return NotFound(_problemDetailsFactory.GetResourceNotFound());
+        }
+        else
+        {
+            var problemaEnEliminacion = _problemDetailsFactory.GetBackendProblem(delCategoriaResult.Errors);
+            return BadRequest(problemaEnEliminacion);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hacienda.Domain.Entities;
+﻿using Hacienda.Domain.ResultErrors;
 
 namespace Hacienda.Domain.ExternalClients;
 

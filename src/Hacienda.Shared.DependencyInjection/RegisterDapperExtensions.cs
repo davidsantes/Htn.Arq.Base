@@ -12,8 +12,8 @@ public static class RegisterDapperExtensions
     /// <param name="connection">Conexión a la base de datos</param>
     /// <returns>Colección configurada</returns>
     public static IServiceCollection RegisterDapper(
-        this IServiceCollection services
-        , string connectionString)
+        this IServiceCollection services, 
+        string connectionString)
     {
         var dbConnection = connectionString;
         services.AddSingleton<IConnectionFactory>(new ConnectionFactory(dbConnection));

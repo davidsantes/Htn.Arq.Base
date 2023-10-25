@@ -106,6 +106,15 @@ namespace Hacienda.Shared.Global.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La operación se ha realizado, pero no ha tenido efecto..
+        /// </summary>
+        public static string MsgOperacionSinEfecto {
+            get {
+                return ResourceManager.GetString("MsgOperacionSinEfecto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se ha encontrado el recurso con identificador {0}..
         /// </summary>
         public static string MsgRecursoNoEncontrado {

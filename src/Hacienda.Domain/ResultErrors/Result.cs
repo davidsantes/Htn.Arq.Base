@@ -1,4 +1,4 @@
-﻿namespace Hacienda.Domain.Entities;
+﻿namespace Hacienda.Domain.ResultErrors;
 
 /// <summary>
 /// Patrón result pattern, para poder devolver resultados controlados y tipados

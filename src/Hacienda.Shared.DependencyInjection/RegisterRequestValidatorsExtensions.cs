@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Hacienda.Application.Dtos;
-using Hacienda.Application.Dtos.Categorias;
+using Hacienda.Application.Dtos.Categorias.Validators;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hacienda.Shared.DependencyInjection;
@@ -14,6 +14,7 @@ public static class RegisterRequestValidatorsExtensions
         this IServiceCollection services)
     {
         services.AddTransient<IValidator<InsertCategoriaProductoRequest>, InsertCategoriaProductoRequestValidator>();
+        services.AddTransient<IValidator<UpdateCategoriaProductoRequest>, UpdateCategoriaProductoRequestValidator>();
         return services;
     }
 }

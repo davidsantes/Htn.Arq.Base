@@ -15,20 +15,24 @@ public class CategoriaProductoService : ICategoriaProductoService
 {
     private readonly ICategoriaRepository _categoriaRepository;
     private readonly ICorreosClientAdapter _correosAdapter;
-    public readonly IMapper _mapper;
+    private readonly IMapper _mapper;
     private readonly IValidator<InsertCategoriaProductoRequest> _validatorInsertCategoria;
+    private readonly IValidator<UpdateCategoriaProductoRequest> _validatorUpdateCategoria;
 
     public CategoriaProductoService(ICategoriaRepository categoriaRepository,
         ICorreosClientAdapter correosAdapter,
         IMapper mapper,
-        IValidator<InsertCategoriaProductoRequest> validator)
+        IValidator<InsertCategoriaProductoRequest> validatorInsertCategoria,
+        IValidator<UpdateCategoriaProductoRequest> validatorUpdateCategoria)
     {
         _categoriaRepository = categoriaRepository;
         _correosAdapter = correosAdapter;
         _mapper = mapper;
-        _validatorInsertCategoria = validator;
+        _validatorInsertCategoria = validatorInsertCategoria;
+        _validatorUpdateCategoria = validatorUpdateCategoria;
     }
 
+    /// <inheritdoc />
     public async Task<IList<GetCategoriaProductoResponse>> GetAllAsync()
     {
         var categorias = await _categoriaRepository.GetAllAsync();
@@ -36,6 +40,7 @@ public class CategoriaProductoService : ICategoriaProductoService
         return listaCategoriasProductoResponse;
     }
 
+    /// <inheritdoc />
     public async Task<GetCategoriaProductoResponse> GetAsync(int id)
     {
         var categoria = await _categoriaRepository.GetAsync(id);
@@ -49,6 +54,7 @@ public class CategoriaProductoService : ICategoriaProductoService
         return categoriaProductoResponse;
     }
 
+    /// <inheritdoc />
     public async Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
     {
         _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
@@ -65,5 +71,34 @@ public class CategoriaProductoService : ICategoriaProductoService
         {
             throw new CustomException(Global_Resources.MsgOperacionKo);
         }
+    }
+
+    /// <inheritdoc />
+    public async Task<ResultRequest<int>> UpdAsync(UpdateCategoriaProductoRequest categoriaRequest)
+    {
+        _validatorUpdateCategoria.ValidateAndThrow(categoriaRequest);
+
+        var existingCategoria = await _categoriaRepository.GetAsync(categoriaRequest.Id);
+        if (existingCategoria == null)
+        {
+            throw new CategoriaNotFoundException(categoriaRequest.Id);
+        }
+
+        var updatedCategoria = _mapper.Map(categoriaRequest, existingCategoria);
+        var result = await _categoriaRepository.UpdAsync(updatedCategoria);
+        return new ResultRequest<int>(result);
+    }
+
+    /// <inheritdoc />
+    public async Task<ResultRequest<int>> DelAsync(int id)
+    {
+        var existingCategoria = await _categoriaRepository.GetAsync(id);
+        if (existingCategoria == null)
+        {
+            throw new CategoriaNotFoundException(id);
+        }
+
+        var result = await _categoriaRepository.DelAsync(id);
+        return new ResultRequest<int>(result);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Hacienda.Domain.Entities;
 using Hacienda.Domain.Repositories;
+using Hacienda.Domain.ResultErrors;
 using Hacienda.Infrastructure.DbContextDapper;
 using System.Data;
 
@@ -16,6 +17,7 @@ public class CategoriaRepositoryDapper : ICategoriaRepository
         _connectionFactory = connectionFactory;
     }
 
+    /// <inheritdoc />
     public async Task<IList<CategoriaProducto>> GetAllAsync()
     {
         var sql = @"
@@ -31,6 +33,7 @@ public class CategoriaRepositoryDapper : ICategoriaRepository
         }
     }
 
+    /// <inheritdoc />
     public async Task<CategoriaProducto> GetAsync(int id)
     {
         //Cambiar si quiere hacerse una prueba de concepto query directa vs procedimiento almacenado:
@@ -64,6 +67,7 @@ public class CategoriaRepositoryDapper : ICategoriaRepository
         }
     }
 
+    /// <inheritdoc />
     public async Task<Result<int>> InsAsync(CategoriaProducto categoria)
     {
         var sql = @"
@@ -77,5 +81,19 @@ public class CategoriaRepositoryDapper : ICategoriaRepository
         }
 
         return new Result<int>(categoria.Id);
+    }
+
+    /// <inheritdoc />
+    public Task<Result<int>> UpdAsync(CategoriaProducto categoria)
+    {
+        //Como es una prueba de concepto no se ha completado
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public Task<Result<int>> DelAsync(int id)
+    {
+        //Como es una prueba de concepto no se ha completado
+        throw new NotImplementedException();
     }
 }

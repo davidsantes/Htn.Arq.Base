@@ -102,6 +102,8 @@ En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. D
     ```xml
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     ```
+
+    Posteriormentes en la clase ```SwaggerExtension``` se configura cómo se anexa Swagger y qué configuración tiene.
 - **HealthChecks**: se ha creado ```MyCustomHealthCheck```, que permitiría chequear lo que quisiéramos del producto (acceso a servicios, bdd…). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 

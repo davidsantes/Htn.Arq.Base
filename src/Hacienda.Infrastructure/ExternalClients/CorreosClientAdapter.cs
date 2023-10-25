@@ -1,5 +1,5 @@
-﻿using Hacienda.Domain.Entities;
-using Hacienda.Domain.ExternalClients;
+﻿using Hacienda.Domain.ExternalClients;
+using Hacienda.Domain.ResultErrors;
 
 namespace Hacienda.Infrastructure.ExternalClients;
 

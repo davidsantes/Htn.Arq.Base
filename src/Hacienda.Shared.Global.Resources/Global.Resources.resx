@@ -132,6 +132,9 @@
   <data name="MsgOperacionOkTitulo" xml:space="preserve">
     <value>Operación completa.</value>
   </data>
+  <data name="MsgOperacionSinEfecto" xml:space="preserve">
+    <value>La operación se ha realizado, pero no ha tenido efecto.</value>
+  </data>
   <data name="MsgRecursoNoEncontrado" xml:space="preserve">
     <value>No se ha encontrado el recurso con identificador {0}.</value>
   </data>

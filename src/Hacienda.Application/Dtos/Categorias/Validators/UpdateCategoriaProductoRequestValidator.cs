@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using Hacienda.Application.Resources;
 
-namespace Hacienda.Application.Dtos.Categorias;
+namespace Hacienda.Application.Dtos.Categorias.Validators;
 
-public class InsertCategoriaProductoRequestValidator : AbstractValidator<InsertCategoriaProductoRequest>
+public class UpdateCategoriaProductoRequestValidator : AbstractValidator<UpdateCategoriaProductoRequest>
 {
-    public InsertCategoriaProductoRequestValidator()
+    public UpdateCategoriaProductoRequestValidator()
     {
         RuleFor(categoria => categoria.Nombre)
             .NotEmpty().WithMessage(ValidationResources.CampoObligatorio)
