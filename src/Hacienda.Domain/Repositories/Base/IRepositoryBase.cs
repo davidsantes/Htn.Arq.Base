@@ -2,7 +2,7 @@
 
 namespace Hacienda.Domain.Repositories.Base;
 
-public interface IRepository<T> where T : class
+public interface IRepositoryBase<T> where T : class
 {
     Task<IReadOnlyList<T>> GetAllAsync();
 

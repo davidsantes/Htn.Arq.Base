@@ -7,6 +7,10 @@ using System.Data;
 
 namespace Hacienda.Infrastructure.Repositories;
 
+/// <summary>
+/// Prueba de concepto de uso de dapper
+/// </summary>
+
 public class CategoriaRepositoryDapper : ICategoriaRepository
 {
     private const string GetCategoriaStoredProcedure = "Get_Categoria_By_Id";

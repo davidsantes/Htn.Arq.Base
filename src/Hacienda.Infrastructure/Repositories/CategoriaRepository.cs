@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hacienda.Infrastructure.Repositories;
 
-public class CategoriaRepository : Repository<CategoriaProducto>, ICategoriaRepository
+public class CategoriaRepository : RepositoryBase<CategoriaProducto>, ICategoriaRepository
 {
     public CategoriaRepository(EntityDbContext context): base(context)
     {
@@ -15,7 +15,7 @@ public class CategoriaRepository : Repository<CategoriaProducto>, ICategoriaRepo
     }
 
     /// <inheritdoc />
-    public new async Task<IList<CategoriaProducto>> GetAllAsync()
+    public async Task<IList<CategoriaProducto>> GetAllAsync()
     {
         var categorias = await _context.CategoriaProductos.AsNoTracking().ToListAsync();
         return categorias;

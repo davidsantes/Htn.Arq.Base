@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 
 namespace Hacienda.Infrastructure.Repositories.Base;
 
-public class Repository<T> : IRepository<T> where T : class
+public class RepositoryBase<T> : IRepositoryBase<T> where T : class
 {
     protected readonly EntityDbContext _context;
 
-    public Repository(EntityDbContext context)
+    public RepositoryBase(EntityDbContext context)
     {
         _context = context;
     }

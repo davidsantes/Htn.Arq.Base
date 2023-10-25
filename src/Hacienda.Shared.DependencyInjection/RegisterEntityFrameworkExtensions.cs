@@ -18,7 +18,7 @@ public static class RegisterEntityFrameworkExtensions
         this IServiceCollection services,
         string connectionString)
     {
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
         services.AddDbContext<EntityDbContext>(options =>
         {
             options.UseSqlServer(connectionString);
