@@ -20,8 +20,9 @@ IHost host = Host.CreateDefaultBuilder(args)
             .RegisterRequestValidators()
             .RegisterAutomapperProfiles();
 
-        //TODO: no funciona EF en un service https://stackoverflow.com/questions/36332239/use-dbcontext-in-asp-net-singleton-injected-class
-
+        //TODO: no funciona EF en un service:
+        //https://stackoverflow.com/questions/36332239/use-dbcontext-in-asp-net-singleton-injected-class
+        //https://www.youtube.com/watch?v=7lQ1fmR6LLE
         //services.AddHostedService<SampleWorker>();
 
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
