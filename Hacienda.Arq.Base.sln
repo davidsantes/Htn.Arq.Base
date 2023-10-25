@@ -55,6 +55,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{1F7805B7-A21
 		Solution Items\Sql\EsquemaBdd.JPG = Solution Items\Sql\EsquemaBdd.JPG
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{A34141C3-704B-41C2-9C16-9B6651390C27}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Postman\postman_collection.json = Solution Items\Postman\postman_collection.json
+		Solution Items\Postman\postman_environment.json = Solution Items\Postman\postman_environment.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +129,7 @@ Global
 		{701D9445-38D7-4FA1-92AE-D395914FE544} = {9DE7A2EA-772B-461C-928D-EFBAD7CB6B92}
 		{239E4121-9E38-422B-B9AF-034A0D38BD2F} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
 		{1F7805B7-A212-4C86-AF7D-10AB201C6CCF} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
+		{A34141C3-704B-41C2-9C16-9B6651390C27} = {2C892ACA-6B49-4207-B321-5ADF84460C28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57E59C06-82B0-4946-A824-18BA119F263D}

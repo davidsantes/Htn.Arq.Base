@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "3ad595d7-d722-4fdc-b4ed-63901d7ff4f1",
+		"name": "Arquitectura de referencia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13496196"
+	},
+	"item": [
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "getCategorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/Categoria/getCategorias",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"Categoria",
+								"getCategorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/Categoria/15665",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"Categoria",
+								"15665"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"categoria de prueba nombre\",\r\n  \"descripcion\": \"categoria de prueba descripcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/Categoria/",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"Categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updCategoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"1\",\r\n  \"nombre\": \"categoria de prueba nombre\",\r\n  \"descripcion\": \"categoria de prueba descripcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/Categoria",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"Categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delCategoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/Categoria/16",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"Categoria",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
