@@ -1,7 +1,7 @@
 ﻿using FluentValidation.TestHelper;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Categorias.Validators;
-using Hacienda.Application.Resources;
+using Hacienda.Shared.Global.Resources;
 using Xunit;
 
 namespace Hacienda.Application.Test.Dtos.Categorias;

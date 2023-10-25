@@ -17,19 +17,4 @@
     <ProjectReference Include="..\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Resources\ValidationResources.Designer.cs">
-      <DependentUpon>ValidationResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\ValidationResources.resx">
-      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

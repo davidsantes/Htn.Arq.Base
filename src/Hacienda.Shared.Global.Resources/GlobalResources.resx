@@ -117,13 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CampoFormatoNoValido" xml:space="preserve">
-    <value>El campo debe contener un formato válido.</value>
+  <data name="MsgExcepcionNoControlada" xml:space="preserve">
+    <value>Se produjo una excepción no controlada.</value>
   </data>
-  <data name="CampoLongitudMaxima" xml:space="preserve">
-    <value>El campo no puede tener más de {0} caracteres.</value>
+  <data name="MsgOperacionKo" xml:space="preserve">
+    <value>No se ha podido realizar la operación.</value>
   </data>
-  <data name="CampoObligatorio" xml:space="preserve">
-    <value>El campo es obligatorio.</value>
+  <data name="MsgOperacionKoTitulo" xml:space="preserve">
+    <value>Operación incompleta.</value>
+  </data>
+  <data name="MsgOperacionOk" xml:space="preserve">
+    <value>La operación se ha realizado con éxito.</value>
+  </data>
+  <data name="MsgOperacionOkTitulo" xml:space="preserve">
+    <value>Operación completa.</value>
+  </data>
+  <data name="MsgOperacionSinEfecto" xml:space="preserve">
+    <value>La operación se ha realizado, pero no ha tenido efecto.</value>
+  </data>
+  <data name="MsgRecursoNoEncontrado" xml:space="preserve">
+    <value>No se ha encontrado el recurso con identificador {0}.</value>
+  </data>
+  <data name="MsgRecursoNoEncontradoTitulo" xml:space="preserve">
+    <value>Recurso no encontrado.</value>
+  </data>
+  <data name="VersionApp" xml:space="preserve">
+    <value>1.0.0</value>
   </data>
 </root>

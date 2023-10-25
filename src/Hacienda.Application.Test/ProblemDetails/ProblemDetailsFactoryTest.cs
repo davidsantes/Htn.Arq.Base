@@ -30,8 +30,8 @@ public class ProblemDetailsFactoryTest
         {
             Status = StatusCodes.Status400BadRequest,
             Type = ExceptionConstantsTypes.ExceptionTypeValidationFailure,
-            Title = Global_Resources.MsgValidacionKoTitulo,
-            Detail = Global_Resources.MsgValidacionKo,
+            Title = ValidationResources.MsgValidacionKoTitulo,
+            Detail = ValidationResources.MsgValidacionKo,
         };
         expectedError.Extensions["errors"] = errors;
 
@@ -53,8 +53,8 @@ public class ProblemDetailsFactoryTest
         {
             Status = StatusCodes.Status404NotFound,
             Type = ExceptionConstantsTypes.ExceptionTypeNotFound,
-            Title = Global_Resources.MsgRecursoNoEncontradoTitulo,
-            Detail = Global_Resources.MsgRecursoNoEncontrado
+            Title = GlobalResources.MsgRecursoNoEncontradoTitulo,
+            Detail = GlobalResources.MsgRecursoNoEncontrado
         };
 
         // Act
@@ -77,7 +77,7 @@ public class ProblemDetailsFactoryTest
         {
             Status = StatusCodes.Status404NotFound,
             Type = ExceptionConstantsTypes.ExceptionTypeNotFound,
-            Title = Global_Resources.MsgRecursoNoEncontradoTitulo,
+            Title = GlobalResources.MsgRecursoNoEncontradoTitulo,
             Detail = message
         };
 
@@ -99,8 +99,8 @@ public class ProblemDetailsFactoryTest
         {
             Status = StatusCodes.Status500InternalServerError,
             Type = ExceptionConstantsTypes.ExceptionTypeControlledInBackend,
-            Title = Global_Resources.MsgOperacionKoTitulo,
-            Detail = Global_Resources.MsgOperacionKo
+            Title = GlobalResources.MsgOperacionKoTitulo,
+            Detail = GlobalResources.MsgOperacionKo
         };
 
         var extensions = new Dictionary<string, object> { { "SomeKey", "SomeValue" } };
@@ -124,7 +124,7 @@ public class ProblemDetailsFactoryTest
         {
             Status = StatusCodes.Status500InternalServerError,
             Type = ExceptionConstantsTypes.ExceptionTypeUnexpectedException,
-            Title = Global_Resources.MsgExcepcionNoControlada,
+            Title = GlobalResources.MsgExcepcionNoControlada,
             Detail = $"[Exception] - Ha sucedido algo inesperado"
         };
 

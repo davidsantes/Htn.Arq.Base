@@ -22,14 +22,14 @@ namespace Hacienda.Shared.Global.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Global_Resources {
+    public class GlobalResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Global_Resources() {
+        internal GlobalResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Hacienda.Shared.Global.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hacienda.Shared.Global.Resources.Global.Resources", typeof(Global_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hacienda.Shared.Global.Resources.GlobalResources", typeof(GlobalResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -129,24 +129,6 @@ namespace Hacienda.Shared.Global.Resources {
         public static string MsgRecursoNoEncontradoTitulo {
             get {
                 return ResourceManager.GetString("MsgRecursoNoEncontradoTitulo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to El elemento a validar tiene uno o más errores..
-        /// </summary>
-        public static string MsgValidacionKo {
-            get {
-                return ResourceManager.GetString("MsgValidacionKo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Validación incorrecta..
-        /// </summary>
-        public static string MsgValidacionKoTitulo {
-            get {
-                return ResourceManager.GetString("MsgValidacionKoTitulo", resourceCulture);
             }
         }
         

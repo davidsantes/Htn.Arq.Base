@@ -38,8 +38,8 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         var problemDetails = Create(statusCode: StatusCodes.Status400BadRequest
             , type: ExceptionConstantsTypes.ExceptionTypeValidationFailure
-            , title: Global_Resources.MsgValidacionKoTitulo
-            , detail: Global_Resources.MsgValidacionKo);
+            , title: ValidationResources.MsgValidacionKoTitulo
+            , detail: ValidationResources.MsgValidacionKo);
 
         if (ex.Errors is not null)
         {
@@ -53,7 +53,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
             , type: ExceptionConstantsTypes.ExceptionTypeNotFound
-            , title: string.Format(Global_Resources.MsgRecursoNoEncontradoTitulo)
+            , title: string.Format(GlobalResources.MsgRecursoNoEncontradoTitulo)
             , detail: ex.Message);
         return problemDetails;
     }
@@ -63,8 +63,8 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         var problemDetails = Create(statusCode: StatusCodes.Status404NotFound
             , type: ExceptionConstantsTypes.ExceptionTypeNotFound
-            , title: Global_Resources.MsgRecursoNoEncontradoTitulo
-            , detail: Global_Resources.MsgRecursoNoEncontrado);
+            , title: GlobalResources.MsgRecursoNoEncontradoTitulo
+            , detail: GlobalResources.MsgRecursoNoEncontrado);
         return problemDetails;
     }
 
@@ -73,8 +73,8 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
             , type: ExceptionConstantsTypes.ExceptionTypeControlledInBackend
-            , title: Global_Resources.MsgOperacionKoTitulo
-            , detail: Global_Resources.MsgOperacionKo
+            , title: GlobalResources.MsgOperacionKoTitulo
+            , detail: GlobalResources.MsgOperacionKo
             , extensions: extensions);
         return problemDetails;
     }
@@ -84,7 +84,7 @@ public class ProblemDetailsFactory : IProblemDetailsFactory
     {
         var problemDetails = Create(statusCode: StatusCodes.Status500InternalServerError
             , type: ExceptionConstantsTypes.ExceptionTypeUnexpectedException
-            , title: Global_Resources.MsgExcepcionNoControlada
+            , title: GlobalResources.MsgExcepcionNoControlada
             , detail: $"[Exception] - " + message);
         return problemDetails;
     }

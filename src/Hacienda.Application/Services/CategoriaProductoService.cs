@@ -69,7 +69,7 @@ public class CategoriaProductoService : ICategoriaProductoService
         }
         else
         {
-            throw new CustomException(Global_Resources.MsgOperacionKo);
+            throw new CustomException(GlobalResources.MsgOperacionKo);
         }
     }
 

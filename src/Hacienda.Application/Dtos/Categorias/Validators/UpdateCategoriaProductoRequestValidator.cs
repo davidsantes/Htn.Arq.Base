@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Hacienda.Application.Resources;
+using Hacienda.Shared.Global.Resources;
 
 namespace Hacienda.Application.Dtos.Categorias.Validators;
 

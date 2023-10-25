@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hacienda.Application.Resources {
+namespace Hacienda.Shared.Global.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Hacienda.Application.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hacienda.Application.Resources.ValidationResources", typeof(ValidationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hacienda.Shared.Global.Resources.ValidationResources", typeof(ValidationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -84,6 +84,24 @@ namespace Hacienda.Application.Resources {
         public static string CampoObligatorio {
             get {
                 return ResourceManager.GetString("CampoObligatorio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El elemento a validar tiene uno o más errores..
+        /// </summary>
+        public static string MsgValidacionKo {
+            get {
+                return ResourceManager.GetString("MsgValidacionKo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validación incorrecta..
+        /// </summary>
+        public static string MsgValidacionKoTitulo {
+            get {
+                return ResourceManager.GetString("MsgValidacionKoTitulo", resourceCulture);
             }
         }
     }

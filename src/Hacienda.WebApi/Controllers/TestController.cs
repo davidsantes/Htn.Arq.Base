@@ -22,7 +22,7 @@ public class TestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetVersion()
     {
-        string version = Global_Resources.VersionApp;
+        string version = GlobalResources.VersionApp;
         return Ok(version);
     }
 
@@ -35,7 +35,7 @@ public class TestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult InsLog()
     {
-        string version = Global_Resources.VersionApp;
+        string version = GlobalResources.VersionApp;
         var guidControl = Guid.NewGuid();
 
         _logger.LogDebug("LogDebug. Versión de producto {@version} - {@guidControl}", version, guidControl.ToString());
@@ -63,6 +63,6 @@ public class TestController : ControllerBase
 #pragma warning restore S1481
 
         return StatusCode(StatusCodes.Status500InternalServerError
-            , new { Message = Global_Resources.MsgExcepcionNoControlada });
+            , new { Message = GlobalResources.MsgExcepcionNoControlada });
     }
 }
