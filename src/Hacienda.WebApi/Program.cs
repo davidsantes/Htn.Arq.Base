@@ -23,7 +23,6 @@ builder.Services.RegisterExceptionAndProblemDetails()
     .RegisterRequestValidators()
     .RegisterAutomapperProfiles();
 
-//Prueba de concepto con acceso mediante Dapper a la base de datos
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.RegisterDapper(databaseConnectionString);
 builder.Services.RegisterEntityFramework(databaseConnectionString);

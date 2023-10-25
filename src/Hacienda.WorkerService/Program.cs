@@ -19,11 +19,14 @@ IHost host = Host.CreateDefaultBuilder(args)
             .RegisterServices(ProjectTypes.WorkerService)
             .RegisterRequestValidators()
             .RegisterAutomapperProfiles();
+
+        //TODO: no funciona EF en un service https://stackoverflow.com/questions/36332239/use-dbcontext-in-asp-net-singleton-injected-class
+
         //services.AddHostedService<SampleWorker>();
 
-        //Prueba de concepto con acceso mediante Dapper a la base de datos:
-        services
-            .RegisterDapper(hostContext.Configuration.GetConnectionString("DefaultConnection"));
+        var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
+        services.RegisterDapper(databaseConnectionString);
+        services.RegisterEntityFramework(databaseConnectionString);
 
         services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
         services.AddHostedService<TimeFileWorker>();
