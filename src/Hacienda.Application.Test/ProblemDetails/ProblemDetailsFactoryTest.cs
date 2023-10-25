@@ -14,8 +14,6 @@ namespace Hacienda.Application.Test.ProblemDetails;
 [Trait("ProblemDetails", "ProblemDetailsFactory")]
 public class ProblemDetailsFactoryTest
 {
-    //TODO: incluir test para todos los casos
-
     [Fact]
     public void Dado_ProblemDetailsFactory_CuandoCreoValidacionNoCorrecta_EntoncesOk()
     {
