@@ -15,9 +15,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host_local}}/Categoria/getCategorias",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/getCategorias",
 							"host": [
-								"{{host_local}}"
+								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
@@ -33,13 +33,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host_local}}/Categoria/15665",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/1",
 							"host": [
-								"{{host_local}}"
+								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
-								"15665"
+								"1"
 							]
 						}
 					},
@@ -60,9 +60,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{host_local}}/Categoria/",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/",
 							"host": [
-								"{{host_local}}"
+								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
@@ -87,12 +87,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host_local}}/Categoria",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/",
 							"host": [
-								"{{host_local}}"
+								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
-								"Categoria"
+								"Categoria",
+								""
 							]
 						}
 					},
@@ -113,13 +114,32 @@
 							}
 						},
 						"url": {
-							"raw": "{{host_local}}/Categoria/16",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/30",
 							"host": [
-								"{{host_local}}"
+								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
-								"16"
+								"30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "getHealthy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhostUrl}}_health",
+							"host": [
+								"{{localhostUrl}}_health"
 							]
 						}
 					},
