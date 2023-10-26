@@ -4,6 +4,7 @@ using Hacienda.Domain.Exceptions.Base;
 using Hacienda.Infrastructure.DbContextEf;
 using Hacienda.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace Hacienda.Infrastructure.Test.Repositories;
@@ -115,6 +116,45 @@ public class RepositoryBaseTests
         // Assert
         result.Should().NotBeEmpty();
         result.Should().HaveCount(2);
+    }
+
+    [Fact]
+    public async Task FindPagedAsync_WithValidData_ShouldReturnPaginatedResult()
+    {
+        // Arrange
+        var dbContextOptions = new DbContextOptionsBuilder<EntityDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
+
+        using var dbContext = new EntityDbContext(dbContextOptions);
+        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
+
+        // Inserción de datos on the fly:
+        var testData = new List<CategoriaProducto>
+            {
+                new CategoriaProducto { Id = 1, Nombre = "Categoría si cumple con filtro" },
+                new CategoriaProducto { Id = 2, Nombre = "Categoría si cumple con filtro" },
+                new CategoriaProducto { Id = 3, Nombre = "Categoría si cumple con filtro" },
+                new CategoriaProducto { Id = 4, Nombre = "Categoría no cumple con filtro" },
+                new CategoriaProducto { Id = 5, Nombre = "Categoría no cumple con filtro" },
+            };
+
+        await dbContext.CategoriaProductos.AddRangeAsync(testData);
+        await dbContext.SaveChangesAsync();
+
+        Expression<Func<CategoriaProducto, bool>> expression = category => category.Nombre.Contains("Categoría si cumple con filtro");
+        int currentPage = 2;
+        int pageSize = 2;
+
+        // Act
+        var result = await repository.FindPagedAsync(expression, currentPage, pageSize);
+
+        // Assert
+        // En total habrá 3 elementos que cumplen el filtro, pero en la página 2 solo habrá 1 elemento, but only 1 item matches the filter
+        result.Items.Should().HaveCount(1);
+        result.CurrentPage.Should().Be(currentPage);
+        result.PageSize.Should().Be(pageSize);
+        result.TotalItems.Should().Be(3);
     }
 
     [Fact]

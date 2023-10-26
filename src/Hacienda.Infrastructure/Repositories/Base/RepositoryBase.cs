@@ -1,5 +1,6 @@
 ﻿using Hacienda.Domain.Exceptions.Base;
 using Hacienda.Domain.Repositories.Base;
+using Hacienda.Domain.Results;
 using Hacienda.Infrastructure.DbContextEf;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -50,6 +51,16 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
     {
         return _context.Set<T>().Where(expression);
+    }
+
+    /// <inheritdoc />
+    public async Task<PaginatedResult<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize)
+    {
+        IQueryable<T> query = _context.Set<T>().Where(expression);
+        int totalItems = await query.CountAsync();
+        List<T> items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return new PaginatedResult<T>(items, page, pageSize, totalItems);
     }
 
     /// <inheritdoc />

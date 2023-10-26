@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Hacienda.Domain.Results;
+using System.Linq.Expressions;
 
 namespace Hacienda.Domain.Repositories.Base;
 
@@ -30,6 +31,15 @@ public interface IRepositoryBase<T> where T : class
     /// <param name="expression">La expresión que define la condición de búsqueda.</param>
     /// <returns>Una colección de elementos que cumplen con la condición especificada.</returns>
     IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+
+    /// <summary>
+    /// Retorna una colección paginada de elementos de tipo T que satisfacen una condición específica definida por una expresión.
+    /// </summary>
+    /// <param name="expression">La expresión que define la condición de búsqueda.</param>
+    /// <param name="page">Número de página (1, 2, 3, ...)</param>
+    /// <param name="pageSize">Tamaño de página (número de elementos por página)</param>
+    /// <returns>Una colección de elementos que cumplen con la condición especificada.</returns>
+    Task<PaginatedResult<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize);
 
     /// <summary>
     /// Agrega una entidad de tipo T de manera asíncrona. No persistirá en base de datos hasta que se haga un commit.
