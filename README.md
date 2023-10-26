@@ -129,7 +129,7 @@ En vez de que la operaci�n devuelva un valor `true`, devolver� `Result<bool>
     ```
 
     Posteriormentes en la clase ```SwaggerExtension``` se configura c�mo se anexa Swagger y qu� configuraci�n tiene.
-- **HealthChecks**: se ha creado ```MyCustomHealthCheck```, que permitir�a chequear lo que quisi�ramos del producto (acceso a servicios, bdd�). 
+- **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitir�a chequear lo que quisi�ramos del producto (acceso a servicios, bdd�). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 
 ## 7. Capa web - Web (XXX.Web)
