@@ -2,28 +2,28 @@
 
 ## Objetivo del Documento
 
-El objetivo de este documento es indicar las características principales de esta prueba de concepto de una arquitectura de referencia.
+El objetivo de este documento es indicar las caracterï¿½sticas principales de esta prueba de concepto de una arquitectura de referencia.
 
 ## Control de versiones
-| Versión | Fecha | Autor   | Observaciones |
+| Versiï¿½n | Fecha | Autor   | Observaciones |
 | ------- | ------- | ------- | ------------- |
-| 0.1     | 23/10/2023 | David S | Versión inicial   |
+| 0.1     | 23/10/2023 | David S | Versiï¿½n inicial   |
 
-## Índice
+## ï¿½ndice
 
 0. Prerequisitos
 1. Un vistazo general
 2. Capas transversales
 3. Capa de dominio (XXX.Domain)
-4. Capa de aplicación (XXX.Application)
+4. Capa de aplicaciï¿½n (XXX.Application)
 5. Capa de infraestructura (XXX.Infrastructure)
 6. Capa web - Web API (XXX.WebApi)
 7. Capa web - Web (XXX.Web)
 8. Capa task (XXX.WorkerService)
 
 ## 0. Prerequisitos
-Será necesario que en local esté configurada la base de datos **[TiendaDb]**. Se anexan los Scripts para poder generar la base de datos (tanto esquema como carga de datos) 
-En función de la versión de SQL Server, la cadena de conexión podría variar. Por ejemplo:
+Serï¿½ necesario que en local estï¿½ configurada la base de datos **[TiendaDb]**. Se anexan los Scripts para poder generar la base de datos (tanto esquema como carga de datos) 
+En funciï¿½n de la versiï¿½n de SQL Server, la cadena de conexiï¿½n podrï¿½a variar. Por ejemplo:
 ```json
 "Server=DESKTOP-SRUHI3C\\SQLEXPRESS;Database=TiendaDb;Trusted_Connection=True;TrustServerCertificate=True;"
 ```
@@ -34,111 +34,113 @@ o:
 
 ## 1. Un vistazo general
 
-Algunas de las características de esta arquitectura son:
+Algunas de las caracterï¿½sticas de esta arquitectura son:
 - **Arquitectura enfocada a dominio** ([Domain Driven Design - DDD](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)), con capas de:
     - Dominio: proyectos XXX.Domain
-    - Aplicación: proyectos XXX.Application
+    - Aplicaciï¿½n: proyectos XXX.Application
     - Infraestructura: proyectos XXX.Infrastructure
-- **Proyectos transversales (1.0 - Cross cutting Layer)**, para reutilización de inyección de dependencia y mensajes.
-- **Testing**, todos los proyectos tendrán su correspondiente proyecto de test. Se utilizan las librerías [XUnit](https://xunit.net/), [Automapper](https://automapper.org/) y [Fluent Assertions](https://fluentassertions.com/) .
+- **Proyectos transversales (1.0 - Cross cutting Layer)**, para reutilizaciï¿½n de inyecciï¿½n de dependencia y mensajes.
+- **Acceso a base de datos**, mediante Entity Framework, aunque tambiÃ©n hay una prueba de concepto con [Dapper](https://github.com/DapperLib/Dapper).
+- **Testing**, todos los proyectos tendrï¿½n su correspondiente proyecto de test. Se utilizan las librerï¿½as [XUnit](https://xunit.net/), [Automapper](https://automapper.org/) y [Fluent Assertions](https://fluentassertions.com/) .
 - **Mapping de entidades y dtos**: uso de [Automapper](https://automapper.org/). 
 
 - **Logs**: uso de [Serilog](https://serilog.net/): 
     - Se escribe tanto en fichero como en [Graylog](https://graylog.org/) (Portalog).
     - La salida se hace en ficheros de logs diferenciados: los logs de nivel error o superior tiene su propia salida (esto es configurable en ```appsettings.json```)
-- **Validaciones de datos de entidades y dtos**: se utiliza la librería [Fluent validation](https://docs.fluentvalidation.net/en/latest/).
+- **Validaciones de datos de entidades y dtos**: se utiliza la librerï¿½a [Fluent validation](https://docs.fluentvalidation.net/en/latest/).
 - **Control de excepciones globales**: 
-    - A través de un middleware ```ExceptionHandlingMiddleware``` que envuelve las llamadas. 
+    - A travï¿½s de un middleware ```ExceptionHandlingMiddleware``` que envuelve las llamadas. 
     - Aplica un saneamiento de excepciones para no devolver Excepciones con el mensaje en crudo, mediante la interfaz ```IExceptionPolicy```. 
-- **Uso del estándar Problem Details**: conocido como RFC 7807, es un estándar de la comunidad de desarrollo web que describe un formato común para informar y comunicar problemas o errores en servicios web y aplicaciones.
-Esa estructura devolverá ```Type``` (Tipo), ```Title``` (Título), ```Status``` (Estado, 400, 500...), ```Detail``` (Detalles).
+- **Uso del estï¿½ndar Problem Details**: conocido como RFC 7807, es un estï¿½ndar de la comunidad de desarrollo web que describe un formato comï¿½n para informar y comunicar problemas o errores en servicios web y aplicaciones.
+Esa estructura devolverï¿½ ```Type``` (Tipo), ```Title``` (Tï¿½tulo), ```Status``` (Estado, 400, 500...), ```Detail``` (Detalles).
 - **Paquetes Nuget**: uso de [Uso de Central Package Management (CPM)](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management): 
-permite que se centralicen las versiones de los paquetes nuget a través del archivo ```Directory.Packages.props```.
-- **Nullable reference types**: todos los proyectos están definidos para que no se realice la [verificación de tipos nulables](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references), evitando warnings:
+permite que se centralicen las versiones de los paquetes nuget a travï¿½s del archivo ```Directory.Packages.props```.
+- **Nullable reference types**: todos los proyectos estï¿½n definidos para que no se realice la [verificaciï¿½n de tipos nulables](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references), evitando warnings:
 ```xml
 <Nullable>disable</Nullable>
 ```
 
 ## 2. Capas transversales (XXX.Shared)
 
-**Definición**:
-Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser susceptibles de crear un paquete nuget.
+**Definiciï¿½n**:
+Proyectos que se pueden utilizar en varias capas diferentes. Podrï¿½an ser susceptibles de crear un paquete nuget.
 
-**Jerarquía**: 
-- **Proyecto Shared.DependencyInjection**: configuración del contenedor de dependencias.
-- **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versión de producto, etcétera). Tenerlos en un mismo proyecto facilita la traducción.
+**Jerarquï¿½a**: 
+- **Proyecto Shared.DependencyInjection**: configuraciï¿½n del contenedor de dependencias, separando las responsabilidades por tipos de estructuras (repositories, automapper...). 
+La extensiÃ³n ```RegisterEntityFramework``` registra y configura el contexto de EF.
+- **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versiï¿½n de producto, etcï¿½tera). Tenerlos en un mismo proyecto facilita la traducciï¿½n.
 
 ## 3. Capa dominio (XXX.Domain)
 
-**Definición**: es el corazón del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
+**Definiciï¿½n**: es el corazï¿½n del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
 
-**Características principales**: 
-- Depende de: nada. No depende de capas superiores como la capa de aplicación o infraestructura.
+**Caracterï¿½sticas principales**: 
+- Depende de: nada. No depende de capas superiores como la capa de aplicaciï¿½n o infraestructura.
 - Contiene las entidades del dominio.
-- Define las reglas de negocio y lógica de dominio.
+- Define las reglas de negocio y lï¿½gica de dominio.
 
-**Jerarquía**: 
+**Jerarquï¿½a**: 
 - **Carpeta Entities**: entidades del producto.
-- **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podrán ser lanzadas en capas superiores.
+- **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podrï¿½n ser lanzadas en capas superiores.
 - **Carpeta ExternalClients**: contratos con servicios externos (servicios web, grpc, etc).
 - **Carpeta Repositories**: contratos con repositorios internos.
 - **Carpeta ResultErrors**: la clase `Result.cs` permite manejar los resultados de operaciones o funciones de una manera robusta. 
-En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
+En vez de que la operaciï¿½n devuelva un valor `true`, devolverï¿½ `Result<bool>`. De esta manera podrï¿½ tener mensajes en el caso de que algo no haya funcionado correctamente.
 
-## 4. Capa aplicación (XXX.Application)
+## 4. Capa aplicaciï¿½n (XXX.Application)
 
-**Definición**: se encarga de coordinar las operaciones del sistema y actúa como un intermediario entre la capa de dominio y la capa de presentación.
+**Definiciï¿½n**: se encarga de coordinar las operaciones del sistema y actï¿½a como un intermediario entre la capa de dominio y la capa de presentaciï¿½n.
 
-**Características principales**: 
+**Caracterï¿½sticas principales**: 
 - Depende de: capa de dominio.
-- Define casos de uso y servicios de aplicación.
-- Implementa la lógica de aplicación y orquesta las operaciones del sistema.
+- Define casos de uso y servicios de aplicaciï¿½n.
+- Implementa la lï¿½gica de aplicaciï¿½n y orquesta las operaciones del sistema.
 
-**Jerarquía**:
-- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en ```Response``` para devolución (una query tipo "Get") y ```Request``` (escritura).
-- **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan información crítica (líneas donde se ha producido el error, datos de la base de datos, etc).
+**Jerarquï¿½a**:
+- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentaciï¿½n. Estos DTOs estï¿½n separados en ```Response``` para devoluciï¿½n (una query tipo "Get") y ```Request``` (escritura).
+- **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan informaciï¿½n crï¿½tica (lï¿½neas donde se ha producido el error, datos de la base de datos, etc).
 - **Carpeta Mapping**: profiles de mapeo de datos.
-- **Carpeta Middlewares**: middleware de comunicación con capas superiores.
-- **Carpeta ProblemDetails**: factoría para generar problem details predefinidos.
-- **Carpeta Services**: servicios de la aplicación, tanto implementación como las interfaces.
+- **Carpeta Middlewares**: middleware de comunicaciï¿½n con capas superiores.
+- **Carpeta ProblemDetails**: factorï¿½a para generar problem details predefinidos.
+- **Carpeta Services**: servicios de la aplicaciï¿½n, tanto implementaciï¿½n como las interfaces.
 
 ## 5. Capa infraestructura (XXX.Infrastructure)
 
-**Definición**: se encarga de la implementación de detalles técnicos y la interacción con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
+**Definiciï¿½n**: se encarga de la implementaciï¿½n de detalles tï¿½cnicos y la interacciï¿½n con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
 
-**Características principales**:
+**Caracterï¿½sticas principales**:
 - Depende de: capa de dominio.
-- Contiene la implementación de la persistencia de datos, como la conexión a la base de datos.
-- Gestiona la comunicación con servicios externos y recursos técnicos.
+- Contiene la implementaciï¿½n de la persistencia de datos, como la conexiï¿½n a la base de datos.
+- Gestiona la comunicaciï¿½n con servicios externos y recursos tï¿½cnicos.
 
-**Jerarquía**:
-- **DbContextDapper**: motor de acceso a datos a través de Dapper.
-- **DbContextEf**: motor de acceso a datos a través de EF.
-- **Carpeta ExternalClients**: implementación de llamada a clientes externos. Se deberá utilizar el **patrón adapter**. 
-- **Carpeta Repositories**: repositorios de la aplicación, a nivel de implementación.
+**Jerarquï¿½a**:
+- **DbContextDapper**: motor de acceso a datos a travï¿½s de Dapper.
+- **DbContextEf**: motor de acceso a datos a travï¿½s de EF.
+- **Carpeta ExternalClients**: implementaciï¿½n de llamada a clientes externos. Se deberï¿½ utilizar el **patrï¿½n adapter**. 
+- **Carpeta Repositories**: repositorios de la aplicaciï¿½n, a nivel de implementaciï¿½n.
 
 ## 6. Capa web - Web API (XXX.WebApi)
 
-**Definición**: web api de ejemplo.
-**Características principales**:
-- **Documentación de API**: se ha configurado la Api para que recoja los comentarios puestos en ```<summary>```, configurando en el proyecto:
+**Definiciï¿½n**: web api de ejemplo.
+**Caracterï¿½sticas principales**:
+- **Documentaciï¿½n de API**: se ha configurado la Api para que recoja los comentarios puestos en ```<summary>```, configurando en el proyecto:
     ```xml
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     ```
 
-    Posteriormentes en la clase ```SwaggerExtension``` se configura cómo se anexa Swagger y qué configuración tiene.
-- **HealthChecks**: se ha creado ```MyCustomHealthCheck```, que permitiría chequear lo que quisiéramos del producto (acceso a servicios, bdd…). 
+    Posteriormentes en la clase ```SwaggerExtension``` se configura cï¿½mo se anexa Swagger y quï¿½ configuraciï¿½n tiene.
+- **HealthChecks**: se ha creado ```MyCustomHealthCheck```, que permitirï¿½a chequear lo que quisiï¿½ramos del producto (acceso a servicios, bddï¿½). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 
 ## 7. Capa web - Web (XXX.Web)
 
-**Definición**: prueba de concepto sencilla para una web hecha con Blazor Server que llama a un servicio y devuelve datos.
+**Definiciï¿½n**: prueba de concepto sencilla para una web hecha con Blazor Server que llama a un servicio y devuelve datos.
 
 ## 8. Capa task (XXX.WorkerService)
 
-**Definición**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
+**Definiciï¿½n**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
 
-## Enlaces de interés
+## Enlaces de interï¿½s
 
 **Generales**:
 - [Arquitecturas de aplicaciones web comunes](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
@@ -146,7 +148,10 @@ En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. D
 - [Serilog](https://serilog.net/)
 - [Graylog](https://graylog.org/)
 
+**Base de datos**
+- [Dapper](https://github.com/DapperLib/Dapper)
+
 **Testing:**
 - [XUnit](https://xunit.net/)
 - [Automapper](https://automapper.org/)
-- [Fluent Assertions](https://fluentassertions.com/) 
+- [Fluent Assertions](https://fluentassertions.com/)

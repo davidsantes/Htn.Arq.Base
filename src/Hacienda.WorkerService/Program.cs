@@ -27,7 +27,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
         services.RegisterDapper(databaseConnectionString);
-        services.RegisterEntityFramework(databaseConnectionString);
+        services.RegisterEntityFramework();
 
         services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
         services.AddHostedService<TimeFileWorker>();

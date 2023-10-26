@@ -1,8 +1,10 @@
 ﻿using Hacienda.Domain.Repositories.Base;
 using Hacienda.Infrastructure.DbContextEf;
 using Hacienda.Infrastructure.Repositories.Base;
+using Hacienda.Shared.DependencyInjection.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Hacienda.Shared.DependencyInjection;
 
@@ -15,15 +17,29 @@ public static class RegisterEntityFrameworkExtensions
     /// <param name="project">Indica el tipo de proyecto. En función del mismo, cambia el registro de las clases</param>
     /// <returns>Colección configurada</returns>
     public static IServiceCollection RegisterEntityFramework(
-        this IServiceCollection services,
-        string connectionString)
+        this IServiceCollection services)
     {
         services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-        services.AddDbContext<EntityDbContext>(options =>
+
+        services.ConfigureOptions<DatabaseOptionsSetup>();
+
+        services.AddDbContext<EntityDbContext>(
+            (serviceProvider, dbContextOptionBuilder) =>
         {
-            options.UseSqlServer(connectionString);
+            var databaseOptions = serviceProvider.GetService<IOptions<DatabaseOptions>>()!.Value;
+
+            dbContextOptionBuilder.UseSqlServer(databaseOptions.ConnectionString, sqlServerAction =>
+            {
+                sqlServerAction.EnableRetryOnFailure(databaseOptions.MaxRetryCount);
+                sqlServerAction.CommandTimeout(databaseOptions.CommandTimeout);
+            });
+
+            //Sólo para entornos de debug, ya que baja el rendimiento y expone datos sensibles.
+            dbContextOptionBuilder.EnableDetailedErrors(databaseOptions.EnableDetailedErrors);
+            dbContextOptionBuilder.EnableSensitiveDataLogging(databaseOptions.EnableSensitiveDataLogging);
+
             //UseQueryTrackingBehavior: optimización de las queries, no realizará seguimiento de las mismas. 
-            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            dbContextOptionBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
 
         return services;

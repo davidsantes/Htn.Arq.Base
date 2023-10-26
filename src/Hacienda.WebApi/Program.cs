@@ -25,7 +25,7 @@ builder.Services.RegisterExceptionAndProblemDetails()
 
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.RegisterDapper(databaseConnectionString);
-builder.Services.RegisterEntityFramework(databaseConnectionString);
+builder.Services.RegisterEntityFramework();
 
 builder.Services.AddSingleton<WebApiHealthCheck>(new WebApiHealthCheck(databaseConnectionString));
 builder.Services.AddHealthChecks()
