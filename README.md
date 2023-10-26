@@ -64,6 +64,10 @@ permite que se centralicen las versiones de los paquetes nuget a través del arch
 **Definición**:
 Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser susceptibles de crear un paquete nuget.
 
+**Jerarquía**: 
+- **Proyecto Shared.DependencyInjection**: configuración del contenedor de dependencias.
+- **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versión de producto, etcétera). Tenerlos en un mismo proyecto facilita la traducción.
+
 ## 3. Capa dominio (XXX.Domain)
 
 **Definición**: es el corazón del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
@@ -72,7 +76,13 @@ Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser suscept
 - Depende de: nada. No depende de capas superiores como la capa de aplicación o infraestructura.
 - Contiene las entidades del dominio.
 - Define las reglas de negocio y lógica de dominio.
-- **Patrón Result**: la clase Result.cs permite manejar los resultados de operaciones o funciones de una manera robusta. 
+
+**Jerarquía**: 
+- **Carpeta Entities**: entidades del producto.
+- **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podrán ser lanzadas en capas superiores.
+- **Carpeta ExternalClients**: contratos con servicios externos (servicios web, grpc, etc).
+- **Carpeta Repositories**: contratos con repositorios internos.
+- **Carpeta ResultErrors**: la clase `Result.cs` permite manejar los resultados de operaciones o funciones de una manera robusta. 
 En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
 
 ## 4. Capa aplicación (XXX.Application)
@@ -83,7 +93,14 @@ En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. D
 - Depende de: capa de dominio.
 - Define casos de uso y servicios de aplicación.
 - Implementa la lógica de aplicación y orquesta las operaciones del sistema.
-- Utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en ```Response``` para devolución (una query tipo "Get") y ```Request``` (escritura).
+
+**Jerarquía**:
+- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en ```Response``` para devolución (una query tipo "Get") y ```Request``` (escritura).
+- **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan información crítica (líneas donde se ha producido el error, datos de la base de datos, etc).
+- **Carpeta Mapping**: profiles de mapeo de datos.
+- **Carpeta Middlewares**: middleware de comunicación con capas superiores.
+- **Carpeta ProblemDetails**: factoría para generar problem details predefinidos.
+- **Carpeta Services**: servicios de la aplicación, tanto implementación como las interfaces.
 
 ## 5. Capa infraestructura (XXX.Infrastructure)
 
@@ -93,6 +110,12 @@ En vez de que la operación devuelva un valor `true`, devolverá `Result<bool>`. D
 - Depende de: capa de dominio.
 - Contiene la implementación de la persistencia de datos, como la conexión a la base de datos.
 - Gestiona la comunicación con servicios externos y recursos técnicos.
+
+**Jerarquía**:
+- **DbContextDapper**: motor de acceso a datos a través de Dapper.
+- **DbContextEf**: motor de acceso a datos a través de EF.
+- **Carpeta ExternalClients**: implementación de llamada a clientes externos. Se deberá utilizar el **patrón adapter**. 
+- **Carpeta Repositories**: repositorios de la aplicación, a nivel de implementación.
 
 ## 6. Capa web - Web API (XXX.WebApi)
 
