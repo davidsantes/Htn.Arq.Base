@@ -21,11 +21,11 @@ public static class RegisterRepositoriesExtensions
         {
             case ProjectTypes.WorkerService: //Un worker service es por defecto singleton
             case ProjectTypes.WebBlazorServer:
-                //services.AddSingleton<ICategoriaRepository, CategoriaRepositoryDapper>();
+                services.AddSingleton<ICategoriaRepositoryPruebaDapper, CategoriaRepositoryPruebaDapper>();
                 services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
                 break;
             default:
-                //services.AddScoped<ICategoriaRepository, CategoriaRepositoryDapper>();
+                services.AddScoped<ICategoriaRepositoryPruebaDapper, CategoriaRepositoryPruebaDapper>();
                 services.AddScoped<ICategoriaRepository, CategoriaRepository>();
                 break;
         }
