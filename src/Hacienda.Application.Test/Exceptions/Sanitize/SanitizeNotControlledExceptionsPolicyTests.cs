@@ -13,7 +13,7 @@ public class SanitizeNotControlledExceptionsPolicyTests
     {
         // Arrange
         var policy = new SanitizeNotControlledExceptionsPolicy();
-        var notFoundException = new NotFoundException();
+        var notFoundException = new NotFoundException("Esta es una prueba");
         var operationException = new OperationException();
 
         // Act

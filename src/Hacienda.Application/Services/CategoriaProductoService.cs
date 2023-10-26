@@ -41,13 +41,7 @@ public class CategoriaProductoService : ICategoriaProductoService
     /// <inheritdoc />
     public async Task<GetCategoriaProductoResponse> GetAsync(int id)
     {
-        var categoria = await _categoriaRepository.GetAsync(id);
-
-        if (categoria == null)
-        {
-            throw new CategoriaNotFoundException(id);
-        }
-
+        var categoria = await _categoriaRepository.GetByIdAsync(id);
         var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
         return categoriaProductoResponse;
     }
@@ -58,12 +52,12 @@ public class CategoriaProductoService : ICategoriaProductoService
         _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
 
         var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);
-        var insResult = await _categoriaRepository.InsAsync(mappedCategoria);
+        var categoriaInsertada = await _categoriaRepository.AddAndCommitAsync(mappedCategoria);
         var resultEnvioCorreo = await _correosAdapter.InsAsync();
 
-        if (resultEnvioCorreo.IsSuccess)
+        if (categoriaInsertada.Id > 0 && resultEnvioCorreo.IsSuccess)
         {
-            return new ResultRequest<int>(insResult);
+            return new ResultRequest<int>(categoriaInsertada.Id);
         }
         else
         {
@@ -76,27 +70,16 @@ public class CategoriaProductoService : ICategoriaProductoService
     {
         _validatorUpdateCategoria.ValidateAndThrow(categoriaRequest);
 
-        var existingCategoria = await _categoriaRepository.GetAsync(categoriaRequest.Id);
-        if (existingCategoria == null)
-        {
-            throw new CategoriaNotFoundException(categoriaRequest.Id);
-        }
-
+        var existingCategoria = await _categoriaRepository.GetByIdAsync(categoriaRequest.Id);
         var updatedCategoria = _mapper.Map(categoriaRequest, existingCategoria);
-        var result = await _categoriaRepository.UpdAsync(updatedCategoria);
+        var result = await _categoriaRepository.UpdateAndCommitAsync(updatedCategoria);
         return new ResultRequest<int>(result);
     }
 
     /// <inheritdoc />
     public async Task<ResultRequest<int>> DelAsync(int id)
     {
-        var existingCategoria = await _categoriaRepository.GetAsync(id);
-        if (existingCategoria == null)
-        {
-            throw new CategoriaNotFoundException(id);
-        }
-
-        var result = await _categoriaRepository.DelAsync(id);
-        return new ResultRequest<int>(result);
+        var categoriaAfectada = await _categoriaRepository.DeleteAndSaveAsync(id);
+        return new ResultRequest<int>(categoriaAfectada);
     }
 }

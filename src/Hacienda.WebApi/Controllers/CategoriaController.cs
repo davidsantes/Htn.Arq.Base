@@ -85,10 +85,11 @@ public class CategoriaController : ControllerBase
     /// Actualiza una categoría de producto concreta.
     /// </summary>
     /// <returns>Si el resultado ha sido satisfactorio</returns>
-    [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdCategoria(UpdateCategoriaProductoRequest categoriaRequest)
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]   
+    public async Task<IActionResult> UpdCategoria([FromRoute] int id, [FromBody] UpdateCategoriaProductoRequest categoriaRequest)
     {
+        categoriaRequest.Id = id;
         var updCategoriaResult = await _categoriaService.UpdAsync(categoriaRequest);
 
         if (updCategoriaResult.IsSuccess)

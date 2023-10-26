@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 
 namespace Hacienda.Infrastructure.Repositories.Base;
 
+/// <inheritdoc />
 public class RepositoryBase<T> : IRepositoryBase<T> where T : class
 {
     protected readonly EntityDbContext _context;
@@ -15,55 +16,18 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
         _context = context;
     }
 
-    public async Task<T> AddAsync(T entity)
-    {
-        var entityAdded = await _context.Set<T>().AddAsync(entity);
-        return entityAdded.Entity;
-    }
-
-    public async Task<T> AddAndCommitAsync(T entity)
-    {
-        var entityAdded = await _context.Set<T>().AddAsync(entity);
-        await _context.SaveChangesAsync();
-        return entityAdded.Entity;
-    }
-
-    public void Delete(T entity)
-    {
-        _context.Set<T>().Remove(entity);
-    }
-
-    public async Task<int> DeleteAndSaveAsync(int id)
-    {
-        T? t = _context.Set<T>().Find(id);
-        if (t == null)
-        {
-            throw new NotFoundException($"Entidad con ID {id} no encontrada");
-        }
-        _context.Set<T>().Remove(t);
-        return await this._context.SaveChangesAsync();
-    }
-
-    public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
-    {
-        return _context.Set<T>().Where(expression);
-    }
-
-    public async Task<IReadOnlyList<T>> GetAllAsync()
-    {
-        return await _context.Set<T>().ToListAsync();
-    }
-
+    /// <inheritdoc />
     public T GetById(int id)
     {
         T? t = _context.Set<T>().Find(id);
         if (t == null)
         {
-            throw new NotFoundException($"Entidad con ID {id} no encontrada");
+            throw new NotFoundException(entityType: typeof(T), entityId: id);
         }
         return t;
     }
 
+    /// <inheritdoc />
     public async Task<T> GetByIdAsync(int id)
     {
         DbSet<T> dbt = _context.Set<T>();
@@ -71,24 +35,72 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
         T? t = await dbt.FindAsync(id);
         if (t == null)
         {
-            throw new NotFoundException($"Entidad con ID {id} no encontrada");
+            throw new NotFoundException(entityType: typeof(T), entityId: id);
         }
         return t;
     }
 
+    /// <inheritdoc />
+    public async Task<IReadOnlyList<T>> GetAllAsync()
+    {
+        return await _context.Set<T>().ToListAsync();
+    }
+
+    /// <inheritdoc />
+    public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+    {
+        return _context.Set<T>().Where(expression);
+    }
+
+    /// <inheritdoc />
+    public async Task<T> AddAsync(T entity)
+    {
+        var entityAdded = await _context.Set<T>().AddAsync(entity);
+        return entityAdded.Entity;
+    }
+
+    /// <inheritdoc />
+    public async Task<T> AddAndCommitAsync(T entity)
+    {
+        var entityAdded = await _context.Set<T>().AddAsync(entity);
+        await _context.SaveChangesAsync();
+        return entityAdded.Entity;
+    }
+
+    /// <inheritdoc />
     public void Update(T entity)
     {
-        this._context.Set<T>().Update(entity);
+        _context.Set<T>().Update(entity);
     }
 
+    /// <inheritdoc />
     public async Task<int> UpdateAndCommitAsync(T entity)
     {
-        this.Update(entity);
-        return await this._context.SaveChangesAsync();
+        Update(entity);
+        return await _context.SaveChangesAsync();
     }
 
+    /// <inheritdoc />
+    public void Delete(T entity)
+    {
+        _context.Set<T>().Remove(entity);
+    }
+
+    /// <inheritdoc />
+    public async Task<int> DeleteAndSaveAsync(int id)
+    {
+        T? t = _context.Set<T>().Find(id);
+        if (t == null)
+        {
+            throw new NotFoundException(entityType: typeof(T), entityId: id);
+        }
+        _context.Set<T>().Remove(t);
+        return await _context.SaveChangesAsync();
+    }
+
+    /// <inheritdoc />
     public async Task<int> CompleteAsync()
     {
-        return await this._context.SaveChangesAsync();
+        return await _context.SaveChangesAsync();
     }
 }

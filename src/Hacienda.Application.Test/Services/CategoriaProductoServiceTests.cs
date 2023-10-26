@@ -15,70 +15,84 @@ namespace Hacienda.Application.Test.Services;
 [Trait("Categoria", "CategoriaProductoService")]
 public class CategoriaProductoServiceTests
 {
-    //[Fact]
-    //public async Task Dado_CategoriaProductoService_CuandoConsigoTodosValores_EntoncesElMapeoEsOk()
-    //{
-    //    // Arrange
-    //    var categoriaRepository = new Mock<ICategoriaRepository>();
-    //    var mapper = new Mock<IMapper>();
-    //    var service = new CategoriaProductoService(categoriaRepository.Object, null, mapper.Object, null);
+    [Fact]
+    public async Task GetAllAsync_ShouldReturnListOfCategoriaProductoResponse()
+    {
+        // Arrange
+        var categoriaRepositoryMock = new Mock<ICategoriaRepository>();
+        var mapperMock = new Mock<IMapper>();
+        var categoriaService = new CategoriaProductoService(categoriaRepositoryMock.Object, null, mapperMock.Object, null, null);
 
-    //    var categoriasEnRepositorio = new List<CategoriaProducto>
-    //    {
-    //        new CategoriaProducto() { Id = 1, Nombre="Electrónica", Descripcion="Desc" },
-    //        new CategoriaProducto() { Id = 2, Nombre = "Ropa", Descripcion = "Desc"  },
-    //        new CategoriaProducto() { Id = 3, Nombre = "Hogar", Descripcion = "Desc"  },
-    //    };
-    //    var mappedResponse = new List<GetCategoriaProductoResponse>
-    //    {
-    //        new GetCategoriaProductoResponse { Id = "1", Nombre = "Electrónica", Descripcion="Desc" },
-    //        new GetCategoriaProductoResponse { Id = "2", Nombre = "Ropa", Descripcion="Desc"},
-    //        new GetCategoriaProductoResponse { Id = "3", Nombre = "Hogar", Descripcion="Desc"},
-    //    };
+        var categorias = new List<CategoriaProducto>(); // Agrega algunas categorías de ejemplo
+        var categoriaProductoResponses = new List<GetCategoriaProductoResponse>(); // Agrega respuestas de ejemplo
 
-    //    categoriaRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(categoriasEnRepositorio);
-    //    mapper.Setup(m => m.Map<List<GetCategoriaProductoResponse>>(categoriasEnRepositorio)).Returns(mappedResponse);
+        categoriaRepositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync(categorias);
+        mapperMock.Setup(mapper => mapper.Map<List<GetCategoriaProductoResponse>>(categorias)).Returns(categoriaProductoResponses);
 
-    //    // Act
-    //    var result = await service.GetAllAsync();
+        // Act
+        var result = await categoriaService.GetAllAsync();
 
-    //    // Assert
-    //    result.Should().NotBeNull();
-    //    result.Should().BeEquivalentTo(mappedResponse); // Verifica que las categorías sean equivalentes
-    //}
+        // Assert
+        result.Should().NotBeNull();
+        result.Should().BeEquivalentTo(categoriaProductoResponses);
+    }
 
-    //[Fact]
-    //public async Task Dado_CategoriaProductoService_CuandoInsertoNueva_EntoncesLlamaRepositorioYCorreoOk()
-    //{
-    //    // Arrange
-    //    var categoriaRepository = new Mock<ICategoriaRepository>();
-    //    var correosAdapter = new Mock<ICorreosClientAdapter>();
-    //    var mapper = new Mock<IMapper>();
-    //    var validator = new Mock<IValidator<InsertCategoriaProductoRequest>>();
-    //    var service = new CategoriaProductoService(categoriaRepository.Object
-    //        , correosAdapter.Object
-    //        , mapper.Object
-    //        , validator.Object);
+    [Fact]
+    public async Task GetAsync_WhenCategoriaExists_ShouldReturnCategoriaProductoResponse()
+    {
+        // Arrange
+        var categoriaRepositoryMock = new Mock<ICategoriaRepository>();
+        var mapperMock = new Mock<IMapper>();
+        var categoriaService = new CategoriaProductoService(categoriaRepositoryMock.Object, null, mapperMock.Object, null, null);
 
-    //    var nuevaCategoriaRequest = new InsertCategoriaProductoRequest
-    //    {
-    //        Nombre = "Nueva Categoría"
-    //    };
+        var categoriaId = 1; // ID de una categoría existente
+        var categoria = new CategoriaProducto(); // Agrega una categoría de ejemplo
+        var categoriaProductoResponse = new GetCategoriaProductoResponse(); // Agrega una respuesta de ejemplo
 
-    //    var resultadoCategoriaRepository = new Result<int>(1);
-    //    categoriaRepository.Setup(repo => repo.InsAsync(It.IsAny<CategoriaProducto>()))
-    //        .ReturnsAsync(resultadoCategoriaRepository);
+        categoriaRepositoryMock.Setup(repo => repo.GetByIdAsync(categoriaId)).ReturnsAsync(categoria);
+        mapperMock.Setup(mapper => mapper.Map<GetCategoriaProductoResponse>(categoria)).Returns(categoriaProductoResponse);
 
-    //    var resultadoCorreosAdapter = new Result<bool>(true);
-    //    correosAdapter.Setup(ca => ca.InsAsync())
-    //        .ReturnsAsync(resultadoCorreosAdapter);
+        // Act
+        var result = await categoriaService.GetAsync(categoriaId);
 
-    //    // Act
-    //    var result = await service.InsAsync(nuevaCategoriaRequest);
+        // Assert
+        result.Should().NotBeNull();
+        result.Should().BeEquivalentTo(categoriaProductoResponse);
+    }
 
-    //    // Assert
-    //    result.Should().NotBeNull();
-    //    categoriaRepository.Verify(repo => repo.InsAsync(It.IsAny<CategoriaProducto>()), Times.Once);
-    //    correosAdapter.Verify(ca => ca.InsAsync(), Times.Once);
-    //}
+    [Fact]
+    public async Task InsAsync_WhenInsertSucceeds_ShouldCallRepositoryAndCorreosAdapter()
+    {
+        // Arrange
+        var categoriaRepositoryMock = new Mock<ICategoriaRepository>();
+        var correosAdapterMock = new Mock<ICorreosClientAdapter>();
+        var mapperMock = new Mock<IMapper>();
+        var validatorInsertCategoriaMock = new Mock<IValidator<InsertCategoriaProductoRequest>>();
+        var categoriaService = new CategoriaProductoService(
+            categoriaRepositoryMock.Object,
+            correosAdapterMock.Object,
+            mapperMock.Object,
+            validatorInsertCategoriaMock.Object,
+            null);
+
+        var insertCategoriaRequest = new InsertCategoriaProductoRequest();
+
+        // Simula la inserción exitosa y devuelve una categoría con ID
+        categoriaRepositoryMock.Setup(repo => repo.AddAndCommitAsync(It.IsAny<CategoriaProducto>()))
+            .ReturnsAsync(new CategoriaProducto { Id = 1 });
+
+        // Simula un envío de correo exitoso
+        correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(new Result<bool>(true));
+
+        // Act
+        var result = await categoriaService.InsAsync(insertCategoriaRequest);
+
+        // Assert
+
+        // Verifica que se llamó al método AddAndCommitAsync en el repositorio una vez con una instancia de CategoriaProducto
+        categoriaRepositoryMock.Verify(repo => repo.AddAndCommitAsync(It.IsAny<CategoriaProducto>()), Times.Once);
+
+        // Verifica que se llamó al método InsAsync en el adaptador de correos una vez
+        correosAdapterMock.Verify(adapter => adapter.InsAsync(), Times.Once);
+    }
 }

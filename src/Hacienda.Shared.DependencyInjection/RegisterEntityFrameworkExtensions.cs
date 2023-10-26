@@ -22,6 +22,7 @@ public static class RegisterEntityFrameworkExtensions
         services.AddDbContext<EntityDbContext>(options =>
         {
             options.UseSqlServer(connectionString);
+            //UseQueryTrackingBehavior: optimización de las queries, no realizará seguimiento de las mismas. 
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
 

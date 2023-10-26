@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"1\",\r\n  \"nombre\": \"categoria de prueba nombre\",\r\n  \"descripcion\": \"categoria de prueba descripcion\"\r\n}",
+							"raw": "{\r\n  \"nombre\": \"categoria de prueba nombre\",\r\n  \"descripcion\": \"categoria de prueba descripcion\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,13 +87,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/2",
 							"host": [
 								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
-								""
+								"2"
 							]
 						}
 					},

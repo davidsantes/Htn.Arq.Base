@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Hacienda.Domain.Entities;
 using Hacienda.Domain.Exceptions.Base;
 using Xunit;
 
@@ -10,23 +11,26 @@ public class NotFoundExceptionTests
     [Fact]
     public void DefaultConstructor_SetsDefaultMessage()
     {
+        // Arrange
+        var id = 456;
+
         // Act
-        var exception = new NotFoundException("The requested item was not found.");
+        var exception = new NotFoundException(typeof(CategoriaProducto), id);
 
         // Assert
-        exception.Message.Should().Be("The requested item was not found.");
+        exception.Message.Should().Contain("Entidad no encontrada");
     }
 
     [Fact]
     public void ParameterizedConstructor_SetsCustomMessage()
     {
         // Arrange
-        var customMessage = "Custom not found message";
+        var id = 456;
 
         // Act
-        var exception = new NotFoundException(customMessage);
+        var exception = new NotFoundException(typeof(CategoriaProducto), id);
 
         // Assert
-        exception.Message.Should().Be(customMessage);
+        exception.Message.Should().Contain("Entidad no encontrada");
     }
 }

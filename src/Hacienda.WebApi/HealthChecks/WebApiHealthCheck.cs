@@ -21,7 +21,7 @@ public class WebApiHealthCheck : IHealthCheck
         CancellationToken cancellationToken = default)
     {
         HealthCheckResult databaseCheckResult = await CheckDatabase(cancellationToken);
-        HealthCheckResult genericServiceCheckResult = await CheckGenericService(cancellationToken);
+        HealthCheckResult genericServiceCheckResult = CheckGenericService(cancellationToken);
 
         var message = $"databaseCheckResult.Status: {databaseCheckResult.Status}" +
             $", genericServiceCheckResult.Status: {genericServiceCheckResult.Status}";
@@ -48,7 +48,10 @@ public class WebApiHealthCheck : IHealthCheck
         }
     }
 
-    private async Task<HealthCheckResult> CheckGenericService(CancellationToken cancellationToken)
+    /// <summary>
+    /// TODO: se debería rellenar con más comrpobaciones en caso de que las haya. En caso contrario, eliminarlo
+    /// </summary>
+    private HealthCheckResult CheckGenericService(CancellationToken cancellationToken)
     {
         try
         {

@@ -10,13 +10,12 @@ namespace Hacienda.Infrastructure.Repositories;
 /// <summary>
 /// Prueba de concepto de uso de dapper
 /// </summary>
-
-public class CategoriaRepositoryDapper : ICategoriaRepository
+public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
 {
     private const string GetCategoriaStoredProcedure = "Get_Categoria_By_Id";
     private readonly IConnectionFactory _connectionFactory;
 
-    public CategoriaRepositoryDapper(IConnectionFactory connectionFactory)
+    public CategoriaRepositoryPruebaDapper(IConnectionFactory connectionFactory)
     {
         _connectionFactory = connectionFactory;
     }
