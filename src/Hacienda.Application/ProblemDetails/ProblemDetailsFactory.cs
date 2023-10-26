@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Hacienda.Application.Exceptions;
-using Hacienda.Domain.Exceptions.Generic;
+using Hacienda.Domain.Exceptions.Base;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿using Hacienda.Domain.Exceptions.Generic;
+﻿using Hacienda.Domain.Exceptions.Base;
 using Hacienda.Domain.Repositories.Base;
 using Hacienda.Infrastructure.DbContextEf;
 using Microsoft.EntityFrameworkCore;

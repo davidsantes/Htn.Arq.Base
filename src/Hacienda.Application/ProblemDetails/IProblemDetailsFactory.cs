@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Hacienda.Domain.Exceptions.Generic;
+using Hacienda.Domain.Exceptions.Base;
 using ProblemDetailsAspNetCoreMvc = Microsoft.AspNetCore.Mvc;
 
 namespace Hacienda.Application.ProblemDetails;

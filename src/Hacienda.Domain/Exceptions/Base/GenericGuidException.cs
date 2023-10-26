@@ -1,15 +1,15 @@
-﻿namespace Hacienda.Domain.Exceptions.Generic;
+﻿namespace Hacienda.Domain.Exceptions.Base;
 
 /// <summary>
 /// Excepción genérica con un guid de seguimiento.
 /// Envuelve una excepción estándar.
 /// </summary>
 [Serializable]
-public class GenericException : Exception
+public class GenericGuidException : Exception
 {
     public Guid Guid { get; set; }
 
-    public GenericException(Exception exception) : base("Ha ocurrido un error.", exception)
+    public GenericGuidException(Exception exception) : base("Ha ocurrido un error.", exception)
     {
         Guid = Guid.NewGuid();
     }

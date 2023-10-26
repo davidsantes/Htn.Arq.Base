@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Hacienda.Domain.Test.Entities;
 
-[Trait("Entities", "Result")]
+[Trait("Result", "Errors")]
 public class ResultTests
 {
     [Fact]

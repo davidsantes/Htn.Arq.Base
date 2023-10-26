@@ -3,11 +3,9 @@ using FluentValidation;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
-using Hacienda.Domain.Exceptions.Generic;
 using Hacienda.Domain.Exceptions.Specific;
 using Hacienda.Domain.ExternalClients;
 using Hacienda.Domain.Repositories;
-using Hacienda.Shared.Global.Resources;
 
 namespace Hacienda.Application.Services;
 
@@ -69,7 +67,7 @@ public class CategoriaProductoService : ICategoriaProductoService
         }
         else
         {
-            throw new CustomException(GlobalResources.MsgOperacionKo);
+            throw new CategoriaOperationException();
         }
     }
 

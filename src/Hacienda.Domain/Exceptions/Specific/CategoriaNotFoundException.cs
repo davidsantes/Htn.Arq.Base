@@ -1,4 +1,4 @@
-﻿using Hacienda.Domain.Exceptions.Generic;
+﻿using Hacienda.Domain.Exceptions.Base;
 
 namespace Hacienda.Domain.Exceptions.Specific;
 

@@ -1,4 +1,4 @@
-﻿namespace Hacienda.Domain.Exceptions.Generic;
+﻿namespace Hacienda.Domain.Exceptions.Base;
 
 public class NotFoundException : Exception
 {

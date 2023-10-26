@@ -1,25 +1,25 @@
-﻿using Hacienda.Domain.Exceptions;
-using Hacienda.Domain.Exceptions.Generic;
+﻿using Hacienda.Domain.Exceptions.Base;
 
 namespace Hacienda.Application.Exceptions.Sanitize;
 
 /// <summary>
 /// Política de saneamiento de excepciones.
 /// </summary>
-public class SanitizeNotCustomExceptionsPolicy : IExceptionPolicy
+public class SanitizeNotControlledExceptionsPolicy : IExceptionPolicy
 {
     /// <summary>
-    /// Sanea todo excepto CustomException
+    /// Sanea las excepciones no controladas
     /// </summary>
     /// <param name="sourceException">Excepción generada</param>
     /// <returns>Devuelve GenericException excepto si es CustomException</returns>
     public Exception ApplyPolicy(Exception sourceException)
     {
-        if (!(sourceException is CustomException))
+        if (sourceException is NotFoundException
+            || sourceException is OperationException)
         {
-            return new GenericException(sourceException);
+            return sourceException;
         }
 
-        return sourceException;
+        return new GenericGuidException(sourceException);
     }
 }

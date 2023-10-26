@@ -1,9 +1,9 @@
 ﻿namespace Hacienda.Application.Exceptions.Sanitize;
 
 /// <summary>
-/// Política de saneamiento de excepciones.
+/// Política de saneamiento de excepciones. No sanea ninguna excepción
 /// </summary>
-public class DoNotSanitizeExceptionsPolicy : IExceptionPolicy
+public class SanitizeNothingExceptionsPolicy : IExceptionPolicy
 {
     /// <summary>
     /// No sanea ninguna excepción, por lo que las devuelve en crudo

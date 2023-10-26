@@ -15,7 +15,7 @@ public static class RegisterExceptionAndProblemDetailsExtensions
         this IServiceCollection services)
     {
         //Debe ser singleton porque se utiliza en un middlewares, el cual por defecto es singleton.
-        services.AddSingleton<IExceptionPolicy, SanitizeNotCustomExceptionsPolicy>();
+        services.AddSingleton<IExceptionPolicy, SanitizeNotControlledExceptionsPolicy>();
         services.AddSingleton<IProblemDetailsFactory, ProblemDetailsFactory>();
 
         return services;

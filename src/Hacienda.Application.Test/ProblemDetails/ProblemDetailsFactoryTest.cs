@@ -3,7 +3,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Hacienda.Application.Exceptions;
 using Hacienda.Application.ProblemDetails;
-using Hacienda.Domain.Exceptions.Generic;
+using Hacienda.Domain.Exceptions.Base;
 using Hacienda.Shared.Global.Resources;
 using Microsoft.AspNetCore.Http;
 using Xunit;

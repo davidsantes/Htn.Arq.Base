@@ -1,9 +1,9 @@
-﻿using Hacienda.Domain.Exceptions.Generic;
+﻿using Hacienda.Domain.Exceptions.Base;
 
 namespace Hacienda.Application.Exceptions.Sanitize;
 
 /// <summary>
-/// Política de saneamiento de excepciones.
+/// Política de saneamiento de excepciones. Sanea todas las excepciones.
 /// </summary>
 public class SanitizeAllExceptionsPolicy : IExceptionPolicy
 {
@@ -14,6 +14,6 @@ public class SanitizeAllExceptionsPolicy : IExceptionPolicy
     /// <returns>Devuelve GenericException</returns>
     public Exception ApplyPolicy(Exception sourceException)
     {
-        return new GenericException(sourceException);
+        return new GenericGuidException(sourceException);
     }
 }
