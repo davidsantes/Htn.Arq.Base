@@ -1,6 +1,6 @@
 ﻿namespace Hacienda.Domain.Entities;
 
-public class CategoriaProducto
+public sealed class CategoriaProducto
 {
     //TODO: revisar How To Use Domain-Driven Design In Clean Architecture, ¿crear los setters privados?
     //https://www.youtube.com/watch?v=1Lcr2c3MVF4
