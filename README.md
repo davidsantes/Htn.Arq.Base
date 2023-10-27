@@ -2,39 +2,39 @@
 
 ## Objetivo del Documento
 
-El objetivo de este documento es indicar las caracter�sticas principales de esta prueba de concepto de una arquitectura de referencia.
+El objetivo de este documento es indicar las características principales de esta prueba de concepto de una arquitectura de referencia.
 
 ## Control de versiones
-| Versi�n | Fecha | Autor   | Observaciones |
+| Versión | Fecha | Autor   | Observaciones |
 | ------- | ------- | ------- | ------------- |
-| 0.1     | 23/10/2023 | David S | Versi�n inicial   |
+| 0.1     | 23/10/2023 | David S | Versión inicial   |
 
-## �ndice
+## Índice
 
 0. Prerequisitos
 1. Un vistazo general
 2. Capas transversales
 3. Capa de dominio (XXX.Domain)
-4. Capa de aplicaci�n (XXX.Application)
+4. Capa de aplicación (XXX.Application)
 5. Capa de infraestructura (XXX.Infrastructure)
 6. Capa web - Web API (XXX.WebApi)
 7. Capa web - Web (XXX.Web)
 8. Capa task (XXX.WorkerService)
 
 ## 0. Prerequisitos
-Ser� necesario que en local est� configurada la base de datos **[TiendaDb]**. Se anexan los Scripts para poder generar la base de datos (tanto esquema como carga de datos) 
-En funci�n de la versi�n de SQL Server, la cadena de conexi�n podr�a variar. Por ejemplo:
+Será necesario que en local esté configurada la base de datos **[TiendaDb]**. Se anexan los Scripts para poder generar la base de datos (tanto esquema como carga de datos) 
+En función de la versión de SQL Server, la cadena de conexión podría variar. Por ejemplo:
 ```json
 "Server=DESKTOP-SRUHI3C\\SQLEXPRESS;Database=TiendaDb;Trusted_Connection=True;TrustServerCertificate=True;"
 ```
 o:
 ```json
-"Server=(LocalDb)\\MSSQLLocalDB;Database=Ejemplo_Tienda;Integrated Security=True"
+"Server=(LocalDb)\\MSSQLLocalDB;Database=TiendaDb;Integrated Security=True"
 ```
 
 ## 1. Un vistazo general
 
-Algunas de las caracter�sticas de esta arquitectura son:
+Algunas de las características de esta arquitectura son:
 - **Arquitectura enfocada a dominio** ([Domain Driven Design - DDD](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)), con capas de:
     - Dominio: proyectos XXX.Domain
     - Aplicaci�n: proyectos XXX.Application
@@ -62,85 +62,86 @@ permite que se centralicen las versiones de los paquetes nuget a trav�s del ar
 
 ## 2. Capas transversales (XXX.Shared)
 
-**Definici�n**:
-Proyectos que se pueden utilizar en varias capas diferentes. Podr�an ser susceptibles de crear un paquete nuget.
+**Definición**:
+Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser susceptibles de crear un paquete nuget.
 
-**Jerarqu�a**: 
-- **Proyecto Shared.DependencyInjection**: configuraci�n del contenedor de dependencias, separando las responsabilidades por tipos de estructuras (repositories, automapper...). 
+**Jerarquía**: 
+- **Proyecto Shared.DependencyInjection**: configuración del contenedor de dependencias, separando las responsabilidades por tipos de estructuras (repositories, automapper...).
 La extensión ```RegisterEntityFramework``` registra y configura el contexto de EF.
-- **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versi�n de producto, etc�tera). Tenerlos en un mismo proyecto facilita la traducci�n.
+- **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versión de producto, etcétera). Tenerlos en un mismo proyecto facilita la traducción.
 
 ## 3. Capa dominio (XXX.Domain)
 
-**Definici�n**: es el coraz�n del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
+**Definición**: es el corazón del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
 
-**Caracter�sticas principales**: 
-- Depende de: nada. No depende de capas superiores como la capa de aplicaci�n o infraestructura.
+**Características principales**: 
+- Depende de: nada. No depende de capas superiores como la capa de aplicación o infraestructura.
 - Contiene las entidades del dominio.
-- Define las reglas de negocio y l�gica de dominio.
+- Define las reglas de negocio y lógica de dominio.
 
-**Jerarqu�a**: 
+**Jerarquía**: 
 - **Carpeta Entities**: entidades del producto.
-- **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podr�n ser lanzadas en capas superiores.
+- **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podrán ser lanzadas en cualquier capa, y deberán ser gestionadas, por ejemplo, a través de un middleware.
 - **Carpeta ExternalClients**: contratos con servicios externos (servicios web, grpc, etc).
 - **Carpeta Repositories**: contratos con repositorios internos.
 - **Carpeta ResultErrors**: la clase `Result.cs` permite manejar los resultados de operaciones o funciones de una manera robusta. 
-En vez de que la operaci�n devuelva un valor `true`, devolver� `Result<bool>`. De esta manera podr� tener mensajes en el caso de que algo no haya funcionado correctamente.
+En vez de que la operación devuelva un valor `true`, devolver� `Result<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
 
-## 4. Capa aplicaci�n (XXX.Application)
+## 4. Capa aplicación (XXX.Application)
 
-**Definici�n**: se encarga de coordinar las operaciones del sistema y act�a como un intermediario entre la capa de dominio y la capa de presentaci�n.
+**Definición**: se encarga de coordinar las operaciones del sistema y actúa como un intermediario entre la capa de dominio y la capa de presentación.
 
 **Caracter�sticas principales**: 
 - Depende de: capa de dominio.
-- Define casos de uso y servicios de aplicaci�n.
+- Define casos de uso y servicios de aplicación.
 - Implementa la l�gica de aplicaci�n y orquesta las operaciones del sistema.
 
-**Jerarqu�a**:
-- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentaci�n. Estos DTOs están separados en:
-    - ```Response``` para devolución de datos desde un método (una query tipo "Get").
-    - ```Request``` para pasar datos a un método de escritura.
-- **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan informaci�n cr�tica (l�neas donde se ha producido el error, datos de la base de datos, etc).
+**Jerarquía**:
+- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en:
+    - ```Request``` para pasar datos a los servicios. Por ejemplo, para enviar los datos para insertar un nuevo elemento.
+    - ```Response``` para devolver estructuras de de datos desde un método. Por ejemplo, oara devolver un listado de elementos.
+- **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan información crítica (líneas donde se ha producido el error, datos de la base de datos, etc).
 - **Carpeta Mapping**: profiles de mapeo de datos.
-- **Carpeta Middlewares**: middleware de comunicaci�n con capas superiores.
-- **Carpeta ProblemDetails**: factor�a para generar problem details predefinidos.
-- **Carpeta Services**: servicios de la aplicaci�n, tanto implementaci�n como las interfaces.
+- **Carpeta Middlewares**: middleware de comunicación con capas superiores.
+- **Carpeta ProblemDetails**: factoría para generar problem details predefinidos.
+- **Carpeta Services**: servicios de la aplicación, tanto implementación como las interfaces.
+    - Servicios: realizarán validaciones de los datos proporcionados desde capas superiores mediante [FluentValidation](https://docs.fluentvalidation.net/)
 
 ## 5. Capa infraestructura (XXX.Infrastructure)
 
-**Definici�n**: se encarga de la implementaci�n de detalles t�cnicos y la interacci�n con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
+**Definiciónn**: se encarga de la implementaci�n de detalles técnicos y la interacción con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
 
-**Caracter�sticas principales**:
+**Características principales**:
 - Depende de: capa de dominio.
-- Contiene la implementaci�n de la persistencia de datos, como la conexi�n a la base de datos.
-- Gestiona la comunicaci�n con servicios externos y recursos t�cnicos.
+- Contiene la implementación de la persistencia de datos, como la conexión a la base de datos.
+- Gestiona la comunicación con servicios externos y recursos t�cnicos.
 
-**Jerarqu�a**:
-- **DbContextDapper**: motor de acceso a datos a trav�s de Dapper.
-- **DbContextEf**: motor de acceso a datos a trav�s de EF.
-- **Carpeta ExternalClients**: implementaci�n de llamada a clientes externos. Se deber� utilizar el **patr�n adapter**. 
-- **Carpeta Repositories**: repositorios de la aplicaci�n, a nivel de implementaci�n.
+**Jerarquía**:
+- **DbContextDapper**: motor de acceso a datos a través de Dapper.
+- **DbContextEf**: motor de acceso a datos a través de EF.
+- **Carpeta ExternalClients**: implementación de llamada a clientes externos. Se deberá utilizar el **patrón adapter**. 
+- **Carpeta Repositories**: repositorios de la aplicación, a nivel de implementación.
 
 ## 6. Capa web - Web API (XXX.WebApi)
 
-**Definici�n**: web api de ejemplo.
-**Caracter�sticas principales**:
-- **Documentaci�n de API**: se ha configurado la Api para que recoja los comentarios puestos en ```<summary>```, configurando en el proyecto:
+**Definición**: web api de ejemplo.
+**Características principales**:
+- **Documentación de API**: se ha configurado la Api para que recoja los comentarios puestos en ```<summary>```, configurando en el proyecto:
     ```xml
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     ```
 
-    Posteriormentes en la clase ```SwaggerExtension``` se configura c�mo se anexa Swagger y qu� configuraci�n tiene.
-- **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitir�a chequear lo que quisi�ramos del producto (acceso a servicios, bdd�). 
+    Posteriormentes en la clase ```SwaggerExtension``` se configura cómo se anexa Swagger y qué configuración tiene.
+- **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitirá chequear cualquier punto que de información del estado de la infraestructura (acceso a servicios, bdd�). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 
 ## 7. Capa web - Web (XXX.Web)
 
-**Definici�n**: prueba de concepto sencilla para una web hecha con Blazor Server que llama a un servicio y devuelve datos.
+**Definición**: prueba de concepto sencilla para una web hecha con Blazor Server que llama a un servicio y devuelve datos.
 
 ## 8. Capa task (XXX.WorkerService)
 
-**Definici�n**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
+**Definición**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
 
 ## Enlaces de inter�s
 
@@ -149,6 +150,9 @@ En vez de que la operaci�n devuelva un valor `true`, devolver� `Result<bool>
 - [Uso de Central Package Management (CPM) para paquetes Nuget](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management)
 - [Serilog](https://serilog.net/)
 - [Graylog](https://graylog.org/)
+
+**Validaciones de datos**
+- [FluentValidation](https://docs.fluentvalidation.net/)
 
 **Base de datos**
 - [Dapper](https://github.com/DapperLib/Dapper)
