@@ -1,5 +1,5 @@
 ﻿namespace Hacienda.Domain.Primitives;
-
+#nullable enable
 /// <summary>
 /// Clase base abstracta para entidades que tienen una propiedad de identificador (Id).
 /// </summary>

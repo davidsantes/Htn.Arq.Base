@@ -13,6 +13,10 @@ namespace Hacienda.Infrastructure.Repositories;
 public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
 {
     private const string GetCategoriaStoredProcedure = "Get_Categoria_By_Id";
+    /// <summary>
+    /// Cambiar si quiere hacerse una prueba de concepto query directa vs procedimiento almacenado
+    /// </summary>
+    private const bool EjecutarConProcedimientoAlmacenado = true;
     private readonly IConnectionFactory _connectionFactory;
 
     public CategoriaRepositoryPruebaDapper(IConnectionFactory connectionFactory)
@@ -36,37 +40,46 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
         }
     }
 
+    private async Task<Categoria> GetCategoriaConProcedimientoAlmacenadoAsync(Guid id)
+    {
+        using (var connection = _connectionFactory.GetOpenConnection())
+        {
+            var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(
+                GetCategoriaStoredProcedure,
+                new { Id = id }, // Parámetros del procedimiento almacenado
+                commandType: CommandType.StoredProcedure // Especifica que es un procedimiento almacenado
+            );
+            return categoria;
+        }
+    }
+
+    private async Task<Categoria> GetCategoriaConSqlRawAsync(Guid id)
+    {
+        var sql = @"
+            SELECT Id,
+                   Nombre,
+                   Descripcion
+            FROM Categorias
+            WHERE Id = @Id";
+
+        using (var connection = _connectionFactory.GetOpenConnection())
+        {
+            var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(sql, new { Id = id });
+            return categoria;
+        }
+    }
+
     /// <inheritdoc />
     public async Task<Categoria> GetAsync(Guid id)
     {
-        //Cambiar si quiere hacerse una prueba de concepto query directa vs procedimiento almacenado:
-        var ejecutarConProcedimientoAlmacenado = false;
-        if (ejecutarConProcedimientoAlmacenado)
+
+        if (EjecutarConProcedimientoAlmacenado)
         {
-            using (var connection = _connectionFactory.GetOpenConnection())
-            {
-                var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(
-                    GetCategoriaStoredProcedure,
-                    new { Id = id }, // Parámetros del procedimiento almacenado
-                    commandType: CommandType.StoredProcedure // Especifica que es un procedimiento almacenado
-                );
-                return categoria;
-            }
+            return await GetCategoriaConProcedimientoAlmacenadoAsync(id);
         }
         else
         {
-            var sql = @"
-                SELECT Id,
-                       Nombre,
-                       Descripcion
-                FROM Categorias
-                WHERE Id = @Id";
-
-            using (var connection = _connectionFactory.GetOpenConnection())
-            {
-                var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(sql, new { Id = id });
-                return categoria;
-            }
+            return await GetCategoriaConSqlRawAsync(id);
         }
     }
 
@@ -78,7 +91,7 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
             OUTPUT INSERTED.Id
             VALUES (@Id, @Nombre, @Descripcion, @FechaAlta);";
 
-        Guid nuevoId = Guid.Empty; // Valor por defecto
+        Guid nuevoId;
         using (var connection = _connectionFactory.GetOpenConnection())
         {
             var result = await connection.QueryAsync<Guid>(sql, categoria);
