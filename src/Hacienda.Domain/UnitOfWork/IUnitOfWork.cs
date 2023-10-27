@@ -5,13 +5,5 @@
 /// </summary>
 public interface IUnitOfWork
 {
-    Task<int> CompleteAsync();
-
-    int Complete();
-
-    void BeginTransaction();
-
-    void CommitTransaction();
-
-    void RollbackTransaction();
+    Task<int> CommitAsync();
 }
