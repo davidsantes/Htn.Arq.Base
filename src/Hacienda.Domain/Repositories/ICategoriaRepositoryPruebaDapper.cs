@@ -23,7 +23,7 @@ public interface ICategoriaRepositoryPruebaDapper
     /// </summary>
     /// <param name="categoria">Categoría a insertar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> InsAsync(Categoria categoria);
+    Task<Result<Guid>> InsAsync(Categoria categoria);
 
     /// <summary>
     /// Actualiza una categoría en concreto

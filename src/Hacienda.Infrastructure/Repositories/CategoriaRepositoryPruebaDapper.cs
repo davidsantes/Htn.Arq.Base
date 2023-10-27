@@ -24,10 +24,10 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
     public async Task<IList<Categoria>> GetAllAsync()
     {
         var sql = @"
-                SELECT IdCategoriaProducto AS Id,
+                SELECT Id,
                        Nombre,
                        Descripcion
-                FROM CategoriasProductos";
+                FROM Categorias";
 
         using (var connection = _connectionFactory.GetOpenConnection())
         {
@@ -56,11 +56,11 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
         else
         {
             var sql = @"
-                SELECT IdCategoriaProducto AS Id,
+                SELECT Id,
                        Nombre,
                        Descripcion
-                FROM CategoriasProductos
-                WHERE IdCategoriaProducto = @Id";
+                FROM Categorias
+                WHERE Id = @Id";
 
             using (var connection = _connectionFactory.GetOpenConnection())
             {
@@ -71,20 +71,21 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
     }
 
     /// <inheritdoc />
-    public async Task<Result<int>> InsAsync(Categoria categoria)
+    public async Task<Result<Guid>> InsAsync(Categoria categoria)
     {
         var sql = @"
-                INSERT INTO CategoriasProductos (Nombre, Descripcion, FechaAlta)
-                VALUES (@Nombre, @Descripcion, @FechaAlta);
-                SELECT SCOPE_IDENTITY();";
+            INSERT INTO Categorias (Id, Nombre, Descripcion, FechaAlta)
+            OUTPUT INSERTED.Id
+            VALUES (@Id, @Nombre, @Descripcion, @FechaAlta);";
 
-        int nuevoId = 0;
+        Guid nuevoId = Guid.Empty; // Valor por defecto
         using (var connection = _connectionFactory.GetOpenConnection())
         {
-            nuevoId = await connection.ExecuteScalarAsync<int>(sql, categoria);
+            var result = await connection.QueryAsync<Guid>(sql, categoria);
+            nuevoId = result.SingleOrDefault();
         }
 
-        return new Result<int>(nuevoId);
+        return new Result<Guid>(nuevoId);
     }
 
     /// <inheritdoc />

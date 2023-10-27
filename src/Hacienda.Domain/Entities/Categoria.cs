@@ -8,6 +8,14 @@ public sealed class Categoria : Entity
     public string Descripcion { get; private set; }
     public DateTime FechaAlta { get; private set; }
 
+    /// <summary>
+    /// Necesario solo si se usa Dapper
+    /// </summary>
+    private Categoria() : base(Guid.NewGuid())
+    {
+
+    }
+
     private Categoria(Guid id
         , string nombre
         , string descripcion
