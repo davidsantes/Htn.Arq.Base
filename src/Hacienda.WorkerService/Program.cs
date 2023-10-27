@@ -23,7 +23,10 @@ IHost host = Host.CreateDefaultBuilder(args)
         //TODO: no funciona EF en un service:
         //https://stackoverflow.com/questions/36332239/use-dbcontext-in-asp-net-singleton-injected-class
         //https://www.youtube.com/watch?v=7lQ1fmR6LLE
+
+#pragma warning disable S125 // Sections of code should not be commented out
         //services.AddHostedService<SampleWorker>();
+#pragma warning restore S125 // Sections of code should not be commented out
 
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
         services.RegisterDapper(databaseConnectionString);
