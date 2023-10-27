@@ -23,7 +23,7 @@ public class CategoriaProductoServiceTests
         var mapperMock = new Mock<IMapper>();
         var categoriaService = new CategoriaProductoService(categoriaRepositoryMock.Object, null, mapperMock.Object, null, null);
 
-        var categorias = new List<CategoriaProducto>(); // Agrega algunas categorías de ejemplo
+        var categorias = new List<Categoria>(); // Agrega algunas categorías de ejemplo
         var categoriaProductoResponses = new List<GetCategoriaProductoResponse>(); // Agrega respuestas de ejemplo
 
         categoriaRepositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync(categorias);
@@ -45,8 +45,8 @@ public class CategoriaProductoServiceTests
         var mapperMock = new Mock<IMapper>();
         var categoriaService = new CategoriaProductoService(categoriaRepositoryMock.Object, null, mapperMock.Object, null, null);
 
-        var categoriaId = 1; // ID de una categoría existente
-        var categoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var categoriaId = Guid.NewGuid(); // ID de una categoría existente
+        var categoria = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
         var categoriaProductoResponse = new GetCategoriaProductoResponse();
 
         categoriaRepositoryMock.Setup(repo => repo.GetByIdAsync(categoriaId)).ReturnsAsync(categoria);
@@ -78,8 +78,8 @@ public class CategoriaProductoServiceTests
         var insertCategoriaRequest = new InsertCategoriaProductoRequest(nombre: "Nombre", descripcion: "Descripcion");
 
         // Simula la inserción exitosa y devuelve una categoría con ID
-        categoriaRepositoryMock.Setup(repo => repo.AddAndCommitAsync(It.IsAny<CategoriaProducto>()))
-            .ReturnsAsync(CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion"));
+        categoriaRepositoryMock.Setup(repo => repo.AddAndCommitAsync(It.IsAny<Categoria>()))
+            .ReturnsAsync(Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion"));
 
         // Simula un envío de correo exitoso
         correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(new Result<bool>(true));
@@ -90,7 +90,7 @@ public class CategoriaProductoServiceTests
         // Assert
 
         // Verifica que se llamó al método AddAndCommitAsync en el repositorio una vez con una instancia de CategoriaProducto
-        categoriaRepositoryMock.Verify(repo => repo.AddAndCommitAsync(It.IsAny<CategoriaProducto>()), Times.Once);
+        categoriaRepositoryMock.Verify(repo => repo.AddAndCommitAsync(It.IsAny<Categoria>()), Times.Once);
 
         // Verifica que se llamó al método InsAsync en el adaptador de correos una vez
         correosAdapterMock.Verify(adapter => adapter.InsAsync(), Times.Once);

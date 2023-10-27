@@ -5,6 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.1 - Solution Items", "0.1 - Solution Items", "{2C892ACA-6B49-4207-B321-5ADF84460C28}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
 	EndProjectSection
@@ -50,9 +51,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{239E4121-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{1F7805B7-A212-4C86-AF7D-10AB201C6CCF}"
 	ProjectSection(SolutionItems) = preProject
-		Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql = Solution Items\Sql\01.Bdd_Ejemplo_TiendaDb_Create_Schema.sql
-		Solution Items\Sql\02.Bdd_Ejemplo_TiendaDb_Create_Data.sql = Solution Items\Sql\02.Bdd_Ejemplo_TiendaDb_Create_Data.sql
-		Solution Items\Sql\EsquemaBdd.JPG = Solution Items\Sql\EsquemaBdd.JPG
+		Solution Items\Sql\01.Create_Schema.sql = Solution Items\Sql\01.Create_Schema.sql
+		Solution Items\Sql\02.Create_Data.sql = Solution Items\Sql\02.Create_Data.sql
+		Solution Items\Sql\EsquemaBdd.PNG = Solution Items\Sql\EsquemaBdd.PNG
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{A34141C3-704B-41C2-9C16-9B6651390C27}"

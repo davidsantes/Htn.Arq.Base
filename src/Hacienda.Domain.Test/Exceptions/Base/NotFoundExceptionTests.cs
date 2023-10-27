@@ -12,10 +12,10 @@ public class NotFoundExceptionTests
     public void DefaultConstructor_SetsDefaultMessage()
     {
         // Arrange
-        var id = 456;
+        var id = Guid.NewGuid();
 
         // Act
-        var exception = new NotFoundException(typeof(CategoriaProducto), id);
+        var exception = new NotFoundException(typeof(Categoria), id);
 
         // Assert
         exception.Message.Should().Contain("Entidad no encontrada");
@@ -25,10 +25,10 @@ public class NotFoundExceptionTests
     public void ParameterizedConstructor_SetsCustomMessage()
     {
         // Arrange
-        var id = 456;
-
+        var id = Guid.NewGuid();
+        
         // Act
-        var exception = new NotFoundException(typeof(CategoriaProducto), id);
+        var exception = new NotFoundException(typeof(Categoria), id);
 
         // Assert
         exception.Message.Should().Contain("Entidad no encontrada");

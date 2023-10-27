@@ -3,7 +3,6 @@ using FluentValidation;
 using Hacienda.Application.Dtos;
 using Hacienda.Application.Dtos.Result;
 using Hacienda.Domain.Entities;
-using Hacienda.Domain.Exceptions.Specific;
 using Hacienda.Domain.ExternalClients;
 using Hacienda.Domain.Repositories;
 using Hacienda.Shared.Global.Resources;
@@ -40,7 +39,7 @@ public class CategoriaProductoService : ICategoriaProductoService
     }
 
     /// <inheritdoc />
-    public async Task<GetCategoriaProductoResponse> GetAsync(int id)
+    public async Task<GetCategoriaProductoResponse> GetAsync(Guid id)
     {
         var categoria = await _categoriaRepository.GetByIdAsync(id);
         var categoriaProductoResponse = _mapper.Map<GetCategoriaProductoResponse>(categoria);
@@ -48,16 +47,17 @@ public class CategoriaProductoService : ICategoriaProductoService
     }
 
     /// <inheritdoc />
-    public async Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
+    public async Task<ResultRequest<Guid>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
     {
         _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
 
-        var mappedCategoria = _mapper.Map<CategoriaProducto>(nuevaCategoriaRequest);
+        var mappedCategoria = _mapper.Map<Categoria>(nuevaCategoriaRequest);
         var categoriaInsertada = await _categoriaRepository.AddAndCommitAsync(mappedCategoria);
         var resultEnvioCorreo = await _correosAdapter.InsAsync();
 
-        var result = new ResultRequest<int>(categoriaInsertada.Id);
-        if (categoriaInsertada.Id <= 0 || !resultEnvioCorreo.IsSuccess)
+        var result = new ResultRequest<Guid>(categoriaInsertada.Id);
+
+        if (categoriaInsertada != null && !resultEnvioCorreo.IsSuccess)
         {
             result.Errors.Add("MsgOperacionSinEfecto", GlobalResources.MsgOperacionSinEfecto);
         }
@@ -77,7 +77,7 @@ public class CategoriaProductoService : ICategoriaProductoService
     }
 
     /// <inheritdoc />
-    public async Task<ResultRequest<int>> DelAsync(int id)
+    public async Task<ResultRequest<int>> DelAsync(Guid id)
     {
         var categoriaAfectada = await _categoriaRepository.DeleteAndSaveAsync(id);
         return new ResultRequest<int>(categoriaAfectada);

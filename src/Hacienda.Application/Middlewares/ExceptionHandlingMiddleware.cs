@@ -35,7 +35,6 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {
-            //TODO: probar badrequest
             if (ex is ValidationException ||
                 ex is NotFoundException)
             {

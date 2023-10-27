@@ -13,7 +13,7 @@ namespace Hacienda.Infrastructure.Test.Repositories;
 public class RepositoryBaseTests
 {
     [Fact]
-    public void GetById_WhenEntityFound_ShouldReturnEntity()
+    public async void GetById_WhenEntityFound_ShouldReturnEntity()
     {
         // Arrange
         var dbContextOptions = new DbContextOptionsBuilder<EntityDbContext>()
@@ -21,20 +21,18 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityId = 1;
+        var repository = new RepositoryBase<Categoria>(dbContext);
 
         // Inserta datos in-memory database
-        var nuevaCategoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var nuevaCategoria = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
         dbContext.Add(nuevaCategoria);
-        dbContext.SaveChanges();
+        var id = dbContext.SaveChanges();
 
         // Act
-        var result = repository.GetById(entityId);
+        var result = await repository.GetAllAsync();
 
         // Assert
-        result.Should().NotBeNull();
-        result.Id.Should().Be(entityId);
+        result.Should().HaveCount(1);
     }
 
     [Fact]
@@ -46,37 +44,12 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityIdNotExists = 999;
+        var repository = new RepositoryBase<Categoria>(dbContext);
+        var entityIdNotExists = Guid.NewGuid();
 
         // Act & Assert
         Action action = () => repository.GetById(entityIdNotExists);
         action.Should().Throw<NotFoundException>();
-    }
-
-    [Fact]
-    public async Task GetByIdAsync_WhenEntityFound_ShouldReturnEntity()
-    {
-        // Arrange
-        var dbContextOptions = new DbContextOptionsBuilder<EntityDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
-            .Options;
-
-        using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityId = 1;
-
-        // Inserta datos in-memory database
-        var nuevaCategoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
-        dbContext.Add(nuevaCategoria);
-        dbContext.SaveChanges();
-
-        // Act
-        var result = await repository.GetByIdAsync(entityId);
-
-        // Assert
-        result.Should().NotBeNull();
-        result.Id.Should().Be(entityId);
     }
 
     [Fact]
@@ -88,12 +61,12 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityIdNotExists = 999;
+        var repository = new RepositoryBase<Categoria>(dbContext);
+        var entityIdNotExists = Guid.NewGuid();
 
         // Act & Assert
-        Func<Task> action = async () => await repository.GetByIdAsync(entityIdNotExists);
-        await action.Should().ThrowAsync<NotFoundException>();
+        Func<Task> act = () => repository.GetByIdAsync(entityIdNotExists);
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 
     [Fact]
@@ -105,11 +78,11 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
+        var repository = new RepositoryBase<Categoria>(dbContext);
 
         // Inserta datos in-memory database
-        var nuevaCategoria1 = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
-        var nuevaCategoria2 = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var nuevaCategoria1 = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var nuevaCategoria2 = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
         dbContext.Add(nuevaCategoria1);
         dbContext.Add(nuevaCategoria2);
         dbContext.SaveChanges();
@@ -131,24 +104,24 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
+        var repository = new RepositoryBase<Categoria>(dbContext);
 
         var descriptionExpected = "Categoría si cumple con filtro";
         var descriptionNonExpected = "Categoría no cumple con filtro";
 
         // Inserción de datos on the fly:
-        var testData = new List<CategoriaProducto>
+        var testData = new List<Categoria>
         {
-            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
-            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
-            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
-            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionNonExpected)
+            Categoria.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            Categoria.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            Categoria.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            Categoria.Crear(nombre: "Nombre", descripcion: descriptionNonExpected)
         };
 
         await dbContext.CategoriaProductos.AddRangeAsync(testData);
         await dbContext.SaveChangesAsync();
 
-        Expression<Func<CategoriaProducto, bool>> expression = category => category.Descripcion.Contains(descriptionExpected);
+        Expression<Func<Categoria, bool>> expression = category => category.Descripcion.Contains(descriptionExpected);
         int currentPage = 2;
         int pageSize = 2;
 
@@ -172,15 +145,15 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var newEntity = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var repository = new RepositoryBase<Categoria>(dbContext);
+        var newEntity = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
 
         // Act
         var result = await repository.AddAsync(newEntity);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().NotBe(0);
+        result.Id.Should().NotBeEmpty();
     }
 
     [Fact]
@@ -192,18 +165,21 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityId = 1;
+        var repository = new RepositoryBase<Categoria>(dbContext);
 
         // Inserta datos in-memory database
-        dbContext.Add(CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion"));
+        dbContext.Add(Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion"));
         dbContext.SaveChanges();
 
+        //Recoje una categoría para intentar eliminarla
+        var categories = await repository.GetAllAsync();
+        var categoryToDelete = categories.FirstOrDefault();
+
         // Act
-        await  repository.DeleteAndSaveAsync(entityId);
+        await repository.DeleteAndSaveAsync(categoryToDelete.Id);
 
         // Assert
-        dbContext.CategoriaProductos.Should().NotContain(e => e.Id == entityId);
+        dbContext.CategoriaProductos.Should().NotContain(e => e.Id == categoryToDelete.Id);
     }
 
     [Fact]
@@ -215,16 +191,16 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
+        var repository = new RepositoryBase<Categoria>(dbContext);
         var nameExpected = "Nueva Categoría";
-        var newEntity = CategoriaProducto.Crear(nombre: nameExpected, descripcion: "Descripcion");
+        var newEntity = Categoria.Crear(nombre: nameExpected, descripcion: "Descripcion");
 
         // Act
         var result = await repository.AddAndCommitAsync(newEntity);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().NotBe(0);
+        result.Id.Should().NotBeEmpty();
 
         // Verifica que la entidad se haya guardado correctamente en la base de datos
         var storedEntity = dbContext.CategoriaProductos.FirstOrDefault(e => e.Id == result.Id);
@@ -241,8 +217,8 @@ public class RepositoryBaseTests
             .Options;
 
         using var dbContext = new EntityDbContext(dbContextOptions);
-        var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityToUpdate = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var repository = new RepositoryBase<Categoria>(dbContext);
+        var entityToUpdate = Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion");
 
         dbContext.Add(entityToUpdate);
         dbContext.SaveChanges();

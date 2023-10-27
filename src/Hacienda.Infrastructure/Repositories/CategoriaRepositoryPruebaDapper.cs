@@ -21,7 +21,7 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
     }
 
     /// <inheritdoc />
-    public async Task<IList<CategoriaProducto>> GetAllAsync()
+    public async Task<IList<Categoria>> GetAllAsync()
     {
         var sql = @"
                 SELECT IdCategoriaProducto AS Id,
@@ -31,13 +31,13 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
 
         using (var connection = _connectionFactory.GetOpenConnection())
         {
-            var categorias = await connection.QueryAsync<CategoriaProducto>(sql);
+            var categorias = await connection.QueryAsync<Categoria>(sql);
             return categorias.ToList();
         }
     }
 
     /// <inheritdoc />
-    public async Task<CategoriaProducto> GetAsync(int id)
+    public async Task<Categoria> GetAsync(Guid id)
     {
         //Cambiar si quiere hacerse una prueba de concepto query directa vs procedimiento almacenado:
         var ejecutarConProcedimientoAlmacenado = false;
@@ -45,7 +45,7 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
         {
             using (var connection = _connectionFactory.GetOpenConnection())
             {
-                var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(
+                var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(
                     GetCategoriaStoredProcedure,
                     new { Id = id }, // Parámetros del procedimiento almacenado
                     commandType: CommandType.StoredProcedure // Especifica que es un procedimiento almacenado
@@ -64,14 +64,14 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
 
             using (var connection = _connectionFactory.GetOpenConnection())
             {
-                var categoria = await connection.QuerySingleOrDefaultAsync<CategoriaProducto>(sql, new { Id = id });
+                var categoria = await connection.QuerySingleOrDefaultAsync<Categoria>(sql, new { Id = id });
                 return categoria;
             }
         }
     }
 
     /// <inheritdoc />
-    public async Task<Result<int>> InsAsync(CategoriaProducto categoria)
+    public async Task<Result<int>> InsAsync(Categoria categoria)
     {
         var sql = @"
                 INSERT INTO CategoriasProductos (Nombre, Descripcion, FechaAlta)
@@ -88,14 +88,14 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
     }
 
     /// <inheritdoc />
-    public Task<Result<int>> UpdAsync(CategoriaProducto categoria)
+    public Task<Result<int>> UpdAsync(Categoria categoria)
     {
         //Como es una prueba de concepto no se ha completado
         throw new NotImplementedException();
     }
 
     /// <inheritdoc />
-    public Task<Result<int>> DelAsync(int id)
+    public Task<Result<int>> DelAsync(Guid id)
     {
         //Como es una prueba de concepto no se ha completado
         throw new NotImplementedException();

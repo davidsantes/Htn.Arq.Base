@@ -7,14 +7,14 @@ namespace Hacienda.Infrastructure.DbContextEf;
 /// <summary>
 /// Aplica la configuración de la entidad CategoriaProducto
 /// </summary>
-public class EntityDbContextCategoriaConfiguration : IEntityTypeConfiguration<CategoriaProducto>
+public class EntityDbContextCategoriaConfiguration : IEntityTypeConfiguration<Categoria>
 {
-    public void Configure(EntityTypeBuilder<CategoriaProducto> builder)
+    public void Configure(EntityTypeBuilder<Categoria> builder)
     {
-        builder.ToTable("CategoriasProductos");
+        builder.ToTable("Categorias");
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)
-            .HasColumnName("IdCategoriaProducto")
+            .HasColumnName("Id")
             .ValueGeneratedOnAdd();
         builder.Property(e => e.Nombre)
             .HasColumnName("Nombre")

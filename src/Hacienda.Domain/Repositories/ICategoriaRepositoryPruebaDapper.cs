@@ -9,33 +9,33 @@ public interface ICategoriaRepositoryPruebaDapper
     /// Retorna todas las categorías
     /// </summary>
     /// <returns>Listado de categorías</returns>
-    Task<IList<CategoriaProducto>> GetAllAsync();
+    Task<IList<Categoria>> GetAllAsync();
 
     /// <summary>
     /// Retorna una categoría en concreto
     /// </summary>
     /// <param name="id">Identificador de la categoría</param>
     /// <returns>Categoría concreta</returns>
-    Task<CategoriaProducto> GetAsync(int id);
+    Task<Categoria> GetAsync(Guid id);
 
     /// <summary>
     /// Inserta una categoría en concreto
     /// </summary>
     /// <param name="categoria">Categoría a insertar</param>
-    /// <returns>Identificador de la categoría, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> InsAsync(CategoriaProducto categoria);
+    /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
+    Task<Result<int>> InsAsync(Categoria categoria);
 
     /// <summary>
     /// Actualiza una categoría en concreto
     /// </summary>
     /// <param name="categoria">Categoría a actualizar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> UpdAsync(CategoriaProducto categoria);
+    Task<Result<int>> UpdAsync(Categoria categoria);
 
     /// <summary>
     /// Elimina una categoría en concreto
     /// </summary>
     /// <param name="id">Categoría a eliminar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> DelAsync(int id);
+    Task<Result<int>> DelAsync(Guid id);
 }

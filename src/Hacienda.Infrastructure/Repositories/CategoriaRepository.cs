@@ -5,7 +5,7 @@ using Hacienda.Infrastructure.Repositories.Base;
 
 namespace Hacienda.Infrastructure.Repositories;
 
-public class CategoriaRepository : RepositoryBase<CategoriaProducto>, ICategoriaRepository
+public class CategoriaRepository : RepositoryBase<Categoria>, ICategoriaRepository
 {
     public CategoriaRepository(EntityDbContext context) : base(context)
     {

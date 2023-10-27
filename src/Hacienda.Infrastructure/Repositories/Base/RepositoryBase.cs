@@ -18,7 +18,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     }
 
     /// <inheritdoc />
-    public T GetById(int id)
+    public T GetById(Guid id)
     {
         T? t = _context.Set<T>().Find(id);
         if (t == null)
@@ -29,7 +29,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     }
 
     /// <inheritdoc />
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(Guid id)
     {
         DbSet<T> dbt = _context.Set<T>();
 
@@ -98,7 +98,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     }
 
     /// <inheritdoc />
-    public async Task<int> DeleteAndSaveAsync(int id)
+    public async Task<int> DeleteAndSaveAsync(Guid id)
     {
         T? t = _context.Set<T>().Find(id);
         if (t == null)

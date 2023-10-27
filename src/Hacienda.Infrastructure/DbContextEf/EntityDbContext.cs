@@ -9,7 +9,7 @@ public class EntityDbContext : DbContext
     {
     }
 
-    public virtual DbSet<CategoriaProducto> CategoriaProductos { get; set; } = null!;
+    public virtual DbSet<Categoria> CategoriaProductos { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,24 +1,27 @@
-﻿namespace Hacienda.Domain.Entities;
+﻿using Hacienda.Domain.Primitives;
 
-public sealed class CategoriaProducto
+namespace Hacienda.Domain.Entities;
+
+public sealed class Categoria : Entity
 {
-    //TODO: revisar How To Use Domain-Driven Design In Clean Architecture, ¿crear los setters privados?
-    //https://www.youtube.com/watch?v=1Lcr2c3MVF4
-    public int Id { get; private set; }
     public string Nombre { get; private set; }
     public string Descripcion { get; private set; }
     public DateTime FechaAlta { get; private set; }
 
-    private CategoriaProducto(string nombre, string descripcion, DateTime fechaAlta)
+    private Categoria(Guid id
+        , string nombre
+        , string descripcion
+        , DateTime fechaAlta)
+        : base(id)
     {
         Nombre = nombre;
         Descripcion = descripcion;
         FechaAlta = fechaAlta;
     }
 
-    public static CategoriaProducto Crear(string nombre, string descripcion)
+    public static Categoria Crear(string nombre, string descripcion)
     {
-        return new CategoriaProducto(nombre, descripcion, DateTime.Now);
+        return new Categoria(Guid.NewGuid(), nombre, descripcion, DateTime.Now);
     }
 
     public void CambiarNombre(string nuevoNombre)

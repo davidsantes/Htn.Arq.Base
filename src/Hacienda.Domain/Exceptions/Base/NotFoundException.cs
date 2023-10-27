@@ -3,13 +3,13 @@
 public class NotFoundException : Exception
 {
     public Type EntityType { get; }
-    public int EntityId { get; }
+    public Guid EntityId { get; }
 
     public NotFoundException(string message) : base(message)
     {
     }
 
-    public NotFoundException(Type entityType, int entityId) : base($"Entidad no encontrada: tipo {entityType.Name} con ID {entityId}")
+    public NotFoundException(Type entityType, Guid entityId) : base($"Entidad no encontrada: tipo {entityType.Name} con ID {entityId}")
     {
         EntityType = entityType;
         EntityId = entityId;

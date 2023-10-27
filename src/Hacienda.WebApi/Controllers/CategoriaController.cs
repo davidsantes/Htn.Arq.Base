@@ -46,7 +46,7 @@ public class CategoriaController : ControllerBase
     /// <returns>Categoría buscada</returns>
     [HttpGet("{id}", Name = "Get")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GetCategoriaProductoResponse>> Get(int id)
+    public async Task<ActionResult<GetCategoriaProductoResponse>> Get(Guid id)
     {
         var categoria = await _categoriaService.GetAsync(id);
 
@@ -87,7 +87,7 @@ public class CategoriaController : ControllerBase
     /// <returns>Si el resultado ha sido satisfactorio</returns>
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]   
-    public async Task<IActionResult> UpdCategoria([FromRoute] int id, [FromBody] UpdateCategoriaProductoRequest categoriaRequest)
+    public async Task<IActionResult> UpdCategoria([FromRoute] Guid id, [FromBody] UpdateCategoriaProductoRequest categoriaRequest)
     {
         categoriaRequest.Id = id;
         var updCategoriaResult = await _categoriaService.UpdAsync(categoriaRequest);
@@ -114,7 +114,7 @@ public class CategoriaController : ControllerBase
     [HttpDelete]
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DelCategoria(int id)
+    public async Task<IActionResult> DelCategoria(Guid id)
     {
         var delCategoriaResult = await _categoriaService.DelAsync(id);
 

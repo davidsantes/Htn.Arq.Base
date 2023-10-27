@@ -97,7 +97,9 @@ En vez de que la operaci�n devuelva un valor `true`, devolver� `Result<bool>
 - Implementa la l�gica de aplicaci�n y orquesta las operaciones del sistema.
 
 **Jerarqu�a**:
-- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentaci�n. Estos DTOs est�n separados en ```Response``` para devoluci�n (una query tipo "Get") y ```Request``` (escritura).
+- **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentaci�n. Estos DTOs están separados en:
+    - ```Response``` para devolución de datos desde un método (una query tipo "Get").
+    - ```Request``` para pasar datos a un método de escritura.
 - **Carpeta Exceptions**: saneamiento de excepciones para mostrar a capas superiores excepciones controladas y que no contengan informaci�n cr�tica (l�neas donde se ha producido el error, datos de la base de datos, etc).
 - **Carpeta Mapping**: profiles de mapeo de datos.
 - **Carpeta Middlewares**: middleware de comunicaci�n con capas superiores.

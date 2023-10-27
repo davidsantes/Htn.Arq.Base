@@ -16,14 +16,14 @@ public interface ICategoriaProductoService
     /// </summary>
     /// <param name="id">Identificador de la categoría</param>
     /// <returns>Categoría concreta</returns>
-    Task<GetCategoriaProductoResponse> GetAsync(int id);
+    Task<GetCategoriaProductoResponse> GetAsync(Guid id);
 
     /// <summary>
     /// Inserta una categoría en concreto
     /// </summary>
     /// <param name="categoria">Categoría a insertar</param>
     /// <returns>Identificador de la categoría, mensajes de si todo ha ido correcto o no</returns>
-    Task<ResultRequest<int>> InsAsync(InsertCategoriaProductoRequest categoria);
+    Task<ResultRequest<Guid>> InsAsync(InsertCategoriaProductoRequest categoria);
 
     /// <summary>
     /// Actualiza una categoría en concreto
@@ -37,5 +37,5 @@ public interface ICategoriaProductoService
     /// </summary>
     /// <param name="id">Categoría a eliminar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<ResultRequest<int>> DelAsync(int id);
+    Task<ResultRequest<int>> DelAsync(Guid id);
 }

@@ -10,14 +10,14 @@ public interface IRepositoryBase<T> where T : class
     /// </summary>
     /// <param name="id">Identificador a buscar</param>
     /// <returns>Entidad encontrada</returns>
-    T GetById(int id);
+    T GetById(Guid id);
 
     /// <summary>
     /// Retorna una entidad, a raíz de un identificador concreto. La ejecución se realizará de manera asíncrona
     /// </summary>
     /// <param name="id">Identificador a buscar</param>
     /// <returns>Entidad encontrada</returns>
-    Task<T> GetByIdAsync(int id);
+    Task<T> GetByIdAsync(Guid id);
 
     /// <summary>
     /// Retorna todas las entidades de un tipo
@@ -79,7 +79,7 @@ public interface IRepositoryBase<T> where T : class
     /// </summary>
     /// <param name="id">Identificador de la entidad a eliminar.</param>
     /// <returns>El número de entidades eliminadas en el contexto.</returns>
-    Task<int> DeleteAndSaveAsync(int id);
+    Task<int> DeleteAndSaveAsync(Guid id);
 
     /// <summary>
     /// Persiste todos los cambios en el contexto de manera asíncrona.
