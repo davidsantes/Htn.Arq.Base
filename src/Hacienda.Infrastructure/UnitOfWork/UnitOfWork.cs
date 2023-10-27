@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hacienda.Infrastructure.UnitOfWork;
 
+/// <summary>
+/// Implementación sacada de:
+/// https://github.com/kgrzybek/modular-monolith-with-ddd/
+/// </summary>
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DbContext _context;
