@@ -6,6 +6,7 @@ using Hacienda.Domain.Entities;
 using Hacienda.Domain.Exceptions.Specific;
 using Hacienda.Domain.ExternalClients;
 using Hacienda.Domain.Repositories;
+using Hacienda.Shared.Global.Resources;
 
 namespace Hacienda.Application.Services;
 
@@ -55,14 +56,13 @@ public class CategoriaProductoService : ICategoriaProductoService
         var categoriaInsertada = await _categoriaRepository.AddAndCommitAsync(mappedCategoria);
         var resultEnvioCorreo = await _correosAdapter.InsAsync();
 
-        if (categoriaInsertada.Id > 0 && resultEnvioCorreo.IsSuccess)
+        var result = new ResultRequest<int>(categoriaInsertada.Id);
+        if (categoriaInsertada.Id <= 0 || !resultEnvioCorreo.IsSuccess)
         {
-            return new ResultRequest<int>(categoriaInsertada.Id);
+            result.Errors.Add("MsgOperacionSinEfecto", GlobalResources.MsgOperacionSinEfecto);
         }
-        else
-        {
-            throw new CategoriaOperationException();
-        }
+
+        return result;
     }
 
     /// <inheritdoc />

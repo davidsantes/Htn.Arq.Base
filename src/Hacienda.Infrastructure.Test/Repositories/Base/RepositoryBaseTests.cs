@@ -25,7 +25,8 @@ public class RepositoryBaseTests
         var entityId = 1;
 
         // Inserta datos in-memory database
-        dbContext.Add(new CategoriaProducto { Id = 1, Nombre = "Nombre", Descripcion = "Descripcion" });
+        var nuevaCategoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        dbContext.Add(nuevaCategoria);
         dbContext.SaveChanges();
 
         // Act
@@ -66,7 +67,8 @@ public class RepositoryBaseTests
         var entityId = 1;
 
         // Inserta datos in-memory database
-        dbContext.Add(new CategoriaProducto { Id = 1, Nombre = "Categoría 1" });
+        var nuevaCategoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        dbContext.Add(nuevaCategoria);
         dbContext.SaveChanges();
 
         // Act
@@ -106,8 +108,10 @@ public class RepositoryBaseTests
         var repository = new RepositoryBase<CategoriaProducto>(dbContext);
 
         // Inserta datos in-memory database
-        dbContext.Add(new CategoriaProducto { Id = 1, Nombre = "Categoría 1" });
-        dbContext.Add(new CategoriaProducto { Id = 2, Nombre = "Categoría 2" });
+        var nuevaCategoria1 = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var nuevaCategoria2 = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        dbContext.Add(nuevaCategoria1);
+        dbContext.Add(nuevaCategoria2);
         dbContext.SaveChanges();
 
         // Act
@@ -129,20 +133,22 @@ public class RepositoryBaseTests
         using var dbContext = new EntityDbContext(dbContextOptions);
         var repository = new RepositoryBase<CategoriaProducto>(dbContext);
 
+        var descriptionExpected = "Categoría si cumple con filtro";
+        var descriptionNonExpected = "Categoría no cumple con filtro";
+
         // Inserción de datos on the fly:
         var testData = new List<CategoriaProducto>
-            {
-                new CategoriaProducto { Id = 1, Nombre = "Categoría si cumple con filtro" },
-                new CategoriaProducto { Id = 2, Nombre = "Categoría si cumple con filtro" },
-                new CategoriaProducto { Id = 3, Nombre = "Categoría si cumple con filtro" },
-                new CategoriaProducto { Id = 4, Nombre = "Categoría no cumple con filtro" },
-                new CategoriaProducto { Id = 5, Nombre = "Categoría no cumple con filtro" },
-            };
+        {
+            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionExpected),
+            CategoriaProducto.Crear(nombre: "Nombre", descripcion: descriptionNonExpected)
+        };
 
         await dbContext.CategoriaProductos.AddRangeAsync(testData);
         await dbContext.SaveChangesAsync();
 
-        Expression<Func<CategoriaProducto, bool>> expression = category => category.Nombre.Contains("Categoría si cumple con filtro");
+        Expression<Func<CategoriaProducto, bool>> expression = category => category.Descripcion.Contains(descriptionExpected);
         int currentPage = 2;
         int pageSize = 2;
 
@@ -167,7 +173,7 @@ public class RepositoryBaseTests
 
         using var dbContext = new EntityDbContext(dbContextOptions);
         var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var newEntity = new CategoriaProducto { Nombre = "Nueva Categoría" };
+        var newEntity = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
 
         // Act
         var result = await repository.AddAsync(newEntity);
@@ -190,7 +196,7 @@ public class RepositoryBaseTests
         var entityId = 1;
 
         // Inserta datos in-memory database
-        dbContext.Add(new CategoriaProducto { Id = 1, Nombre = "Categoría 1" });
+        dbContext.Add(CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion"));
         dbContext.SaveChanges();
 
         // Act
@@ -210,7 +216,8 @@ public class RepositoryBaseTests
 
         using var dbContext = new EntityDbContext(dbContextOptions);
         var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var newEntity = new CategoriaProducto { Nombre = "Nueva Categoría" };
+        var nameExpected = "Nueva Categoría";
+        var newEntity = CategoriaProducto.Crear(nombre: nameExpected, descripcion: "Descripcion");
 
         // Act
         var result = await repository.AddAndCommitAsync(newEntity);
@@ -222,7 +229,7 @@ public class RepositoryBaseTests
         // Verifica que la entidad se haya guardado correctamente en la base de datos
         var storedEntity = dbContext.CategoriaProductos.FirstOrDefault(e => e.Id == result.Id);
         storedEntity.Should().NotBeNull();
-        storedEntity.Nombre.Should().Be("Nueva Categoría");
+        storedEntity.Nombre.Should().Be(nameExpected);
     }
 
     [Fact]
@@ -235,13 +242,14 @@ public class RepositoryBaseTests
 
         using var dbContext = new EntityDbContext(dbContextOptions);
         var repository = new RepositoryBase<CategoriaProducto>(dbContext);
-        var entityToUpdate = new CategoriaProducto { Nombre = "Categoría a Actualizar" };
+        var entityToUpdate = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
 
         dbContext.Add(entityToUpdate);
         dbContext.SaveChanges();
 
         // Modifica la entidad
-        entityToUpdate.Nombre = "Categoría Actualizada";
+        var nuevoNombre = "Nombre Actualizado";
+        entityToUpdate.CambiarNombre(nuevoNombre);
 
         // Act
         var result = await repository.UpdateAndCommitAsync(entityToUpdate);
@@ -252,7 +260,6 @@ public class RepositoryBaseTests
         // Verifica que la entidad se haya actualizado correctamente en la base de datos
         var updatedEntity = dbContext.CategoriaProductos.FirstOrDefault(e => e.Id == entityToUpdate.Id);
         updatedEntity.Should().NotBeNull();
-        updatedEntity.Nombre.Should().Be("Categoría Actualizada");
+        updatedEntity.Nombre.Should().Be(nuevoNombre);
     }
-
 }

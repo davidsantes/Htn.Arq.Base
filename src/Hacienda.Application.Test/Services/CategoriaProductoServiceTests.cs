@@ -46,8 +46,8 @@ public class CategoriaProductoServiceTests
         var categoriaService = new CategoriaProductoService(categoriaRepositoryMock.Object, null, mapperMock.Object, null, null);
 
         var categoriaId = 1; // ID de una categoría existente
-        var categoria = new CategoriaProducto(); // Agrega una categoría de ejemplo
-        var categoriaProductoResponse = new GetCategoriaProductoResponse(); // Agrega una respuesta de ejemplo
+        var categoria = CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion");
+        var categoriaProductoResponse = new GetCategoriaProductoResponse();
 
         categoriaRepositoryMock.Setup(repo => repo.GetByIdAsync(categoriaId)).ReturnsAsync(categoria);
         mapperMock.Setup(mapper => mapper.Map<GetCategoriaProductoResponse>(categoria)).Returns(categoriaProductoResponse);
@@ -75,11 +75,11 @@ public class CategoriaProductoServiceTests
             validatorInsertCategoriaMock.Object,
             null);
 
-        var insertCategoriaRequest = new InsertCategoriaProductoRequest();
+        var insertCategoriaRequest = new InsertCategoriaProductoRequest(nombre: "Nombre", descripcion: "Descripcion");
 
         // Simula la inserción exitosa y devuelve una categoría con ID
         categoriaRepositoryMock.Setup(repo => repo.AddAndCommitAsync(It.IsAny<CategoriaProducto>()))
-            .ReturnsAsync(new CategoriaProducto { Id = 1 });
+            .ReturnsAsync(CategoriaProducto.Crear(nombre: "Nombre", descripcion: "Descripcion"));
 
         // Simula un envío de correo exitoso
         correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(new Result<bool>(true));

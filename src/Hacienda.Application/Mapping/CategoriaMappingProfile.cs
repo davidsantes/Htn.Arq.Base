@@ -9,8 +9,10 @@ public class CategoriaMappingProfile : Profile
     public CategoriaMappingProfile()
     {
         //Request
-        CreateMap<InsertCategoriaProductoRequest, CategoriaProducto>();
-        CreateMap<UpdateCategoriaProductoRequest, CategoriaProducto>();        
+        CreateMap<InsertCategoriaProductoRequest, CategoriaProducto>()
+            .ConstructUsing(request => CategoriaProducto.Crear(request.Nombre, request.Descripcion));
+        CreateMap<UpdateCategoriaProductoRequest, CategoriaProducto>()
+            .ConstructUsing(request => CategoriaProducto.Crear(request.Nombre, request.Descripcion));
 
         //Response
         CreateMap<CategoriaProducto, GetCategoriaProductoResponse>();

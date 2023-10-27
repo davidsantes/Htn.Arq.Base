@@ -78,12 +78,13 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
                 VALUES (@Nombre, @Descripcion, @FechaAlta);
                 SELECT SCOPE_IDENTITY();";
 
+        int nuevoId = 0;
         using (var connection = _connectionFactory.GetOpenConnection())
         {
-            categoria.Id = await connection.ExecuteScalarAsync<int>(sql, categoria);
+            nuevoId = await connection.ExecuteScalarAsync<int>(sql, categoria);
         }
 
-        return new Result<int>(categoria.Id);
+        return new Result<int>(nuevoId);
     }
 
     /// <inheritdoc />

@@ -14,11 +14,10 @@ public class InsertCategoriaProductoRequestValidatorTests
     {
         // Arrange
         var validator = new InsertCategoriaProductoRequestValidator();
-        var categoria = new InsertCategoriaProductoRequest
-        {
-            Nombre = "Nombre de categoría válido",
-            Descripcion = "Descripción de categoría válido"
-        };
+        var categoria = new InsertCategoriaProductoRequest(
+            nombre: "Nombre de categoría válido",
+            descripcion: "Descripción de categoría válido"
+            );
 
         // Act
         var result = validator.TestValidate(categoria);
@@ -32,16 +31,15 @@ public class InsertCategoriaProductoRequestValidatorTests
     {
         // Arrange
         var validator = new InsertCategoriaProductoRequestValidator();
-        var categoria = new InsertCategoriaProductoRequest
-        {
-            Nombre = ""
-        };
+        var categoria = new InsertCategoriaProductoRequest(
+            nombre: "Nombre de categoría válido", descripcion: null
+            );
 
         // Act
         var result = validator.TestValidate(categoria);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(c => c.Nombre)
+        result.ShouldHaveValidationErrorFor(c => c.Descripcion)
             .WithErrorMessage(ValidationResources.CampoObligatorio);
     }
 
@@ -50,10 +48,7 @@ public class InsertCategoriaProductoRequestValidatorTests
     {
         // Arrange
         var validator = new InsertCategoriaProductoRequestValidator();
-        var categoria = new InsertCategoriaProductoRequest
-        {
-            Nombre = "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados"
-        };
+        var categoria = new InsertCategoriaProductoRequest(nombre: "Nombre de categoria demasiado extenso para la cantidad de caracteres aceptados", descripcion: "Descripcion");
 
         int maxLength = 50;
         var categoriaNombreRequerido = string.Format(ValidationResources.CampoLongitudMaxima, maxLength);
