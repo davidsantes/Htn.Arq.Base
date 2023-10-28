@@ -84,7 +84,7 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
     }
 
     /// <inheritdoc />
-    public async Task<Result<Guid>> InsAsync(Categoria categoria)
+    public async Task<ResultToReturnWithObject<Guid>> InsAsync(Categoria categoria)
     {
         var sql = @"
             INSERT INTO Categorias (Id, Nombre, Descripcion, FechaAlta)
@@ -98,19 +98,19 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
             nuevoId = result.SingleOrDefault();
         }
 
-        var resultSuccess = Result<Guid>.AddSuccessResult(nuevoId);
+        var resultSuccess = ResultToReturnWithObject<Guid>.AddSuccessResult(nuevoId);
         return resultSuccess;
     }
 
     /// <inheritdoc />
-    public Task<Result<int>> UpdAsync(Categoria categoria)
+    public Task<ResultToReturnWithObject<int>> UpdAsync(Categoria categoria)
     {
         //Como es una prueba de concepto no se ha completado
         throw new NotImplementedException();
     }
 
     /// <inheritdoc />
-    public Task<Result<int>> DelAsync(Guid id)
+    public Task<ResultToReturnWithObject<int>> DelAsync(Guid id)
     {
         //Como es una prueba de concepto no se ha completado
         throw new NotImplementedException();

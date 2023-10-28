@@ -47,7 +47,7 @@ public class CategoriaProductoService : ICategoriaProductoService
     }
 
     /// <inheritdoc />
-    public async Task<ResultRequest<Guid>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
+    public async Task<ResultToReturnRequestWithObject<Guid>> InsAsync(InsertCategoriaProductoRequest nuevaCategoriaRequest)
     {
         _validatorInsertCategoria.ValidateAndThrow(nuevaCategoriaRequest);
 
@@ -55,7 +55,7 @@ public class CategoriaProductoService : ICategoriaProductoService
         var categoriaInsertada = await _categoriaRepository.AddAndCommitAsync(mappedCategoria);
         var resultEnvioCorreo = await _correosAdapter.InsAsync();
 
-        var result = new ResultRequest<Guid>(categoriaInsertada.Id);
+        var result = new ResultToReturnRequestWithObject<Guid>(categoriaInsertada.Id);
 
         if (categoriaInsertada != null && !resultEnvioCorreo.IsSuccess)
         {
@@ -66,20 +66,20 @@ public class CategoriaProductoService : ICategoriaProductoService
     }
 
     /// <inheritdoc />
-    public async Task<ResultRequest<int>> UpdAsync(UpdateCategoriaProductoRequest categoriaRequest)
+    public async Task<ResultToReturnRequestWithObject<int>> UpdAsync(UpdateCategoriaProductoRequest categoriaRequest)
     {
         _validatorUpdateCategoria.ValidateAndThrow(categoriaRequest);
 
         var existingCategoria = await _categoriaRepository.GetByIdAsync(categoriaRequest.Id);
         var updatedCategoria = _mapper.Map(categoriaRequest, existingCategoria);
         var result = await _categoriaRepository.UpdateAndCommitAsync(updatedCategoria);
-        return new ResultRequest<int>(result);
+        return new ResultToReturnRequestWithObject<int>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResultRequest<int>> DelAsync(Guid id)
+    public async Task<ResultToReturnRequestWithObject<int>> DelAsync(Guid id)
     {
         var categoriaAfectada = await _categoriaRepository.DeleteAndSaveAsync(id);
-        return new ResultRequest<int>(categoriaAfectada);
+        return new ResultToReturnRequestWithObject<int>(categoriaAfectada);
     }
 }

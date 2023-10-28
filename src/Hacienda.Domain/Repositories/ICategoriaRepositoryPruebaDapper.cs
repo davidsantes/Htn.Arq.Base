@@ -23,19 +23,19 @@ public interface ICategoriaRepositoryPruebaDapper
     /// </summary>
     /// <param name="categoria">Categoría a insertar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<Guid>> InsAsync(Categoria categoria);
+    Task<ResultToReturnWithObject<Guid>> InsAsync(Categoria categoria);
 
     /// <summary>
     /// Actualiza una categoría en concreto
     /// </summary>
     /// <param name="categoria">Categoría a actualizar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> UpdAsync(Categoria categoria);
+    Task<ResultToReturnWithObject<int>> UpdAsync(Categoria categoria);
 
     /// <summary>
     /// Elimina una categoría en concreto
     /// </summary>
     /// <param name="id">Categoría a eliminar</param>
     /// <returns>Registros afectados, mensajes de si todo ha ido correcto o no</returns>
-    Task<Result<int>> DelAsync(Guid id);
+    Task<ResultToReturnWithObject<int>> DelAsync(Guid id);
 }

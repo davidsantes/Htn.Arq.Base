@@ -82,7 +82,7 @@ public class CategoriaProductoServiceTests
             .ReturnsAsync(Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion"));
 
         // Simula un envío de correo exitoso
-        var resultSuccess = ResultWithNoContent.AddSuccessResult();
+        var resultSuccess = ResultToReturnWithoutObject.AddSuccessResult();
         correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(resultSuccess);
 
         // Act

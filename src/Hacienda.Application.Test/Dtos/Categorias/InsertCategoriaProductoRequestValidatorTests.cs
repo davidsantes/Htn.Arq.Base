@@ -7,7 +7,7 @@ using Xunit;
 namespace Hacienda.Application.Test.Dtos.Categorias;
 
 [Trait("Categoria", "ValidacionCategoriaProductoDto")]
-public class InsertCategoriaProductoRequestValidatorTests
+public class ResultToReturnRequestWithObjectTests
 {
     [Fact]
     public void Dado_CategoriaProductoDtoValidator_CuandoValoresObligatoriosSiEstanInformados_EntoncesOk()

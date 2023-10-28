@@ -4,15 +4,15 @@ using Xunit;
 
 namespace Hacienda.Domain.Test.Results
 {
-    [Trait("ResultWithNoContentTests", "Errors")]
-    public class ResultWithNoContentTests
+    [Trait("Results", "ResultToReturnWithoutObject")]
+    public class ResultToReturnWithoutObjectTests
     {
         [Fact]
         public void Dado_Result_CuandoConstructorCorrecto_EntoncesOk()
         {
             // Act
 
-            var resultado = ResultWithNoContent.AddSuccessResult();
+            var resultado = ResultToReturnWithoutObject.AddSuccessResult();
 
             // Assert
             resultado.IsSuccess.Should().BeTrue();
@@ -26,7 +26,7 @@ namespace Hacienda.Domain.Test.Results
             (string Key, string Message) result1 = ResultErrorMessageFactory.GetMessage("Categoria.NoEncontrada");
 
             // Act
-            var resultado = ResultWithNoContent.AddFailureResult(result1.Key, result1.Message);
+            var resultado = ResultToReturnWithoutObject.AddFailureResult(result1.Key, result1.Message);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();
@@ -51,7 +51,7 @@ namespace Hacienda.Domain.Test.Results
             };
 
             // Act
-            var resultado = ResultWithNoContent.AddFailureResult(errors);
+            var resultado = ResultToReturnWithoutObject.AddFailureResult(errors);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();

@@ -11,7 +11,7 @@ public class CorreosClientAdapter : ICorreosClientAdapter
     /// Replacing Named Clients With Typed Clients
     /// Why You Should Avoid Typed Clients In Singleton Services (indicarlo!!!!)
     /// </summary>
-    public async Task<ResultWithNoContent> InsAsync()
+    public async Task<ResultToReturnWithoutObject> InsAsync()
     {
         // Simulamos una operación asíncrona de creación, como una inserción en la base de datos
         await Task.Delay(100);
@@ -19,7 +19,7 @@ public class CorreosClientAdapter : ICorreosClientAdapter
         // Llamada al envío de correos
 
         //Simulamos que ha ido correctamente
-        var result = ResultWithNoContent.AddSuccessResult();
+        var result = ResultToReturnWithoutObject.AddSuccessResult();
 
         return result;
     }

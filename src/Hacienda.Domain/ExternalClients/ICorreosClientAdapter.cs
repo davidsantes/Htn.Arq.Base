@@ -4,5 +4,5 @@ namespace Hacienda.Domain.ExternalClients;
 
 public interface ICorreosClientAdapter
 {
-    Task<ResultWithNoContent> InsAsync();
+    Task<ResultToReturnWithoutObject> InsAsync();
 }

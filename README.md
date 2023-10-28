@@ -37,25 +37,25 @@ o:
 Algunas de las características de esta arquitectura son:
 - **Arquitectura enfocada a dominio** ([Domain Driven Design - DDD](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)), con capas de:
     - Dominio: proyectos XXX.Domain
-    - Aplicaci�n: proyectos XXX.Application
+    - Aplicación: proyectos XXX.Application
     - Infraestructura: proyectos XXX.Infrastructure
-- **Proyectos transversales (1.0 - Cross cutting Layer)**, para reutilizaci�n de inyecci�n de dependencia y mensajes.
+- **Proyectos transversales (1.0 - Cross cutting Layer)**, para reutilización de inyección de dependencia y mensajes.
 - **Acceso a base de datos**, mediante Entity Framework, aunque también hay una prueba de concepto con [Dapper](https://github.com/DapperLib/Dapper).
-- **Testing**, todos los proyectos tendr�n su correspondiente proyecto de test. Se utilizan las librer�as [XUnit](https://xunit.net/), [Automapper](https://automapper.org/) y [Fluent Assertions](https://fluentassertions.com/) .
+- **Testing**, todos los proyectos tendrán su correspondiente proyecto de test. Se utilizan las librerías [XUnit](https://xunit.net/), [Automapper](https://automapper.org/) y [Fluent Assertions](https://fluentassertions.com/) .
 - **Mapping de entidades y dtos**: uso de [Automapper](https://automapper.org/). 
 
 - **Logs**: uso de [Serilog](https://serilog.net/): 
     - Se escribe tanto en fichero como en [Graylog](https://graylog.org/) (Portalog).
     - La salida se hace en ficheros de logs diferenciados: los logs de nivel error o superior tiene su propia salida (esto es configurable en ```appsettings.json```)
-- **Validaciones de datos de entidades y dtos**: se utiliza la librer�a [Fluent validation](https://docs.fluentvalidation.net/en/latest/).
+- **Validaciones de datos de entidades y dtos**: se utiliza la librería [Fluent validation](https://docs.fluentvalidation.net/en/latest/).
 - **Control de excepciones globales**: 
-    - A trav�s de un middleware ```ExceptionHandlingMiddleware``` que envuelve las llamadas. 
+    - A través de un middleware ```ExceptionHandlingMiddleware``` que envuelve las llamadas. 
     - Aplica un saneamiento de excepciones para no devolver Excepciones con el mensaje en crudo, mediante la interfaz ```IExceptionPolicy```. 
-- **Uso del est�ndar Problem Details**: conocido como RFC 7807, es un est�ndar de la comunidad de desarrollo web que describe un formato com�n para informar y comunicar problemas o errores en servicios web y aplicaciones.
-Esa estructura devolver� ```Type``` (Tipo), ```Title``` (T�tulo), ```Status``` (Estado, 400, 500...), ```Detail``` (Detalles).
+- **Uso del estándar Problem Details**: conocido como RFC 7807, es un estándar de la comunidad de desarrollo web que describe un formato común para informar y comunicar problemas o errores en servicios web y aplicaciones.
+Esa estructura devolverá ```Type``` (Tipo), ```Title``` (Título), ```Status``` (Estado, 400, 500...), ```Detail``` (Detalles).
 - **Paquetes Nuget**: uso de [Uso de Central Package Management (CPM)](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management): 
-permite que se centralicen las versiones de los paquetes nuget a trav�s del archivo ```Directory.Packages.props```.
-- **Nullable reference types**: todos los proyectos est�n definidos para que no se realice la [verificaci�n de tipos nulables](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references), evitando warnings:
+permite que se centralicen las versiones de los paquetes nuget a través del archivo ```Directory.Packages.props```.
+- **Nullable reference types**: todos los proyectos están definidos para que no se realice la [verificación de tipos nulables](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references), evitando warnings:
 ```xml
 <Nullable>disable</Nullable>
 ```
@@ -83,18 +83,21 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 - **Carpeta Entities**: entidades del producto.
 - **Carpeta Exceptions**: define las excepciones que se van a utilizar dentro del producto. Estas excepciones podrán ser lanzadas en cualquier capa, y deberán ser gestionadas, por ejemplo, a través de un middleware.
 - **Carpeta ExternalClients**: contratos con servicios externos (servicios web, grpc, etc).
+- **Carpeta Primitives**: elementos que definen los componentes básicos de DDD: Entity, Agreggate root, etc.
 - **Carpeta Repositories**: contratos con repositorios internos.
-- **Carpeta ResultErrors**: la clase `Result.cs` permite manejar los resultados de operaciones o funciones de una manera robusta. 
-En vez de que la operación devuelva un valor `true`, devolver� `Result<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
+- **Carpeta Results**: clases que permiten manejar los resultados de operaciones o funciones de una manera robusta, devolviendo:
+    - `ResultToReturnWithObject`: para poder devolver resultados controlados y tipados. Además de si la operación ha sido exitosa o no, devuelve un genérico que puede representar: el usuario creado, un identificador, etc. En vez de que la operación devuelva un valor `true`, devolverá `ResultToReturnWithObject<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
+    - `ResultToReturnWithoutObject`: Para poder devolver resultados controlados y tipados. Pensado para mensajes void, que no tengan que devolver usuarios, identificadores, etc. A diferencia de la clase "Result", no contiene ningún elemento de tipo <T>.
+- **Carpeta Unit of work**: definición del contrato para utilizar Unit of work en capas superiores.
 
 ## 4. Capa aplicación (XXX.Application)
 
 **Definición**: se encarga de coordinar las operaciones del sistema y actúa como un intermediario entre la capa de dominio y la capa de presentación.
 
-**Caracter�sticas principales**: 
+**Características principales**: 
 - Depende de: capa de dominio.
 - Define casos de uso y servicios de aplicación.
-- Implementa la l�gica de aplicaci�n y orquesta las operaciones del sistema.
+- Implementa la lógica de aplicación y orquesta las operaciones del sistema.
 
 **Jerarquía**:
 - **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en:
@@ -109,12 +112,12 @@ En vez de que la operación devuelva un valor `true`, devolver� `Result<bool>`
 
 ## 5. Capa infraestructura (XXX.Infrastructure)
 
-**Definiciónn**: se encarga de la implementaci�n de detalles técnicos y la interacción con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
+**Definiciónn**: se encarga de la implementación de detalles técnicos y la interacción con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
 
 **Características principales**:
 - Depende de: capa de dominio.
 - Contiene la implementación de la persistencia de datos, como la conexión a la base de datos.
-- Gestiona la comunicación con servicios externos y recursos t�cnicos.
+- Gestiona la comunicación con servicios externos y recursos técnicos.
 
 **Jerarquía**:
 - **DbContextDapper**: motor de acceso a datos a través de Dapper.
@@ -132,7 +135,7 @@ En vez de que la operación devuelva un valor `true`, devolver� `Result<bool>`
     ```
 
     Posteriormentes en la clase ```SwaggerExtension``` se configura cómo se anexa Swagger y qué configuración tiene.
-- **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitirá chequear cualquier punto que de información del estado de la infraestructura (acceso a servicios, bdd�). 
+- **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitirá chequear cualquier punto que de información del estado de la infraestructura (acceso a servicios, bdd). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 
 ## 7. Capa web - Web (XXX.Web)
@@ -143,7 +146,7 @@ En vez de que la operación devuelva un valor `true`, devolver� `Result<bool>`
 
 **Definición**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
 
-## Enlaces de inter�s
+## Enlaces de interés
 
 **Generales**:
 - [Arquitecturas de aplicaciones web comunes](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)

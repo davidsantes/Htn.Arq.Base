@@ -4,8 +4,8 @@ using Xunit;
 
 namespace Hacienda.Domain.Test.Results
 {
-    [Trait("Result", "Errors")]
-    public class ResultTests
+    [Trait("Results", "ResultToReturnWithObject")]
+    public class ResultToReturnWithObjectTests
     {
         [Fact]
         public void Dado_Result_CuandoConstructorCorrecto_EntoncesOk()
@@ -14,7 +14,7 @@ namespace Hacienda.Domain.Test.Results
             var idMoq = 1;
 
             // Act
-            var resultado = Result<int>.AddSuccessResult(idMoq);
+            var resultado = ResultToReturnWithObject<int>.AddSuccessResult(idMoq);
 
             // Assert
             resultado.IsSuccess.Should().BeTrue();
@@ -30,7 +30,7 @@ namespace Hacienda.Domain.Test.Results
             (string Key, string Message) result1 = ResultErrorMessageFactory.GetMessage("Categoria.NoEncontrada");
 
             // Act
-            var resultado = Result<int>.AddFailureResult(idMoq, result1.Key, result1.Message);
+            var resultado = ResultToReturnWithObject<int>.AddFailureResult(idMoq, result1.Key, result1.Message);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();
@@ -57,7 +57,7 @@ namespace Hacienda.Domain.Test.Results
             };
 
             // Act
-            var resultado = Result<int>.AddFailureResult(idMoq, errors);
+            var resultado = ResultToReturnWithObject<int>.AddFailureResult(idMoq, errors);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();

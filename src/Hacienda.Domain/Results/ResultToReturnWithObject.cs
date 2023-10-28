@@ -6,13 +6,13 @@
 /// el usuario creado, un identificador, etc.
 /// </summary>
 /// <typeparam name="T">Elemento a devolver</typeparam>
-public class Result<T>
+public class ResultToReturnWithObject<T>
 {
     public bool IsSuccess { get; }
     public T Value { get; }
     public IDictionary<string, object> Errors { get; }
 
-    private Result(T value, bool isSuccess, Dictionary<string, object> errors)
+    private ResultToReturnWithObject(T value, bool isSuccess, Dictionary<string, object> errors)
     {
         if (isSuccess && errors.Count > 0 ||
             !isSuccess && errors.Count < 1)
@@ -30,10 +30,10 @@ public class Result<T>
     /// </summary>
     /// <param name="objeto">Objeto del resultado. Una categoría, un usuario, un id...</param>
     /// <returns>Resultado correcto</returns>
-    public static Result<T> AddSuccessResult(T objeto)
+    public static ResultToReturnWithObject<T> AddSuccessResult(T objeto)
     {
         var errorsNone = new Dictionary<string, object>();
-        return new Result<T>(objeto, true, errorsNone);
+        return new ResultToReturnWithObject<T>(objeto, true, errorsNone);
     }
 
     /// <summary>
@@ -43,13 +43,13 @@ public class Result<T>
     /// <param name="code">Código identificativo del error. Se recomienda utilizar una nomenclatura: Usuario.NoCompletado, etc</param>
     /// <param name="description">Descripción de error</param>
     /// <returns>Resultado incorrecto</returns>
-    public static Result<T> AddFailureResult(T objeto, string code, string description)
+    public static ResultToReturnWithObject<T> AddFailureResult(T objeto, string code, string description)
     {
         var errors = new Dictionary<string, object>
         {
             { code, description }
         };
-        return new Result<T>(objeto, false, errors);
+        return new ResultToReturnWithObject<T>(objeto, false, errors);
     }
 
     /// <summary>
@@ -58,8 +58,8 @@ public class Result<T>
     /// <param name="objeto">Objeto del resultado. Una categoría, un usuario, un id...</param>
     /// <param name="errors">Lista de errores</param>
     /// <returns>Resultado incorrecto</returns>
-    public static Result<T> AddFailureResult(T objeto, Dictionary<string, object> errors)
+    public static ResultToReturnWithObject<T> AddFailureResult(T objeto, Dictionary<string, object> errors)
     {
-        return new Result<T>(objeto, false, errors);
+        return new ResultToReturnWithObject<T>(objeto, false, errors);
     }
 }
