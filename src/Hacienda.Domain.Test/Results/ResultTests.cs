@@ -1,9 +1,8 @@
 ﻿using FluentAssertions;
-using Xunit;
-using System.Collections.Generic;
 using Hacienda.Domain.Results;
+using Xunit;
 
-namespace Hacienda.Domain.Test.Entities
+namespace Hacienda.Domain.Test.Results
 {
     [Trait("Result", "Errors")]
     public class ResultTests

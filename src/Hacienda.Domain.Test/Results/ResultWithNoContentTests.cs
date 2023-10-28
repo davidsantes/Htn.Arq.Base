@@ -2,7 +2,7 @@
 using Hacienda.Domain.Results;
 using Xunit;
 
-namespace Hacienda.Domain.Test.Entities
+namespace Hacienda.Domain.Test.Results
 {
     [Trait("ResultWithNoContentTests", "Errors")]
     public class ResultWithNoContentTests
