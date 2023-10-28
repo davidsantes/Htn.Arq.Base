@@ -39,7 +39,7 @@ public interface IRepositoryBase<T> where T : class
     /// <param name="page">Número de página (1, 2, 3, ...)</param>
     /// <param name="pageSize">Tamaño de página (número de elementos por página)</param>
     /// <returns>Una colección de elementos que cumplen con la condición especificada.</returns>
-    Task<PaginatedResult<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize);
+    Task<ResultPaginated<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize);
 
     /// <summary>
     /// Agrega una entidad de tipo T de manera asíncrona. No persistirá en base de datos hasta que se haga un commit.

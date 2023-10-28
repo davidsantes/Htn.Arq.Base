@@ -1,8 +1,8 @@
-﻿using Hacienda.Domain.ResultErrors;
+﻿using Hacienda.Domain.Results;
 
 namespace Hacienda.Domain.ExternalClients;
 
 public interface ICorreosClientAdapter
 {
-    Task<Result<bool>> InsAsync();
+    Task<ResultWithNoContent> InsAsync();
 }

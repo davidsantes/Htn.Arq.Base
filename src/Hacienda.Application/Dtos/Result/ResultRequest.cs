@@ -1,4 +1,4 @@
-﻿using Hacienda.Domain.ResultErrors;
+﻿using Hacienda.Domain.Results;
 
 namespace Hacienda.Application.Dtos.Result;
 

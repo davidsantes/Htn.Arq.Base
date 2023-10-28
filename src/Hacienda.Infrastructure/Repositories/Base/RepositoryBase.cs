@@ -54,13 +54,13 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     }
 
     /// <inheritdoc />
-    public async Task<PaginatedResult<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize)
+    public async Task<ResultPaginated<T>> FindPagedAsync(Expression<Func<T, bool>> expression, int page, int pageSize)
     {
         IQueryable<T> query = _context.Set<T>().Where(expression);
         int totalItems = await query.CountAsync();
         List<T> items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
-        return new PaginatedResult<T>(items, page, pageSize, totalItems);
+        return new ResultPaginated<T>(items, page, pageSize, totalItems);
     }
 
     /// <inheritdoc />

@@ -18,6 +18,5 @@ public class CorreosAdapterRepositoryTests
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeTrue();
     }
 }

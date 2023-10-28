@@ -1,25 +1,21 @@
 ﻿using FluentAssertions;
-using Xunit;
-using System.Collections.Generic;
 using Hacienda.Domain.Results;
+using Xunit;
 
 namespace Hacienda.Domain.Test.Entities
 {
-    [Trait("Result", "Errors")]
-    public class ResultTests
+    [Trait("ResultWithNoContentTests", "Errors")]
+    public class ResultWithNoContentTests
     {
         [Fact]
         public void Dado_Result_CuandoConstructorCorrecto_EntoncesOk()
         {
-            // Arrange
-            var idMoq = 1;
-
             // Act
-            var resultado = Result<int>.AddSuccessResult(idMoq);
+
+            var resultado = ResultWithNoContent.AddSuccessResult();
 
             // Assert
             resultado.IsSuccess.Should().BeTrue();
-            resultado.Value.Should().Be(idMoq);
             resultado.Errors.Should().BeEmpty();
         }
 
@@ -27,15 +23,13 @@ namespace Hacienda.Domain.Test.Entities
         public void Dado_Result_CuandoAgregarMensajeDeError_EntoncesDeberiaAgregarError()
         {
             // Arrange
-            var idMoq = 1;
             (string Key, string Message) result1 = ResultErrorMessageFactory.GetMessage("Categoria.NoEncontrada");
 
             // Act
-            var resultado = Result<int>.AddFailureResult(idMoq, result1.Key, result1.Message);
+            var resultado = ResultWithNoContent.AddFailureResult(result1.Key, result1.Message);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();
-            resultado.Value.Should().Be(idMoq);
             resultado.Errors.Should().HaveCount(1);
             resultado.Errors.Should().ContainKey(result1.Key);
             resultado.Errors[result1.Key].Should().Be(result1.Message);
@@ -45,7 +39,6 @@ namespace Hacienda.Domain.Test.Entities
         public void Dado_Result_CuandoAgregarMensajesDeError_EntoncesDeberiaAgregarErrores()
         {
             // Arrange
-            var idMoq = 1;
             (string Key, string Message) result1 = ResultErrorMessageFactory.GetMessage("Categoria.NoEncontrada");
             (string Key, string Message) result2 = ResultErrorMessageFactory.GetMessage("Producto.NoEncontrado");
             (string Key, string Message) result3 = ResultErrorMessageFactory.GetMessage("Pedido.NoEncontrado");
@@ -58,11 +51,10 @@ namespace Hacienda.Domain.Test.Entities
             };
 
             // Act
-            var resultado = Result<int>.AddFailureResult(idMoq, errors);
+            var resultado = ResultWithNoContent.AddFailureResult(errors);
 
             // Assert
             resultado.IsSuccess.Should().BeFalse();
-            resultado.Value.Should().Be(idMoq);
             resultado.Errors.Should().HaveCount(3);
             resultado.Errors.Should().ContainKeys(result1.Key, result2.Key, result3.Key);
             resultado.Errors[result1.Key].Should().Be(result1.Message);

@@ -6,7 +6,7 @@ using Hacienda.Application.Services;
 using Hacienda.Domain.Entities;
 using Hacienda.Domain.ExternalClients;
 using Hacienda.Domain.Repositories;
-using Hacienda.Domain.ResultErrors;
+using Hacienda.Domain.Results;
 using Moq;
 using Xunit;
 
@@ -82,7 +82,8 @@ public class CategoriaProductoServiceTests
             .ReturnsAsync(Categoria.Crear(nombre: "Nombre", descripcion: "Descripcion"));
 
         // Simula un envío de correo exitoso
-        correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(new Result<bool>(true));
+        var resultSuccess = ResultWithNoContent.AddSuccessResult();
+        correosAdapterMock.Setup(adapter => adapter.InsAsync()).ReturnsAsync(resultSuccess);
 
         // Act
         var result = await categoriaService.InsAsync(insertCategoriaRequest);

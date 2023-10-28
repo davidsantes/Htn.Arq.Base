@@ -53,7 +53,6 @@ public class EntityTests
         entity1.GetHashCode().Should().NotBe(entity2.GetHashCode());
     }
 
-    //TODO: cambiar por Categoria
     public class EntityWithId : Entity
     {
         public EntityWithId(Guid id) : base(id)

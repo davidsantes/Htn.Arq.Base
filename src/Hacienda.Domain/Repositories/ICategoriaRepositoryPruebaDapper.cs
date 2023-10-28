@@ -1,5 +1,5 @@
 ﻿using Hacienda.Domain.Entities;
-using Hacienda.Domain.ResultErrors;
+using Hacienda.Domain.Results;
 
 namespace Hacienda.Domain.Repositories;
 

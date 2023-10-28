@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Hacienda.Domain.Entities;
 using Hacienda.Domain.Repositories;
-using Hacienda.Domain.ResultErrors;
+using Hacienda.Domain.Results;
 using Hacienda.Infrastructure.DbContextDapper;
 using System.Data;
 
@@ -98,7 +98,8 @@ public class CategoriaRepositoryPruebaDapper : ICategoriaRepositoryPruebaDapper
             nuevoId = result.SingleOrDefault();
         }
 
-        return new Result<Guid>(nuevoId);
+        var resultSuccess = Result<Guid>.AddSuccessResult(nuevoId);
+        return resultSuccess;
     }
 
     /// <inheritdoc />
