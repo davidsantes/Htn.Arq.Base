@@ -50,7 +50,7 @@ public class TestController : ControllerBase
     /// Provoca una excepción. Sirve para verificar el control de excepciones.
     /// </summary>
     /// <returns>Mensaje de error</returns>
-    [HttpGet("insExcepcion")]
+    [HttpPost("insExcepcion")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult InsExcepcion()
     {
