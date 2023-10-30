@@ -45,7 +45,7 @@ Algunas de las características de esta arquitectura son:
 - **Mapping de entidades y dtos**: uso de [Automapper](https://automapper.org/). 
 
 - **Logs**: uso de [Serilog](https://serilog.net/): 
-    - Se escribe tanto en fichero como en [Graylog](https://graylog.org/) (Portalog).
+    - Se escribe en fichero, y en versiones futuras (aún no soportado) en [Graylog](https://graylog.org/) (Portalog).
     - La salida se hace en ficheros de logs diferenciados: los logs de nivel error o superior tiene su propia salida (esto es configurable en ```appsettings.json```)
 - **Validaciones de datos de entidades y dtos**: se utiliza la librería [Fluent validation](https://docs.fluentvalidation.net/en/latest/).
 - **Control de excepciones globales**: 
