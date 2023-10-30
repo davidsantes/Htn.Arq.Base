@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "3ad595d7-d722-4fdc-b4ed-63901d7ff4f1",
 		"name": "Arquitectura de referencia",
+		"description": "Colección para testear la arquitectura de referencia. Realiza tanto un test de la api de categorías como de la administración del sistema (versión del producto, si inserta logs, si las excepciones están bien controladas, etcétera).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13496196"
 	},
@@ -10,43 +11,41 @@
 			"name": "Categorias",
 			"item": [
 				{
-					"name": "getCategorias",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/getCategorias",
-							"host": [
-								"{{localhostUrl}}{{apiVersion}}"
-							],
-							"path": [
-								"Categoria",
-								"getCategorias"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getCategoria",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/1",
-							"host": [
-								"{{localhostUrl}}{{apiVersion}}"
-							],
-							"path": [
-								"Categoria",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "insCategoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"log: Categoria_Ins\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_201_Created\")));\r",
+									"    \r",
+									"    // Asegurarse de que el nombre no está vacío\r",
+									"    pm.expect(pm.response.json().nombre).to.not.be.empty;\r",
+									"    \r",
+									"    // Asegurarse de que la descripción no está vacía\r",
+									"    pm.expect(pm.response.json().descripcion).to.not.be.empty;\r",
+									"\r",
+									"    // Asegurarse de que el encabezado \"Location\" existe en la respuesta\r",
+									"    pm.response.to.have.header(\"Location\");\r",
+									"\r",
+									"    // Extraer el GUID de la URL del encabezado \"Location\" y almacenarlo en una variable de entorno\r",
+									"    const locationHeader = pm.response.headers.get(\"Location\");\r",
+									"    const guid = locationHeader.split(\"/\").pop(); // Extraer el GUID de la URL\r",
+									"    pm.environment.set(\"test_Categoria_Id\", guid);\r",
+									"\r",
+									"    // Asegurarse de que el GUID no está vacío\r",
+									"    pm.expect(pm.environment.get(\"test_Categoria_Id\")).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -73,7 +72,71 @@
 					"response": []
 				},
 				{
+					"name": "getCategoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"log: Categoria_Get\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    // Asegurarse de que el id no está vacío\r",
+									"    pm.expect(pm.response.json().id).to.not.be.empty;\r",
+									"\r",
+									"    // Asegurarse de que el nombre no está vacío\r",
+									"    pm.expect(pm.response.json().nombre).to.not.be.empty;\r",
+									"    \r",
+									"    // Asegurarse de que la descripción no está vacía\r",
+									"    pm.expect(pm.response.json().descripcion).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/{{test_Categoria_Id}}",
+							"host": [
+								"{{localhostUrl}}{{apiVersion}}"
+							],
+							"path": [
+								"Categoria",
+								"{{test_Categoria_Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "updCategoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"log: Categoria_Upd\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    // Asegurarse de que el id no está vacío\r",
+									"    pm.expect(pm.response.json().id).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -87,13 +150,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/2",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/{{test_Categoria_Id}}",
 							"host": [
 								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
-								"2"
+								"{{test_Categoria_Id}}"
 							]
 						}
 					},
@@ -101,6 +164,23 @@
 				},
 				{
 					"name": "delCategoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"log: Categoria_Del\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_204_No_Content\")));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -114,13 +194,54 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/30",
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/{{test_Categoria_Id}}",
 							"host": [
 								"{{localhostUrl}}{{apiVersion}}"
 							],
 							"path": [
 								"Categoria",
-								"30"
+								"{{test_Categoria_Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"log: Categoria_Get_All\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    //Registros desde la respuesta JSON\r",
+									"    const registros = pm.response.json();\r",
+									"\r",
+									"    //Asegurarse de que el arreglo de registros no esté vacío\r",
+									"    pm.expect(registros.length).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhostUrl}}{{apiVersion}}/Categoria/getCategorias",
+							"host": [
+								"{{localhostUrl}}{{apiVersion}}"
+							],
+							"path": [
+								"Categoria",
+								"getCategorias"
 							]
 						}
 					},
@@ -129,10 +250,33 @@
 			]
 		},
 		{
-			"name": "Health",
+			"name": "Admon sistema",
 			"item": [
 				{
 					"name": "getHealthy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"admon sistema: heatlh\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    // Obtén el objeto \"status\" desde la respuesta JSON\r",
+									"    const status = pm.response.json().status;\r",
+									"\r",
+									"    // Asegurarse de que el estado sea \"Healthy\"\r",
+									"    pm.expect(status).to.eql(\"Healthy\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -140,6 +284,153 @@
 							"raw": "{{localhostUrl}}_health",
 							"host": [
 								"{{localhostUrl}}_health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVersion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"admon sistema: version\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    // Obtén la respuesta completa\r",
+									"    const responseText = pm.response.text();\r",
+									"\r",
+									"    // Asegurarse de que la respuesta no esté vacía\r",
+									"    pm.expect(responseText).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhostUrl}}{{apiVersion}}/Test/getVersion",
+							"host": [
+								"{{localhostUrl}}{{apiVersion}}"
+							],
+							"path": [
+								"Test",
+								"getVersion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insLog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"admon sistema: insLog\", function () {\r",
+									"    //Respuesta en un tiempo aceptable:\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_200_Ok\")));\r",
+									"    \r",
+									"    // Obtén la respuesta completa\r",
+									"    const responseText = pm.response.text();\r",
+									"\r",
+									"    // Asegurarse de que la respuesta no esté vacía\r",
+									"    pm.expect(responseText).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhostUrl}}{{apiVersion}}/Test/insLog",
+							"host": [
+								"{{localhostUrl}}{{apiVersion}}"
+							],
+							"path": [
+								"Test",
+								"insLog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insExcepcion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"admon sistema: insException\", function () {\r",
+									"    //Respuesta en un tiempo aceptable (descomentar para entornos desplegados, en local se para en la excepción y tarda más tiempo):\r",
+									"    //pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"test_Load_Testing_Response_Time_Limit\")));\r",
+									"    \r",
+									"    //Código de respuesta correcto:\r",
+									"    pm.response.to.have.status(parseInt(pm.environment.get(\"test_Response_Status_500_Internal_Server_Error\")));\r",
+									"    \r",
+									"    // Obtiene la respuesta JSON\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    // Asegurarse de que el type no está vacío\r",
+									"    pm.expect(pm.response.json().type).to.not.be.empty;\r",
+									"\r",
+									"    // Asegurarse de que el type no está vacío\r",
+									"    pm.expect(pm.response.json().title).to.not.be.empty;\r",
+									"\r",
+									"    // Asegurarse de que el type no está vacío\r",
+									"    pm.expect(pm.response.json().detail).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhostUrl}}{{apiVersion}}/Test/insExcepcion",
+							"host": [
+								"{{localhostUrl}}{{apiVersion}}"
+							],
+							"path": [
+								"Test",
+								"insExcepcion"
 							]
 						}
 					},
