@@ -135,9 +135,9 @@ namespace Hacienda.Shared.Global.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1.0.0.
         /// </summary>
-        public static string VersionApp {
+        public static string VersionProducto {
             get {
-                return ResourceManager.GetString("VersionApp", resourceCulture);
+                return ResourceManager.GetString("VersionProducto", resourceCulture);
             }
         }
     }

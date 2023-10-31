@@ -22,7 +22,7 @@ public class TestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetVersion()
     {
-        string version = GlobalResources.VersionApp;
+        string version = GlobalResources.VersionProducto;
         return Ok(version);
     }
 
@@ -35,7 +35,7 @@ public class TestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult InsLog()
     {
-        string version = GlobalResources.VersionApp;
+        string version = GlobalResources.VersionProducto;
         var guidControl = Guid.NewGuid();
 
         _logger.LogDebug("LogDebug. Versión de producto {@version} - {@guidControl}", version, guidControl.ToString());

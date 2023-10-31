@@ -141,7 +141,7 @@
   <data name="MsgRecursoNoEncontradoTitulo" xml:space="preserve">
     <value>Recurso no encontrado.</value>
   </data>
-  <data name="VersionApp" xml:space="preserve">
+  <data name="VersionProducto" xml:space="preserve">
     <value>1.0.0</value>
   </data>
 </root>
