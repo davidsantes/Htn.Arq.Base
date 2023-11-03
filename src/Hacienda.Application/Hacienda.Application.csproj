@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hacienda.Domain\Hacienda.Domain.csproj" />
+    <ProjectReference Include="..\Hacienda.Infrastructure\Hacienda.Infrastructure.csproj" />
     <ProjectReference Include="..\Hacienda.Shared.Global.Resources\Hacienda.Shared.Global.Resources.csproj" />
   </ItemGroup>
 
