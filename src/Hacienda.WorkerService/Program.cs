@@ -1,5 +1,4 @@
-using Hacienda.Shared.DependencyInjection;
-using Hacienda.Shared.DependencyInjection.Projects;
+using Hacienda.Application.DependencyInjection.Extensions;
 using Hacienda.WorkerService.Workers;
 using Serilog;
 
@@ -14,10 +13,10 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         services.RegisterExceptionAndProblemDetails()
-            .RegisterRepositories(ProjectTypes.WorkerService)
-            .RegisterAdapters(ProjectTypes.WorkerService)
-            .RegisterServices(ProjectTypes.WorkerService)
-            .RegisterRequestValidators()
+            .RegisterRepositoriesSingleton()
+            .RegisterAdaptersSingleton()
+            .RegisterServicesSingleton()
+            .RegisterRequestValidatorsTransient()
             .RegisterAutomapperProfiles();
 
         //TODO: no funciona EF en un service:
@@ -30,7 +29,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
         services.RegisterDapper(databaseConnectionString);
-        services.RegisterEntityFramework();
+        services.RegisterEntityFrameworkTransient(hostContext.Configuration);
 
         services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
         services.AddHostedService<TimeFileWorker>();

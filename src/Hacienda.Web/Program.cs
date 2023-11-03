@@ -1,5 +1,4 @@
-using Hacienda.Shared.DependencyInjection;
-using Hacienda.Shared.DependencyInjection.Projects;
+using Hacienda.Application.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,15 +7,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.RegisterExceptionAndProblemDetails()
-    .RegisterRepositories(ProjectTypes.WebBlazorServer)
-    .RegisterAdapters(ProjectTypes.WebBlazorServer)
-    .RegisterServices(ProjectTypes.WebBlazorServer)
-    .RegisterRequestValidators()
+    .RegisterRepositoriesSingleton()
+    .RegisterAdaptersSingleton()
+    .RegisterServicesSingleton()
+    .RegisterRequestValidatorsTransient()
     .RegisterAutomapperProfiles();
 
 //Prueba de concepto con acceso mediante Dapper a la base de datos
-builder.Services
-    .RegisterDapper(builder.Configuration.GetConnectionString("DefaultConnection"));
+var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.RegisterDapper(databaseConnectionString);
+builder.Services.RegisterEntityFrameworkTransient(builder.Configuration);
 
 var app = builder.Build();
 

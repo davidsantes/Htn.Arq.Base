@@ -1,5 +1,4 @@
-using Hacienda.Shared.DependencyInjection;
-using Hacienda.Shared.DependencyInjection.Projects;
+using Hacienda.Application.DependencyInjection.Extensions;
 using Hacienda.WebApi.Builder;
 using Hacienda.WebApi.HealthChecks;
 using Hacienda.WebApi.RegisterExtensions;
@@ -17,15 +16,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger();
 
 builder.Services.RegisterExceptionAndProblemDetails()
-    .RegisterRepositories(ProjectTypes.WebApi)
-    .RegisterAdapters(ProjectTypes.WebApi)
-    .RegisterServices(ProjectTypes.WebApi)
+    .RegisterRepositories()
+    .RegisterAdapters()
+    .RegisterServices()
     .RegisterRequestValidators()
     .RegisterAutomapperProfiles();
 
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.RegisterDapper(databaseConnectionString);
-builder.Services.RegisterEntityFramework();
+builder.Services.RegisterEntityFramework(builder.Configuration);
 
 builder.Services.AddSingleton<WebApiHealthCheck>(new WebApiHealthCheck(databaseConnectionString));
 builder.Services.AddHealthChecks()

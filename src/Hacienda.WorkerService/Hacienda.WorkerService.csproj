@@ -19,6 +19,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hacienda.Application\Hacienda.Application.csproj" />
-    <ProjectReference Include="..\Hacienda.Shared.DependencyInjection\Hacienda.Shared.DependencyInjection.csproj" />
   </ItemGroup>
 </Project>
