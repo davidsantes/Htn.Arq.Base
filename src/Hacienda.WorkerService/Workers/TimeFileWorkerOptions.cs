@@ -2,7 +2,7 @@
 
 namespace Hacienda.WorkerService.Workers;
 
-public class TimeFileWorkerOptions : IWorkerOptions
+public class TimeFileWorkerOptions : IWorkerOptionsBase
 {
     /// <inheritdoc/>
     public int RepeatIntervalSeconds { get; set; }

@@ -8,25 +8,27 @@ public class TimeFileWorker : WorkerBase.WorkerBase
     private readonly TimeFileWorkerOptions _workerOptions;
     private readonly ILogger<TimeFileWorker> _logger;
     private readonly ITimeService _timeService;
-    private readonly ICategoriaProductoService _categoriaProductoService;
 
     public TimeFileWorker(
-        IOptions<TimeFileWorkerOptions> workerOptions
+        IServiceScopeFactory serviceScopeFactory
+        , IOptions<TimeFileWorkerOptions> workerOptions
         , ILogger<TimeFileWorker> logger
-        , ITimeService timeService
-        , ICategoriaProductoService categoriaProductoService)
-        : base(workerOptions.Value)
+        , ITimeService timeService)
+        : base(serviceScopeFactory
+            , workerOptions.Value
+            , logger)
     {
         _workerOptions = workerOptions.Value;
         _timeService = timeService;
         _logger = logger;
-        _categoriaProductoService = categoriaProductoService;
     }
 
-    public override async Task DoWorkAsync()
+    public override async Task DoWorkAsync(IServiceScope scope)
     {
+        var _categoriaProductoService = scope.ServiceProvider.GetService<ICategoriaProductoService>();
+
         await InsFile();
-        await InsCategorias();
+        await InsCategorias(_categoriaProductoService);
     }
 
     private async Task InsFile()
@@ -40,9 +42,9 @@ public class TimeFileWorker : WorkerBase.WorkerBase
         _logger.LogInformation("outFile: {outFile}", outFile);
     }
 
-    private async Task InsCategorias()
+    private async Task InsCategorias(ICategoriaProductoService categoriaProductoService)
     {
-        var categorias = await _categoriaProductoService.GetAllAsync();
+        var categorias = await categoriaProductoService.GetAllAsync();
         foreach (var categoria in categorias)
         {
             _logger.LogInformation(categoria.Nombre);
