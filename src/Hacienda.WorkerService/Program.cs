@@ -13,10 +13,10 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         services.RegisterExceptionAndProblemDetails()
-            .RegisterRepositoriesSingleton()
-            .RegisterAdaptersSingleton()
-            .RegisterServicesSingleton()
-            .RegisterRequestValidatorsTransient()
+            .RegisterRepositories()
+            .RegisterAdapters()
+            .RegisterServices()
+            .RegisterRequestValidators()
             .RegisterAutomapperProfiles();
 
         //TODO: no funciona EF en un service:
@@ -29,7 +29,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
         services.RegisterDapper(databaseConnectionString);
-        services.RegisterEntityFrameworkTransient(hostContext.Configuration);
+        services.RegisterEntityFramework(hostContext.Configuration);
 
         services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
         services.AddHostedService<TimeFileWorker>();
