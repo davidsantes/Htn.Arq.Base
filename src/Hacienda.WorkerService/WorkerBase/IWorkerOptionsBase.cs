@@ -1,9 +1,12 @@
 ﻿namespace Hacienda.WorkerService.WorkerBase;
 
+/// <summary>
+/// Valores base que deben cumplir todos los background service que utilicen WorkerBase
+/// </summary>
 public interface IWorkerOptionsBase
 {
     /// <summary>
-    /// Defines the period between the end of one unit of work and the start of the next.
+    /// Define el periodo entre una ejecución y otra
     /// </summary>
-    int RepeatIntervalSeconds { get; set; }
+    int RepeatIntervalInSeconds { get; set; }
 }

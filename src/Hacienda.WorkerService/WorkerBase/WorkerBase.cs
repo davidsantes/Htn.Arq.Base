@@ -3,9 +3,8 @@
 namespace Hacienda.WorkerService.WorkerBase;
 
 /// <summary>
-/// Worker provides consistent logging (including a logger enriched with the type of the
-/// worker), and alerting. The <see cref="DoWorkAsync"/> method is called indefinetly, so long
-/// as it is supposed to.
+/// El Worker proporciona un registro consistente, incluyendo un logger enriquecido con el tipo del worker y alertas.
+/// El método <see cref="DoWorkAsync"/> se llama indefinidamente.
 /// </summary>
 public abstract class WorkerBase : BackgroundService
 {
@@ -24,26 +23,23 @@ public abstract class WorkerBase : BackgroundService
         WorkerName = GetType().Name;
 
         _logger.LogInformation(
-            "Starting {worker}. Runs every {minutes} minutes. All options {@options}",
+            $"INICIO: background service: {WorkerName}. Se ejecuta cada {_workerOptions.RepeatIntervalInSeconds} segundos. Opciones: {_workerOptions}",
             WorkerName,
-            _workerOptions.RepeatIntervalSeconds,
+            _workerOptions.RepeatIntervalInSeconds,
             _workerOptions);
     }
 
     public string WorkerName { get; }
 
     /// <summary>
-    /// Work method run based on <see cref="IWorkerOptionsBase.RepeatIntervalSeconds"/>. Exceptions
-    /// thrown here are turned into alerts.
+    /// Método basado en <see cref="IWorkerOptionsBase.RepeatIntervalInSeconds"/>.
+    /// Las excepciones se lanzarán aquí y se convertirán en alertas.
     /// </summary>
     public abstract Task DoWorkAsync(IServiceScope scope);
 
     [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "We catch anything and alert instead of rethrowing")]
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // Await right away so Host Startup can continue.
-        await Task.Delay(10).ConfigureAwait(false);
-
         try
         {
             while (!stoppingToken.IsCancellationRequested)
@@ -52,32 +48,39 @@ public abstract class WorkerBase : BackgroundService
                 {
                     using var scope = _serviceScopeFactory.CreateScope();
 
-                    _logger.LogInformation("Calling DoWorkAsync");
+                    _logger.LogInformation("INICIO: background service: {WorkerName}, hora: {time}, Llamando a DoWorkAsync", GetType().Name, DateTimeOffset.Now);
+
                     await DoWorkAsync(scope).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
+                    // Registra cualquier excepción no controlada y envía una alerta. El trabajador volverá a intentarlo después del intervalo normal.
                     _logger.LogError(
                         ex,
-                        "Unhandled exception occurred in the {worker}. Sending an alert. Worker will retry after the normal interveral.",
+                        $"ERROR: Se produjo una excepción no controlada en el {WorkerName}.",
                         WorkerName);
                 }
 
-                await Task.Delay(_workerOptions.RepeatIntervalSeconds * 1000, stoppingToken)
+                // Espera un tiempo antes de volver a realizar la tarea.
+                await Task
+                    .Delay(_workerOptions.RepeatIntervalInSeconds * 1000, stoppingToken)
                     .ConfigureAwait(false);
             }
 
+            // Registra el fin de la ejecución y si se canceló el token de cancelación.
             _logger.LogInformation(
-                "Execution ended. Cancelation token cancelled = {IsCancellationRequested}",
+                $"FIN: background service: {WorkerName}. Token de cancelación cancelado = {stoppingToken.IsCancellationRequested}",
                 stoppingToken.IsCancellationRequested);
         }
         catch (Exception ex) when (stoppingToken.IsCancellationRequested)
         {
-            _logger.LogWarning(ex, "Execution Cancelled");
+            // Registra una excepción si la ejecución se cancela.
+            _logger.LogWarning(ex, $"ERROR: background service: {WorkerName}. Ejecución cancelada.");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unhandled exception. Execution Stopping");
+            // Registra una excepción no controlada si la ejecución se detiene.
+            _logger.LogError(ex, $"ERROR: background service: {WorkerName}. Ejecución no controlada.");
         }
     }
 }

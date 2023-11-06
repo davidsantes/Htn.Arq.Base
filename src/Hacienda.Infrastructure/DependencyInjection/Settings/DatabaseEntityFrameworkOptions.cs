@@ -1,7 +1,6 @@
 ﻿namespace Hacienda.Infrastructure.DependencyInjection.Settings;
 
 public class DatabaseEntityFrameworkOptions
-
 {
     public const string SectionName = "DatabaseEntityFrameworkOptions";
     public string ConnectionString { get; set; }

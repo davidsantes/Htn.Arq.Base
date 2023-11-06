@@ -1,5 +1,7 @@
 using Hacienda.Application.DependencyInjection.Extensions;
-using Hacienda.WorkerService.Workers;
+using Hacienda.WorkerService.Workers.CategoriaWorkerWithBase;
+using Hacienda.WorkerService.Workers.CategoriaWorkerWithBase.Settings;
+using Hacienda.WorkerService.Workers.CategoriaWorkerWithoutBase;
 using Serilog;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -19,21 +21,17 @@ IHost host = Host.CreateDefaultBuilder(args)
             .RegisterRequestValidators()
             .RegisterAutomapperProfiles();
 
-        //TODO: no funciona EF en un service:
-        //https://stackoverflow.com/questions/36332239/use-dbcontext-in-asp-net-singleton-injected-class
-        //https://www.youtube.com/watch?v=7lQ1fmR6LLE
-
-#pragma warning disable S125 // Sections of code should not be commented out
-        //services.AddHostedService<SampleWorker>();
-#pragma warning restore S125 // Sections of code should not be commented out
-
         var databaseConnectionString = hostContext.Configuration.GetConnectionString("DefaultConnection");
         services.RegisterDapper(databaseConnectionString);
         services.RegisterEntityFramework(hostContext.Configuration);
 
-        services.Configure<TimeFileWorkerOptions>(hostContext.Configuration.GetSection("TimeFileWorker"));
-        services.AddHostedService<TimeFileWorker>();
-        services.AddSingleton<ITimeService, TimeService>();
+        //Configuración de CategoriaWorkerWithoutBase
+        services.Configure<CategoriaWorkerOptionsWithoutBase>(hostContext.Configuration.GetSection("CategoriaWorkerWithoutBaseOptions"));
+        services.AddHostedService<CategoriaWorkerWithoutBase>();
+
+        //Configuración de CategoriaWorkerWithBase
+        services.Configure<CategoriaWorkerOptions>(hostContext.Configuration.GetSection("CategoriaWorkerWithBaseOptions"));
+        services.AddHostedService<CategoriaWorkerWithBase>();
     })
     //TODO: ver cómo controlar las excepciones
     .Build();
