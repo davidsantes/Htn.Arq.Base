@@ -7,18 +7,18 @@ El objetivo de este documento es indicar las características principales de est
 ## Control de versiones
 | Versión | Fecha | Autor   | Observaciones |
 | ------- | ------- | ------- | ------------- |
-| 0.1     | 23/10/2023 | David S | Versión inicial   |
+| 0.1     | 06/11/2023 | David S | Versión inicial   |
 
 ## Índice
 
 0. Prerequisitos
-1. Un vistazo general
-2. Capas transversales
-3. Capa de dominio (XXX.Domain)
-4. Capa de aplicación (XXX.Application)
-5. Capa de infraestructura (XXX.Infrastructure)
-6. Capa web - Web API (XXX.WebApi)
-7. Capa web - Web (XXX.Web)
+1. Características generales
+2. Esquema
+3. Capas transversales
+4. Capa de dominio (XXX.Domain)
+5. Capa de aplicación (XXX.Application)
+6. Capa de infraestructura (XXX.Infrastructure)
+7. Capa web - Web API (XXX.WebApi)
 8. Capa task (XXX.WorkerService)
 
 ## 0. Prerequisitos
@@ -32,7 +32,7 @@ o:
 "Server=(LocalDb)\\MSSQLLocalDB;Database=TiendaDb;Integrated Security=True"
 ```
 
-## 1. Un vistazo general
+## 1. Características generales
 
 Algunas de las características de esta arquitectura son:
 - **Arquitectura enfocada a dominio** ([Domain Driven Design - DDD](https://learn.microsoft.com/es-es/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)), con capas de:
@@ -60,7 +60,21 @@ permite que se centralicen las versiones de los paquetes nuget a través del arc
 <Nullable>disable</Nullable>
 ```
 
-## 2. Capas transversales (XXX.Shared)
+## 2. Esquema
+
+### 2.1. Esquema general
+![Esquema general](./Solution%20Items/Docs/01.EsquemaGeneral.PNG)
+
+### 2.2. Esquema a nivel de aplicaciones
+![Esquema app](./Solution%20Items/Docs/02.EsquemaApp.PNG)
+
+### 2.3. Esquema detalle Web Api
+![Esquema app](./Solution%20Items/Docs/03.EsquemaDetalleWebApi.PNG)
+
+### 2.4. Esquema detalle Background service
+![Esquema app](./Solution%20Items/Docs/04.EsquemaDetalleWorker.PNG)
+
+## 3. Capas transversales (XXX.Shared)
 
 **Definición**:
 Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser susceptibles de crear un paquete nuget.
@@ -70,7 +84,7 @@ Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser suscep
 La extensión ```RegisterEntityFramework``` registra y configura el contexto de EF.
 - **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versión de producto, etcétera). Tenerlos en un mismo proyecto facilita la traducción.
 
-## 3. Capa dominio (XXX.Domain)
+## 4. Capa dominio (XXX.Domain)
 
 **Definición**: es el corazón del sistema y contiene las entidades, agregados y objetos de valor que representan el conocimiento del negocio.
 
@@ -90,7 +104,7 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
     - `ResultToReturnWithoutObject`: Para poder devolver resultados controlados y tipados. Pensado para mensajes void, que no tengan que devolver usuarios, identificadores, etc. A diferencia de la clase "Result", no contiene ningún elemento de tipo <T>.
 - **Carpeta Unit of work**: definición del contrato para utilizar Unit of work en capas superiores.
 
-## 4. Capa aplicación (XXX.Application)
+## 5. Capa aplicación (XXX.Application)
 
 **Definición**: se encarga de coordinar las operaciones del sistema y actúa como un intermediario entre la capa de dominio y la capa de presentación.
 
@@ -110,7 +124,7 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 - **Carpeta Services**: servicios de la aplicación, tanto implementación como las interfaces.
     - Servicios: realizarán validaciones de los datos proporcionados desde capas superiores mediante [FluentValidation](https://docs.fluentvalidation.net/)
 
-## 5. Capa infraestructura (XXX.Infrastructure)
+## 6. Capa infraestructura (XXX.Infrastructure)
 
 **Definiciónn**: se encarga de la implementación de detalles técnicos y la interacción con recursos externos, como bases de datos, servicios web y sistemas de almacenamiento.
 
@@ -125,7 +139,7 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 - **Carpeta ExternalClients**: implementación de llamada a clientes externos. Se deberá utilizar el **patrón adapter**. 
 - **Carpeta Repositories**: repositorios de la aplicación, a nivel de implementación.
 
-## 6. Capa web - Web API (XXX.WebApi)
+## 7. Capa web - Web API (XXX.WebApi)
 
 **Definición**: web api de ejemplo.
 **Características principales**:
@@ -138,13 +152,14 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 - **HealthChecks**: se ha creado ```WebApiHealthCheck```, que permitirá chequear cualquier punto que de información del estado de la infraestructura (acceso a servicios, bdd). 
     La salida la produce si ponemos `https://localhost:XXXX/_health`, en formato Json, mediante el nuget `AspNetCore.HealthChecks.UI.Client`:
 
-## 7. Capa web - Web (XXX.Web)
-
-**Definición**: prueba de concepto sencilla para una web hecha con Blazor Server que llama a un servicio y devuelve datos.
-
 ## 8. Capa task (XXX.WorkerService)
 
-**Definición**: prueba de concepto sencilla para un servicio de background que llama a un servicio y devuelve datos.
+**Definición**: prueba de concepto de BackgroundService que llama a los servicios de la capa de aplicación y devuelve los datos.
+
+**Características principales**:
+- **WorkerBase**: uso de la clase ```WorkerBase``` para utilizar una serie de parámetros y registros comunes (por ejemplo, el uso de loggin, o el intervalo de tiempo).
+- **Tipos de Workers**: se han implementado dos workers, uno con esta clase base y otro sin clase base.
+- **Nota**: En ambos casos se accede a base de datos, por loq eu se ha solventado el problema de que el DbContext de Entity Framework sea de tipo scoped.
 
 ## Enlaces de interés
 
