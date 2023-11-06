@@ -11,10 +11,7 @@ namespace Hacienda.Domain.Test.Results
         [Fact]
         public void Constructor_WithValidValue_ShouldCreateSuccessfulResultToReturnRequestWithObject()
         {
-            // Arrange
-            var value = 42;
-
-            // Act
+            // Arrange & Act
             var result = new ResultToReturnRequestWithoutObject();
 
             // Assert
