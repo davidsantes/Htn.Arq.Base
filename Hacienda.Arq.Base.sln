@@ -44,6 +44,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0 - Task Layer", "6.0 - T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{239E4121-9E38-422B-B9AF-034A0D38BD2F}"
 	ProjectSection(SolutionItems) = preProject
+		Solution Items\Docs\01.EsquemaGeneral.PNG = Solution Items\Docs\01.EsquemaGeneral.PNG
+		Solution Items\Docs\02.EsquemaApp.PNG = Solution Items\Docs\02.EsquemaApp.PNG
+		Solution Items\Docs\03.EsquemaDetalleWebApi.PNG = Solution Items\Docs\03.EsquemaDetalleWebApi.PNG
+		Solution Items\Docs\04.EsquemaDetalleWorker.PNG = Solution Items\Docs\04.EsquemaDetalleWorker.PNG
 		Solution Items\Docs\EsquemaDdd.PNG = Solution Items\Docs\EsquemaDdd.PNG
 	EndProjectSection
 EndProject
