@@ -23,7 +23,7 @@ public abstract class WorkerBase : BackgroundService
         WorkerName = GetType().Name;
 
         _logger.LogInformation(
-            $"INICIO: background service: {WorkerName}. Se ejecuta cada {_workerOptions.RepeatIntervalInSeconds} segundos. Opciones: {_workerOptions}",
+            $"INICIO: background service: {WorkerName}. Se ejecuta cada {_workerOptions.RepeatIntervalInSeconds} segundos. Hora: {DateTimeOffset.Now}. Opciones: {_workerOptions}",
             WorkerName,
             _workerOptions.RepeatIntervalInSeconds,
             _workerOptions);
@@ -48,7 +48,7 @@ public abstract class WorkerBase : BackgroundService
                 {
                     using var scope = _serviceScopeFactory.CreateScope();
 
-                    _logger.LogInformation("INICIO: background service: {WorkerName}, hora: {time}, Llamando a DoWorkAsync", GetType().Name, DateTimeOffset.Now);
+                    _logger.LogInformation($"INICIO: background service: {WorkerName}. Hora: {DateTimeOffset.Now}. Llamando a DoWorkAsync", WorkerName);
 
                     await DoWorkAsync(scope).ConfigureAwait(false);
                 }
@@ -57,7 +57,7 @@ public abstract class WorkerBase : BackgroundService
                     // Registra cualquier excepción no controlada y envía una alerta. El trabajador volverá a intentarlo después del intervalo normal.
                     _logger.LogError(
                         ex,
-                        $"ERROR: Se produjo una excepción no controlada en el {WorkerName}.",
+                        $"ERROR: background service: {WorkerName}. Ejecución no controlada. Hora: {DateTimeOffset.Now}.",
                         WorkerName);
                 }
 
@@ -69,18 +69,18 @@ public abstract class WorkerBase : BackgroundService
 
             // Registra el fin de la ejecución y si se canceló el token de cancelación.
             _logger.LogInformation(
-                $"FIN: background service: {WorkerName}. Token de cancelación cancelado = {stoppingToken.IsCancellationRequested}",
+                $"FIN: background service: {WorkerName}. Token de cancelación cancelado = {stoppingToken.IsCancellationRequested}. Hora: {DateTimeOffset.Now}.",
                 stoppingToken.IsCancellationRequested);
         }
         catch (Exception ex) when (stoppingToken.IsCancellationRequested)
         {
             // Registra una excepción si la ejecución se cancela.
-            _logger.LogWarning(ex, $"ERROR: background service: {WorkerName}. Ejecución cancelada.");
+            _logger.LogWarning(ex, $"ERROR: background service: {WorkerName}. Ejecución cancelada. Hora: {DateTimeOffset.Now}.");
         }
         catch (Exception ex)
         {
             // Registra una excepción no controlada si la ejecución se detiene.
-            _logger.LogError(ex, $"ERROR: background service: {WorkerName}. Ejecución no controlada.");
+            _logger.LogError(ex, $"ERROR: background service: {WorkerName}. Ejecución no controlada. Hora: {DateTimeOffset.Now}.");
         }
     }
 }

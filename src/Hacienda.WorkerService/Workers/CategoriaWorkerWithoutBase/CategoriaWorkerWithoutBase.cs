@@ -29,7 +29,7 @@ public class CategoriaWorkerWithoutBase : BackgroundService
             var logger = scope.ServiceProvider.GetService<ILogger<CategoriaWorkerWithoutBase>>();
             var categoriaProductoService = scope.ServiceProvider.GetService<ICategoriaProductoService>();
             
-            logger.LogInformation("INICIO: background service: {WorkerName}, hora: {time}", GetType().Name, DateTimeOffset.Now);
+            logger.LogInformation($"INICIO: background service: {WorkerName}. Se ejecuta cada {_workerOptions.RepeatIntervalInSeconds} segundos. Hora: {DateTimeOffset.Now}");
 
             var categorias = await categoriaProductoService.GetAllAsync();
             foreach (var categoria in categorias)
@@ -37,7 +37,7 @@ public class CategoriaWorkerWithoutBase : BackgroundService
                 logger.LogInformation(categoria.Nombre);
             }
 
-            logger.LogInformation("FIN: background service: {WorkerName}, hora: {time}", GetType().Name, DateTimeOffset.Now);
+            logger.LogInformation($"FIN: background service: {WorkerName}. Hora: {DateTimeOffset.Now}");
 
             await Task.Delay(TimeSpan.FromSeconds(_workerOptions.RepeatIntervalInSeconds), stoppingToken);
         }
