@@ -80,8 +80,6 @@ permite que se centralicen las versiones de los paquetes nuget a través del arc
 Proyectos que se pueden utilizar en varias capas diferentes. Podrían ser susceptibles de crear un paquete nuget.
 
 **Jerarquía**: 
-- **Proyecto Shared.DependencyInjection**: configuración del contenedor de dependencias, separando las responsabilidades por tipos de estructuras (repositories, automapper...).
-La extensión ```RegisterEntityFramework``` registra y configura el contexto de EF.
 - **Proyecto Hacienda.Shared.Global.Resources**: literales compartidos (mensajes de operaciones, versión de producto, etcétera). Tenerlos en un mismo proyecto facilita la traducción.
 
 ## 4. Capa dominio (XXX.Domain)
@@ -102,18 +100,19 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 - **Carpeta Results**: clases que permiten manejar los resultados de operaciones o funciones de una manera robusta, devolviendo:
     - `ResultToReturnWithObject`: para poder devolver resultados controlados y tipados. Además de si la operación ha sido exitosa o no, devuelve un genérico que puede representar: el usuario creado, un identificador, etc. En vez de que la operación devuelva un valor `true`, devolverá `ResultToReturnWithObject<bool>`. De esta manera podrá tener mensajes en el caso de que algo no haya funcionado correctamente.
     - `ResultToReturnWithoutObject`: Para poder devolver resultados controlados y tipados. Pensado para mensajes void, que no tengan que devolver usuarios, identificadores, etc. A diferencia de la clase "Result", no contiene ningún elemento de tipo <T>.
-- **Carpeta Unit of work**: definición del contrato para utilizar Unit of work en capas superiores.
+- **Carpeta ValueObjects**: en caso de utilizar DDD, aquí irán los value objects.
 
 ## 5. Capa aplicación (XXX.Application)
 
 **Definición**: se encarga de coordinar las operaciones del sistema y actúa como un intermediario entre la capa de dominio y la capa de presentación.
 
 **Características principales**: 
-- Depende de: capa de dominio.
+- Depende de: capa de dominio y de infraestructura.
 - Define casos de uso y servicios de aplicación.
 - Implementa la lógica de aplicación y orquesta las operaciones del sistema.
 
 **Jerarquía**:
+- **Carpeta DependencyInjection**: clases para autoregistrar en el contenedor de dependencias los objetos de este proyecto.
 - **Carpeta Dtos**: utiliza DTOs para comunicarse con la capa de presentación. Estos DTOs están separados en:
     - ```Request``` para pasar datos a los servicios. Por ejemplo, para enviar los datos para insertar un nuevo elemento.
     - ```Response``` para devolver estructuras de de datos desde un método. Por ejemplo, oara devolver un listado de elementos.
@@ -136,6 +135,7 @@ La extensión ```RegisterEntityFramework``` registra y configura el contexto de 
 **Jerarquía**:
 - **DbContextDapper**: motor de acceso a datos a través de Dapper.
 - **DbContextEf**: motor de acceso a datos a través de EF.
+- **Carpeta DependencyInjection**: clases para autoregistrar en el contenedor de dependencias los objetos de este proyecto.
 - **Carpeta ExternalClients**: implementación de llamada a clientes externos. Se deberá utilizar el **patrón adapter**. 
 - **Carpeta Repositories**: repositorios de la aplicación, a nivel de implementación.
 
