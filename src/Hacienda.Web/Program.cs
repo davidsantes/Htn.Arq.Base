@@ -1,4 +1,5 @@
 using Hacienda.Application.DependencyInjection.Extensions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ var databaseConnectionString = builder.Configuration.GetConnectionString("Defaul
 builder.Services.RegisterDapper(databaseConnectionString);
 builder.Services.RegisterEntityFrameworkTransient(builder.Configuration);
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,5 +40,8 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("La aplicación se está ejecutando...");
 
 await app.RunAsync();
