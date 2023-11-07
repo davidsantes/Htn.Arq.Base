@@ -44,24 +44,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.0 - Task Layer", "6.0 - T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{239E4121-9E38-422B-B9AF-034A0D38BD2F}"
 	ProjectSection(SolutionItems) = preProject
-		Solution Items\Docs\01.EsquemaGeneral.PNG = Solution Items\Docs\01.EsquemaGeneral.PNG
-		Solution Items\Docs\02.EsquemaApp.PNG = Solution Items\Docs\02.EsquemaApp.PNG
-		Solution Items\Docs\03.EsquemaDetalleWebApi.PNG = Solution Items\Docs\03.EsquemaDetalleWebApi.PNG
-		Solution Items\Docs\04.EsquemaDetalleWorker.PNG = Solution Items\Docs\04.EsquemaDetalleWorker.PNG
-		Solution Items\Docs\EsquemaDdd.PNG = Solution Items\Docs\EsquemaDdd.PNG
+		SolutionItems\Docs\01.EsquemaGeneral.PNG = SolutionItems\Docs\01.EsquemaGeneral.PNG
+		SolutionItems\Docs\02.EsquemaApp.PNG = SolutionItems\Docs\02.EsquemaApp.PNG
+		SolutionItems\Docs\03.EsquemaDetalleWebApi.PNG = SolutionItems\Docs\03.EsquemaDetalleWebApi.PNG
+		SolutionItems\Docs\04.EsquemaDetalleWorker.PNG = SolutionItems\Docs\04.EsquemaDetalleWorker.PNG
+		SolutionItems\Docs\EsquemaDdd.PNG = SolutionItems\Docs\EsquemaDdd.PNG
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{1F7805B7-A212-4C86-AF7D-10AB201C6CCF}"
 	ProjectSection(SolutionItems) = preProject
-		Solution Items\Sql\01.Create_Schema.sql = Solution Items\Sql\01.Create_Schema.sql
-		Solution Items\Sql\02.Create_Data.sql = Solution Items\Sql\02.Create_Data.sql
-		Solution Items\Sql\EsquemaBdd.PNG = Solution Items\Sql\EsquemaBdd.PNG
+		SolutionItems\Sql\01.Create_Schema.sql = SolutionItems\Sql\01.Create_Schema.sql
+		SolutionItems\Sql\02.Create_Data.sql = SolutionItems\Sql\02.Create_Data.sql
+		SolutionItems\Sql\EsquemaBdd.PNG = SolutionItems\Sql\EsquemaBdd.PNG
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{A34141C3-704B-41C2-9C16-9B6651390C27}"
 	ProjectSection(SolutionItems) = preProject
-		Solution Items\Postman\postman_collection.json = Solution Items\Postman\postman_collection.json
-		Solution Items\Postman\postman_environment.json = Solution Items\Postman\postman_environment.json
+		SolutionItems\Postman\postman_collection.json = SolutionItems\Postman\postman_collection.json
+		SolutionItems\Postman\postman_environment.json = SolutionItems\Postman\postman_environment.json
 	EndProjectSection
 EndProject
 Global
